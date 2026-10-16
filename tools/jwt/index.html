@@ -2,58 +2,198 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JWT 在线解码与 Token 过期校验工具 - DevHub 纯前端工作台</title>
+    <title>JWT 在线解码与 Token 过期校验工具 - 纯前端安全解析 | DevHub</title>
     
     <!-- 搜索引擎站长认证 (Google & Bing) -->
     <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
     <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
 
     <!-- SEO 核心元标签 -->
-    <meta name="description" content="安全合规的在线 JWT (JSON Web Token) 解码器。本地解析 Header 与 Payload 数据，直观检查算法与有效载荷，自动计算 exp 字段判断 Token 是否过期，数据绝不上传服务器。" />
-    <meta name="keywords" content="JWT解码,JWT在线解析,JWT校验,JSON Web Token,Token过期时间,jwt debugger online,jwt decoder,DevHub" />
+    <meta name="description" content="安全合规的在线 JWT (JSON Web Token) 解码器。纯前端本地解析 Header 与 Payload 数据，直观检查算法与 Claims 有效载荷，自动计算 exp 字段判断 Token 是否过期，数据 100% 留在浏览器本地，绝不上传任何服务器。" />
+    <meta name="keywords" content="JWT解码,JWT在线解析,JWT校验,JSON Web Token,Token过期时间,jwt debugger online,jwt decoder,OAuth鉴权,DevHub" />
     <meta name="author" content="upowerman" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://yunitytech.top/tools/jwt/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="JWT 在线解码与 Token 过期校验工具 - DevHub" />
+    <meta property="og:title" content="JWT 在线解码与 Token 过期校验工具 - 纯前端安全 | DevHub" />
     <meta property="og:description" content="本地解析 Header 与 Payload 数据，自动预警过期时间，100% 数据隐私安全。" />
     <meta property="og:url" content="https://yunitytech.top/tools/jwt/" />
     <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="JWT 在线解码与 Token 过期校验工具 - DevHub" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JWT 在线解码与 Token 过期校验工具 - 纯前端安全 | DevHub" />
     <meta name="twitter:description" content="本地解析 Header 与 Payload 数据，自动预警过期时间，100% 数据隐私安全。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
 
-    <!-- 结构化数据 (JSON-LD) -->
+    <!-- 结构化数据 (JSON-LD) 包含 WebApp、面包屑与 FAQ 问答 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "DevHub JWT 解码器",
-      "url": "https://yunitytech.top/tools/jwt/",
-      "description": "纯前端 JWT Token 结构化解码与过期检测工具",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://yunitytech.top/tools/jwt/#webapp",
+          "name": "DevHub JWT 解码器",
+          "url": "https://yunitytech.top/tools/jwt/",
+          "description": "纯前端离线 JWT 在线解码、Claims 解析与 Token 过期校验工具",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://yunitytech.top/tools/jwt/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DevHub 首页",
+              "item": "https://yunitytech.top/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "开发者工具箱",
+              "item": "https://yunitytech.top/#tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "JWT 解码器",
+              "item": "https://yunitytech.top/tools/jwt/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://yunitytech.top/tools/jwt/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "在线使用 JWT 解码器解析生产环境 Token 安全吗？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "使用常规服务端解析工具存在安全合规隐患。DevHub JWT 解码器基于纯前端浏览器本地算法，使用 UTF-8 安全 Base64URL 纯客户端解码，没有任何后台接口接收你的 Token，可放心解析含用户鉴权信息的测试与生产 Token。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "JWT 结构中的三部分分别代表什么？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "JWT 采用以句号 '.' 分隔的三段结构：第一段为 Header（头部，声明签名算法如 HS256/RS256 及令牌类型）；第二段为 Payload（有效载荷，存放身份 Claims 与自定义业务属性）；第三段为 Signature（数字签名，由前两段结合服务端私钥防篡改生成）。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "如何通过 exp 字段判断 JWT 是否过期？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "exp 是 JWT 标准声明中的 Expiration Time（过期时间戳，以秒为单位）。DevHub 会自动将 exp * 1000 转换为可读的北京时间，并与本地当前系统时间对比：当当前时间大于 exp 时自动预警已过期。"
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
   </head>
   <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
-    <div id="app"></div>
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>JWT 解码器</span>
+        </nav>
+        
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">JWT 在线解码与 Token 过期校验工具 (JWT Decoder & Debugger)</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          专为后端架构师、API 开发者及全栈工程师打造的 JWT 调试利器。本地结构化着色解析 Header 与 Payload、深度校验标准 Claims，智能判定 Token 过期状态，绝不上报服务器。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">JWT 标准 Claims 字段速查</h2>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid #e2e8f0; color: #475569;">
+                <th style="padding: 8px 4px; width: 80px;">字段</th>
+                <th style="padding: 8px 4px; width: 140px;">英文全称</th>
+                <th style="padding: 8px 4px;">含义与说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-family: monospace; font-weight: 600; color: #7c3aed;">sub</td>
+                <td style="padding: 8px 4px;">Subject</td>
+                <td style="padding: 8px 4px; color: #475569;">该 JWT 所面向的主体（通常为用户唯一 User ID）</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-family: monospace; font-weight: 600; color: #7c3aed;">iss</td>
+                <td style="padding: 8px 4px;">Issuer</td>
+                <td style="padding: 8px 4px; color: #475569;">签发机构标识或 OAuth 认证中心域名</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-family: monospace; font-weight: 600; color: #7c3aed;">exp</td>
+                <td style="padding: 8px 4px;">Expiration Time</td>
+                <td style="padding: 8px 4px; color: #475569;">过期时间（秒级 Unix 时间戳），超时即拒绝服务</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-family: monospace; font-weight: 600; color: #7c3aed;">iat</td>
+                <td style="padding: 8px 4px;">Issued At</td>
+                <td style="padding: 8px 4px; color: #475569;">签发时间（秒级 Unix 时间戳）</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 4px; font-family: monospace; font-weight: 600; color: #7c3aed;">nbf</td>
+                <td style="padding: 8px 4px;">Not Before</td>
+                <td style="padding: 8px 4px; color: #475569;">生效时间，在此时刻之前 Token 不可被接受</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么在 DevHub 解码 JWT 是绝对安全的？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 纯前端解码仅调用浏览器内置的 Base64 算法与 JSON.parse，网络抓包不会产生任何发送 Token 的请求，无中间人监听风险。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: JWT 的 Payload 可以加密敏感密码吗？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 切勿在 JWT Payload 存放明文密码！因为 Payload 仅做了 Base64URL 编码，任何人拿到均可直接解码读取内容，它仅保证防篡改而非内容保密。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
+            <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
     <noscript>
       <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
         <h1>JWT 在线解码与 Token 校验工具</h1>
-        <p>支持粘贴 Bearer JWT 令牌后自动分离 Header、Payload 与 Signature，语法高亮格式化展示 Claims，并智能提取 exp 字段提示过期时间与状态。纯浏览器本地处理，保障生产环境 Token 隐私绝对安全。</p>
-        <p><a href="/">返回 DevHub 开发者工作台首页</a></p>
+        <p>本地解析 Header 与 Payload 数据，直观检查算法与有效载荷，自动计算 exp 字段判断 Token 是否过期，数据绝不上传服务器。</p>
+        <p><a href="/">返回 DevHub 首页</a></p>
       </div>
     </noscript>
     <script type="module" src="/src/main.ts"></script>

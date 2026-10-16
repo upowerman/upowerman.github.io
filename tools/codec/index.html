@@ -2,58 +2,198 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Base64 / URL 在线编解码与 MD5 / SHA256 哈希计算 - DevHub 纯前端工作台</title>
+    <title>Base64 / URL 在线编解码与 MD5 / SHA256 哈希计算 - 纯前端安全工具 | DevHub</title>
     
     <!-- 搜索引擎站长认证 (Google & Bing) -->
     <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
     <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
 
     <!-- SEO 核心元标签 -->
-    <meta name="description" content="全能在线编解码与哈希计算工具。支持 UTF-8 中文与 Emoji 的 Base64 编码解码、URL Encode / Decode、MD5 与 SHA-256 实时哈希计算，纯本地运算秒级出结果。" />
-    <meta name="keywords" content="Base64编码,Base64解码,URL编码,URL解码,MD5加密,SHA256计算,哈希计算器,base64 encode decode,DevHub" />
+    <meta name="description" content="全能好用的在线编解码与哈希计算工具。支持安全 UTF-8 中文字符与 Emoji 的 Base64 编码解码、URL Encode / Decode 转义处理、MD5 (32位) 与 SHA-256 (64位) 实时哈希计算。纯本地离线运算，秒级响应，数据绝对安全。" />
+    <meta name="keywords" content="Base64编码,Base64解码,URL编码,URL解码,MD5在线加密,SHA256计算器,哈希计算,base64 encode decode,DevHub" />
     <meta name="author" content="upowerman" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://yunitytech.top/tools/codec/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Base64 / URL 在线编解码与哈希计算 - DevHub" />
+    <meta property="og:title" content="Base64 / URL 在线编解码与哈希计算 - 纯前端离线 | DevHub" />
     <meta property="og:description" content="支持中文与 Emoji 的 Base64/URL 编解码，MD5与SHA256哈希实时秒算。" />
     <meta property="og:url" content="https://yunitytech.top/tools/codec/" />
     <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Base64 / URL 在线编解码与哈希计算 - DevHub" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Base64 / URL 在线编解码与哈希计算 - 纯前端离线 | DevHub" />
     <meta name="twitter:description" content="支持中文与 Emoji 的 Base64/URL 编解码，MD5与SHA256哈希实时秒算。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
 
-    <!-- 结构化数据 (JSON-LD) -->
+    <!-- 结构化数据 (JSON-LD) 包含 WebApp、面包屑与 FAQ 问答 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "DevHub 编解码与哈希工具",
-      "url": "https://yunitytech.top/tools/codec/",
-      "description": "纯前端 Base64/URL 编解码与 MD5/SHA256 哈希计算器",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://yunitytech.top/tools/codec/#webapp",
+          "name": "DevHub 编解码与哈希工具",
+          "url": "https://yunitytech.top/tools/codec/",
+          "description": "纯前端 Base64、URL 编解码与 MD5/SHA256 哈希在线计算工具",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://yunitytech.top/tools/codec/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DevHub 首页",
+              "item": "https://yunitytech.top/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "开发者工具箱",
+              "item": "https://yunitytech.top/#tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "编解码与哈希",
+              "item": "https://yunitytech.top/tools/codec/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://yunitytech.top/tools/codec/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "为什么在部分网站进行 Base64 编解码时中文会出现乱码？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "浏览器原生的 btoa 和 atob 函数仅支持单字节 Latin1 字符（0-255）。遇到多字节的 UTF-8 中文字符或 Emoji 表情时会直接抛出字符越界异常或产生乱码。DevHub 底层统一采用 TextEncoder 与 TextDecoder 处理二进制字节流，实现 100% 汉字与特殊字符安全编解码。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "MD5 和 SHA-256 可以被解密吗？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MD5 与 SHA-256 是单向散列哈希函数（Hash Function），而非可逆的对称/非对称加密算法，数学上不可逆向解密。网上常见的所谓‘MD5解密’实际上是利用预先计算好的‘彩虹表（Rainbow Table）’进行碰撞反查。建议涉及密码存储时务必配合盐值（Salt）或使用专门的 bcrypt/argon2 算法。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "encodeURI 与 encodeURIComponent 有什么区别？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "encodeURI 用于编码完整的统一资源标识符 (URI)，它不会对 URI 中的语义分隔符（如 http://, /, ?, &, =）进行转义；而 encodeURIComponent 会对除了字母数字外的绝大部分标点符号都进行转义，通常用于给 URL 查询参数中的单个 key 或 value 进行安全转码。"
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
   </head>
   <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
-    <div id="app"></div>
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>编解码与哈希</span>
+        </nav>
+        
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Base64 / URL 在线编解码与 MD5 / SHA256 哈希计算工具</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          纯前端离线一站式加密解密与哈希工具箱：支持中文字符与 Emoji 的 Base64 编码解码、URL 参数 Encode/Decode 转码，以及标准 MD5 与 SHA-256 摘要哈希极速计算。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">常见编解码与哈希算法对比指南</h2>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid #e2e8f0; color: #475569;">
+                <th style="padding: 8px 4px; width: 120px;">算法/格式</th>
+                <th style="padding: 8px 4px; width: 80px;">是否可逆</th>
+                <th style="padding: 8px 4px; width: 110px;">输出长度</th>
+                <th style="padding: 8px 4px;">核心应用场景</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-family: monospace; font-weight: 600;">Base64</td>
+                <td style="padding: 8px 4px; color: #16a34a; font-weight: 600;">可逆</td>
+                <td style="padding: 8px 4px;">~ 原文本 133%</td>
+                <td style="padding: 8px 4px; color: #475569;">文本协议传输图片、内联资源、邮件协议附件</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-family: monospace; font-weight: 600;">URL Encode</td>
+                <td style="padding: 8px 4px; color: #16a34a; font-weight: 600;">可逆</td>
+                <td style="padding: 8px 4px;">视非ASCII字符而定</td>
+                <td style="padding: 8px 4px; color: #475569;">HTTP GET 请求 Query 参数中包含特殊标点与汉字转义</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-family: monospace; font-weight: 600;">MD5</td>
+                <td style="padding: 8px 4px; color: #ef4444; font-weight: 600;">不可逆</td>
+                <td style="padding: 8px 4px;">32 位十六进制</td>
+                <td style="padding: 8px 4px; color: #475569;">快速文件完整性校验 (Checksum)、数据指纹生成</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 4px; font-family: monospace; font-weight: 600;">SHA-256</td>
+                <td style="padding: 8px 4px; color: #ef4444; font-weight: 600;">不可逆</td>
+                <td style="padding: 8px 4px;">64 位十六进制</td>
+                <td style="padding: 8px 4px; color: #475569;">数字证书验签、区块链加密哈希、安全密码存证</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么 DevHub 能够支持包含中文与 Emoji 的 Base64 转换？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 我们采用标准的 Web API TextEncoder 将字符先转为 UTF-8 字节序列再执行 Base64，解决了原生 btoa 对 Unicode 字符报错的痛点。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 哈希计算是把文本上传到云端服务器运行的吗？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 绝不上传。所有哈希摘要运算全部由浏览器本地 JavaScript 主线程实时运算得出，无网络延迟且确保隐私安全。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
     <noscript>
       <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
-        <h1>Base64 / URL 编解码与哈希计算器</h1>
-        <p>提供支持 UTF-8 中文与 Emoji 字符的安全 Base64 编码与解码、URL 特殊字符编解码以及 32 位 MD5 和 64 位 SHA-256 单向哈希计算。纯前端计算，速度极快，数据不传输至外部网络。</p>
-        <p><a href="/">返回 DevHub 开发者工作台首页</a></p>
+        <h1>Base64 / URL 在线编解码与 MD5 / SHA256 哈希计算</h1>
+        <p>支持中文与 Emoji 的 Base64/URL 编解码，MD5与SHA256哈希实时秒算，纯本地运算。</p>
+        <p><a href="/">返回 DevHub 首页</a></p>
       </div>
     </noscript>
     <script type="module" src="/src/main.ts"></script>

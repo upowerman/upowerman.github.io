@@ -2,17 +2,19 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DevHub - 开发者复合型工作台与资源导航</title>
+    <title>DevHub - 开发者复合型工作台与资源导航 | 纯前端离线小工具</title>
     
     <!-- 搜索引擎站长认证 (Google & Bing) -->
     <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
     <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
 
     <!-- SEO 基础元标签 -->
-    <meta name="description" content="专为程序员设计的高频工作台：内置纯前端离线开发者小工具（JSON格式化/时间戳/JWT解码/正则测试/编解码）与精选高质量技术资源导航。" />
-    <meta name="keywords" content="开发者工具箱,程序员导航,纯前端离线小工具,JSON格式化,时间戳转换,JWT解码,正则表达式测试,Base64编解码,AI大模型导航,独立开发出海,DevHub" />
+    <meta name="description" content="DevHub 专为程序员打造的高频日常工作台：内置 100% 纯前端离线开发者工具（JSON实验室、Unix时间戳转换、JWT解码、Base64/URL编解码与MD5/SHA256哈希、正则表达式测试）与精选垂直技术导航（AI大模型、前端、后端、出海独立开发）。数据绝不上报，隐私安全无忧。" />
+    <meta name="keywords" content="开发者工具箱,程序员工作台,前端工具箱,纯前端离线工具,JSON格式化校验,时间戳转换,JWT解码器,正则表达式在线测试,Base64编解码,MD5加密,AI大模型导航,独立开发出海,DevHub" />
     <meta name="author" content="upowerman" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://yunitytech.top/" />
@@ -20,40 +22,134 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="DevHub - 开发者复合型工作台与资源导航" />
-    <meta property="og:description" content="专为程序员设计的高频工作台：内置纯前端离线开发者小工具与精选高质量技术资源导航。" />
+    <meta property="og:description" content="专为程序员设计的高频工作台：内置纯前端离线开发者小工具与精选高质量技术资源导航。数据 100% 本地运算，绝不上报。" />
     <meta property="og:url" content="https://yunitytech.top/" />
     <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="DevHub - 开发者复合型工作台与资源导航" />
-    <meta name="twitter:description" content="专为程序员设计的高频工作台：内置纯前端离线开发者小工具与精选高质量技术资源导航。" />
+    <meta name="twitter:description" content="专为程序员设计的高频工作台：内置纯前端离线开发者小工具与精选高质量技术资源导航。数据 100% 本地运算，绝不上报。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
 
-    <!-- 结构化数据 (JSON-LD) 供 Google 与 Bing 识别 WebApp -->
+    <!-- 结构化数据 (JSON-LD) 供 Google、Bing 等搜索引擎识别 WebApp 与站点导航 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "DevHub",
-      "url": "https://yunitytech.top/",
-      "description": "专为程序员设计的高频工作台：内置纯前端离线开发者小工具与精选高质量技术资源导航。",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://yunitytech.top/#webapp",
+          "name": "DevHub",
+          "url": "https://yunitytech.top/",
+          "description": "专为程序员设计的高频工作台：内置纯前端离线开发者小工具与精选高质量技术资源导航。",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "All",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "ItemList",
+          "@id": "https://yunitytech.top/#tools-list",
+          "name": "DevHub 内置纯前端小工具",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "JSON 实验室",
+              "url": "https://yunitytech.top/tools/json/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "时间戳转换器",
+              "url": "https://yunitytech.top/tools/timestamp/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "JWT 解码器",
+              "url": "https://yunitytech.top/tools/jwt/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "编解码与哈希",
+              "url": "https://yunitytech.top/tools/codec/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "正则测试与速查",
+              "url": "https://yunitytech.top/tools/regex/"
+            }
+          ]
+        }
+      ]
     }
     </script>
   </head>
   <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
-    <div id="app"></div>
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容（Vue 挂载后会自动平滑接管替换） -->
+      <header style="max-width: 1200px; margin: 0 auto; padding: 24px 16px;">
+        <h1 style="font-size: 28px; font-weight: 800; margin-bottom: 8px;">DevHub - 开发者复合型工作台与资源导航</h1>
+        <p style="color: #64748b; font-size: 14px;">专为程序员打造的高频日常工作台 · 100% 纯前端离线开发者小工具 · 精选垂直技术生态导航</p>
+      </header>
+      <main style="max-width: 1200px; margin: 0 auto; padding: 0 16px 40px;">
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 16px;">内置高频纯前端离线小工具</h2>
+          <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+            <li style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+              <h3 style="font-size: 16px; margin-bottom: 6px;"><a href="/tools/json/" style="color: #16a34a; text-decoration: none; font-weight: 600;">JSON 实验室</a></h3>
+              <p style="font-size: 13px; color: #64748b; margin: 0;">2/4空格美化格式化、单行压缩、语法错误精确定位与一键复制。</p>
+            </li>
+            <li style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+              <h3 style="font-size: 16px; margin-bottom: 6px;"><a href="/tools/timestamp/" style="color: #16a34a; text-decoration: none; font-weight: 600;">时间戳转换器</a></h3>
+              <p style="font-size: 13px; color: #64748b; margin: 0;">Unix 秒/毫秒时间戳双向互转、北京时间/UTC时间显示、实时秒级看板。</p>
+            </li>
+            <li style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+              <h3 style="font-size: 16px; margin-bottom: 6px;"><a href="/tools/jwt/" style="color: #16a34a; text-decoration: none; font-weight: 600;">JWT 解码器</a></h3>
+              <p style="font-size: 13px; color: #64748b; margin: 0;">Header 与 Payload 结构化着色解析、Claims 检查、exp 过期时间预警。</p>
+            </li>
+            <li style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+              <h3 style="font-size: 16px; margin-bottom: 6px;"><a href="/tools/codec/" style="color: #16a34a; text-decoration: none; font-weight: 600;">全能编解码与哈希</a></h3>
+              <p style="font-size: 13px; color: #64748b; margin: 0;">安全 UTF-8 中文/Emoji Base64 编解码、URL 编解码、MD5 与 SHA256 哈希计算。</p>
+            </li>
+            <li style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+              <h3 style="font-size: 16px; margin-bottom: 6px;"><a href="/tools/regex/" style="color: #16a34a; text-decoration: none; font-weight: 600;">正则测试与速查</a></h3>
+              <p style="font-size: 13px; color: #64748b; margin: 0;">实时多项高亮匹配、防抖与 ReDoS 防护、预置手机号/邮箱/IP常用模板。</p>
+            </li>
+          </ul>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 16px;">精选分类技术导航</h2>
+          <p style="font-size: 14px; color: #64748b; line-height: 1.8;">
+            收录前沿 <strong>AI 与大模型</strong>（DeepSeek、ChatGPT、Claude、Hugging Face、Ollama）、<strong>前端与跨端</strong>（Vue 3、React、Tailwind CSS、Vite、TypeScript）、<strong>后端与云原生</strong>（Spring Boot、Docker Hub、Linux 命令速查、Kubernetes）、<strong>独立开发与出海</strong>（Product Hunt、Supabase、Cloudflare、Stripe）以及<strong>极客技术社区</strong>（GitHub Trending、V2EX、Hacker News、LINUX DO）。
+          </p>
+        </section>
+      </main>
+    </div>
     <noscript>
       <div style="padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
-        <h1>DevHub - 开发者复合型工作台与资源导航</h1>
-        <p>专为程序员设计的高频工作台：内置纯前端离线开发者小工具（JSON格式化与校验、Unix时间戳转换器、JWT解码器、Base64/URL编解码与MD5/SHA256哈希计算、正则表达式测试器）与精选高质量技术资源导航（AI大模型、前端、后端与云原生、独立开发出海）。</p>
-        <p>本网站为纯前端 SPA 应用，所有工具计算 100% 在本地浏览器完成。请在您的浏览器设置中启用 JavaScript 以获得完整交互式体验。</p>
+        <h2>DevHub - 开发者复合型工作台与资源导航</h2>
+        <p>专为程序员设计的高频工作台：内置纯前端离线开发者小工具（JSON格式化与校验、Unix时间戳转换器、JWT解码器、Base64/URL编解码与MD5/SHA256哈希计算、正则表达式测试器）与精选高质量技术资源导航。</p>
+        <ul>
+          <li><a href="/tools/json/">JSON 实验室在线格式化与校验</a></li>
+          <li><a href="/tools/timestamp/">Unix 时间戳秒与毫秒双向转换</a></li>
+          <li><a href="/tools/jwt/">JWT 在线解码与 Token 过期校验</a></li>
+          <li><a href="/tools/codec/">Base64/URL 编解码与 MD5/SHA256 哈希计算</a></li>
+          <li><a href="/tools/regex/">正则表达式在线测试与常用正则模板速查</a></li>
+        </ul>
+        <p>本网站为纯前端应用，所有计算 100% 在客户端浏览器中完成，杜绝代码与隐私泄露风险。请在浏览器中启用 JavaScript 获取最佳交互体验。</p>
       </div>
     </noscript>
     <script type="module" src="/src/main.ts"></script>

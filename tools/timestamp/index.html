@@ -2,58 +2,193 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Unix 时间戳在线转换工具 (秒/毫秒/北京时间/UTC) - DevHub 纯前端工作台</title>
+    <title>Unix 时间戳在线转换工具 (秒/毫秒/北京时间/UTC双向互转) | DevHub</title>
     
     <!-- 搜索引擎站长认证 (Google & Bing) -->
     <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
     <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
 
     <!-- SEO 核心元标签 -->
-    <meta name="description" content="精准的在线 Unix 时间戳转换器。支持秒(10位)与毫秒(13位)时间戳与北京时间、UTC、ISO 8601 双向互转，实时动态刷新，支持人类友好相对时间计算。" />
-    <meta name="keywords" content="时间戳转换,Unix时间戳,在线时间戳互转,北京时间转时间戳,毫秒时间戳,timestamp converter online,DevHub" />
+    <meta name="description" content="精准好用的在线 Unix 时间戳转换器。支持秒(10位)与毫秒(13位)时间戳与北京时间(GMT+8)、UTC、ISO 8601 双向秒级互转，实时动态秒级刷新看板，支持人类友好的相对时间计算（如几分钟前）。" />
+    <meta name="keywords" content="时间戳转换,Unix时间戳,在线时间戳互转,北京时间转时间戳,毫秒时间戳,Unix timestamp converter,时间戳计算器,DevHub" />
     <meta name="author" content="upowerman" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://yunitytech.top/tools/timestamp/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Unix 时间戳在线转换工具 - DevHub" />
-    <meta property="og:description" content="秒/毫秒时间戳与北京时间、UTC 双向秒级互转，实时动态刷新。" />
+    <meta property="og:title" content="Unix 时间戳在线转换工具 - 秒与毫秒双向互转 | DevHub" />
+    <meta property="og:description" content="秒/毫秒时间戳与北京时间、UTC 双向秒级互转，实时动态刷新看板。" />
     <meta property="og:url" content="https://yunitytech.top/tools/timestamp/" />
     <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Unix 时间戳在线转换工具 - DevHub" />
-    <meta name="twitter:description" content="秒/毫秒时间戳与北京时间、UTC 双向秒级互转，实时动态刷新。" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Unix 时间戳在线转换工具 - 秒与毫秒双向互转 | DevHub" />
+    <meta name="twitter:description" content="秒/毫秒时间戳与北京时间、UTC 双向秒级互转，实时动态刷新看板。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
 
-    <!-- 结构化数据 (JSON-LD) -->
+    <!-- 结构化数据 (JSON-LD) 包含 WebApp、面包屑与 FAQ 问答 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "DevHub 时间戳转换器",
-      "url": "https://yunitytech.top/tools/timestamp/",
-      "description": "纯前端 Unix 时间戳与北京时间、UTC 双向转换工具",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://yunitytech.top/tools/timestamp/#webapp",
+          "name": "DevHub 时间戳转换器",
+          "url": "https://yunitytech.top/tools/timestamp/",
+          "description": "纯前端离线 Unix 秒/毫秒时间戳与北京时间、UTC 双向互转工具",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://yunitytech.top/tools/timestamp/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DevHub 首页",
+              "item": "https://yunitytech.top/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "开发者工具箱",
+              "item": "https://yunitytech.top/#tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "时间戳转换器",
+              "item": "https://yunitytech.top/tools/timestamp/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://yunitytech.top/tools/timestamp/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Unix 秒级时间戳 (10位) 与毫秒级时间戳 (13位) 有什么区别？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Unix 秒级时间戳是指从协调世界时 1970年1月1日 00:00:00 UTC 起至现在的总秒数（通常为 10 位整型，如 Python 的 time.time() 取整）；毫秒级时间戳为总毫秒数（通常为 13 位整型，如 JavaScript 的 Date.now() 或 Java 的 System.currentTimeMillis()）。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "为什么转换出来的时间经常差了 8 个小时？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "这是由于时区差引起的。Unix 时间戳本质上是无时区偏置的标准 UTC 绝对时间。中国标准时间（北京时间）为东八区（UTC+8），比标准 UTC 时间快 8 个小时。DevHub 同时展示 Local 北京时间与 UTC 标准时间，避免时区偏差导致的数据排查混乱。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "什么是 2038 年问题（Y2038 Bug）？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "在旧版 32 位有符号整数系统中，Unix 时间戳的最大表示上限为 2147483647（对应北京时间 2038年1月19日 11:14:07），溢出后会回卷为负数导致系统异常。现代 64 位操作系统已将时间上限扩展至近 2920 亿年之后。"
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
   </head>
   <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
-    <div id="app"></div>
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>时间戳转换器</span>
+        </nav>
+        
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Unix 时间戳在线转换工具 (Unix Timestamp Converter)</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          专为后端工程师、数据库管理员及分布式系统排障打造的高效转换工具。支持 10 位秒级 / 13 位毫秒级时间戳与北京时间、UTC、ISO 8601 标准日期双向互转，自带实时看板与相对时间换算。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">常用语言获取当前时间戳速查</h2>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid #e2e8f0; color: #475569;">
+                <th style="padding: 8px 4px;">编程语言</th>
+                <th style="padding: 8px 4px;">秒级时间戳 (10位)</th>
+                <th style="padding: 8px 4px;">毫秒级时间戳 (13位)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">JavaScript</td>
+                <td style="padding: 8px 4px; font-family: monospace;">Math.floor(Date.now() / 1000)</td>
+                <td style="padding: 8px 4px; font-family: monospace;">Date.now()</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">Python</td>
+                <td style="padding: 8px 4px; font-family: monospace;">int(time.time())</td>
+                <td style="padding: 8px 4px; font-family: monospace;">int(time.time() * 1000)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">Java</td>
+                <td style="padding: 8px 4px; font-family: monospace;">Instant.now().getEpochSecond()</td>
+                <td style="padding: 8px 4px; font-family: monospace;">System.currentTimeMillis()</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 4px; font-weight: 600;">Go</td>
+                <td style="padding: 8px 4px; font-family: monospace;">time.Now().Unix()</td>
+                <td style="padding: 8px 4px; font-family: monospace;">time.Now().UnixMilli()</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么转换出的时间相差 8 小时？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 这是时区偏差所致。北京时间属于东八区 (GMT+8)，而标准时间戳依据 UTC 计算。DevHub 会自动展示本地时区时间并标明 UTC 标准时。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 10 位和 13 位时间戳如何快速区分？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 10 位是以秒为单位（目前以 17 开头），13 位是以毫秒为单位（目前以 17 开头后面多 3 位数字）。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
     <noscript>
       <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
         <h1>Unix 时间戳在线转换工具</h1>
-        <p>提供秒级/毫秒级 Unix 时间戳与年-月-日 时:分:秒（北京时间/UTC时间）双向秒级转换、相对时间（几分钟前/几天后）分析与实时当前时间戳看板。纯前端离线运行，免安装秒开。</p>
-        <p><a href="/">返回 DevHub 开发者工作台首页</a></p>
+        <p>支持秒/毫秒时间戳与北京时间、UTC 双向互转，实时动态刷新，支持相对时间换算。</p>
+        <p><a href="/">返回 DevHub 首页</a></p>
       </div>
     </noscript>
     <script type="module" src="/src/main.ts"></script>

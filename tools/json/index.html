@@ -2,53 +2,163 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JSON 格式化与在线校验工具 - DevHub 纯前端离线开发者工作台</title>
+    <title>JSON 格式化与在线校验工具 - 纯前端离线美化/单行压缩 | DevHub</title>
     
     <!-- 搜索引擎站长认证 (Google & Bing) -->
     <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
     <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
 
     <!-- SEO 核心元标签 -->
-    <meta name="description" content="免费、无广告、纯前端离线的 JSON 格式化与校验工具。支持 2/4 空格美化、单行压缩、语法错误精确定位与一键复制。数据 100% 留在浏览器本地，绝不泄露。" />
-    <meta name="keywords" content="JSON格式化,JSON在线校验,JSON压缩,JSON美化,JSON验证器,JSON parser online,JSON validator,DevHub" />
+    <meta name="description" content="免费、无广告、纯前端离线的 JSON 格式化与在线校验工具。支持 2/4 空格美化缩进、单行极简压缩、语法错误精确定位与一键复制。数据 100% 留在浏览器本地主线程计算，绝不泄露任何接口与业务隐私。" />
+    <meta name="keywords" content="JSON格式化,JSON在线校验,JSON压缩,JSON美化,JSON验证器,JSON parser online,JSON validator,纯前端工具,DevHub" />
     <meta name="author" content="upowerman" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://yunitytech.top/tools/json/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="JSON 格式化与在线校验工具 - DevHub" />
+    <meta property="og:title" content="JSON 格式化与在线校验工具 - 纯前端离线 | DevHub" />
     <meta property="og:description" content="纯前端离线运行的 JSON 美化、校验与单行压缩神器，数据 100% 本地安全。" />
     <meta property="og:url" content="https://yunitytech.top/tools/json/" />
     <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="JSON 格式化与在线校验工具 - DevHub" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JSON 格式化与在线校验工具 - 纯前端离线 | DevHub" />
     <meta name="twitter:description" content="纯前端离线运行的 JSON 美化、校验与单行压缩神器，数据 100% 本地安全。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
 
-    <!-- 结构化数据 (JSON-LD) -->
+    <!-- 结构化数据 (JSON-LD) 包含 WebApp、面包屑导航与 FAQ 问答富摘要 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "DevHub JSON 实验室",
-      "url": "https://yunitytech.top/tools/json/",
-      "description": "纯前端离线 JSON 格式化、校验、单行压缩工具",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://yunitytech.top/tools/json/#webapp",
+          "name": "DevHub JSON 实验室",
+          "url": "https://yunitytech.top/tools/json/",
+          "description": "纯前端离线 JSON 格式化、校验、单行压缩工具",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://yunitytech.top/tools/json/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DevHub 首页",
+              "item": "https://yunitytech.top/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "开发者工具箱",
+              "item": "https://yunitytech.top/#tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "JSON 实验室",
+              "item": "https://yunitytech.top/tools/json/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://yunitytech.top/tools/json/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "为什么推荐使用纯前端离线 JSON 格式化工具？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "传统在线工具通常将用户的 JSON 请求内容发送至服务端解析，存在接口密钥、Token 与业务私有数据泄露的严重风险。DevHub 采用纯前端 JavaScript 本地解析与格式化，数据全程仅在当前浏览器内存中流转，杜绝外泄可能。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "JSON 格式化与单行压缩有什么应用场景区别？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "格式化排版（2空格或4空格）能够让多层嵌套的复杂 JSON 结构层次分明，极大提升后端接口联调与日志排查效率；而单行压缩（Minify）去除冗余空白符与换行，可显著减少数据传输体积，适合生产环境 API 调用或配置文件储存。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "JSON 解析失败时如何准确定位语法错误？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "常见错误包括：尾部遗留多余逗号 (trailing comma)、使用了非标准的单引号包裹键值、未正确闭合花括号等。DevHub 内置错误捕获器，会在顶部红框精准提示解析失败原因，助你秒级排查修正。"
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
   </head>
   <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
-    <div id="app"></div>
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>JSON 实验室</span>
+        </nav>
+        
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">JSON 格式化与在线校验工具 (JSON Formatter & Validator)</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          免费高效的纯前端离线 JSON 实验室：支持 2 空格/4 空格美化排版、单行去除空格压缩、语法错误精确定位与一键快速复制。数据 100% 在本地浏览器计算，绝不上报远程服务器。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">核心特性一览</h2>
+          <ul style="padding-left: 20px; color: #334155; font-size: 14px; line-height: 1.8;">
+            <li><strong>2 空格 / 4 空格智能排版</strong>：符合主流前端工程代码规范，层级折进清晰。</li>
+            <li><strong>一键单行极简压缩</strong>：快速剔除换行与缩进空格，最小化字符尺寸。</li>
+            <li><strong>语法异常精确诊断</strong>：遇到格式异常即时给出清晰中文解析指引。</li>
+            <li><strong>100% 数据隐私安全</strong>：浏览器纯本地执行，无任何云端上报风险。</li>
+          </ul>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么推荐使用纯前端离线 JSON 格式化工具？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 避免将包含鉴权 Token、数据库明细或内部接口数据的 JSON 传输给不可信的第三方服务端，完全在本地完成排版转换。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: JSON 解析报错最常见的原因有哪些？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 最多见的是数组或对象末尾存在多余逗号（Trailing Commas），或者使用了单引号取代双引号括起属性名。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
     <noscript>
       <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
         <h1>JSON 格式化与在线校验工具</h1>

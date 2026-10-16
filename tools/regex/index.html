@@ -2,58 +2,196 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>正则表达式在线测试与常用正则速查 - DevHub 纯前端工作台</title>
+    <title>正则表达式在线测试与常用正则速查表 - 纯前端防死锁 | DevHub</title>
     
     <!-- 搜索引擎站长认证 (Google & Bing) -->
     <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
     <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
 
     <!-- SEO 核心元标签 -->
-    <meta name="description" content="好用的在线正则表达式测试工具。支持实时匹配高亮、多匹配项列表展示，内置 200ms 防抖与防死锁保护，预置常用正则模板（邮箱、手机号、IP地址、URL、汉字、身份证号）一键填入。" />
-    <meta name="keywords" content="正则测试,正则表达式在线测试,常用正则,正则速查表,手机号正则,邮箱正则,regex tester online,DevHub" />
+    <meta name="description" content="好用的在线正则表达式测试与速查工具。支持实时匹配高亮、多匹配项列表展示，内置 200ms 防抖与 ReDoS 防死锁安全保护，预置常用正则模板（电子邮箱、中国手机号、IPv4地址、URL链接、中文字符、18位身份证号）一键载入测试。" />
+    <meta name="keywords" content="正则测试,正则表达式在线测试,常用正则表达式,正则速查表,手机号正则,邮箱正则,regex tester online,ReDoS防护,DevHub" />
     <meta name="author" content="upowerman" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://yunitytech.top/tools/regex/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="正则表达式在线测试与常用正则速查 - DevHub" />
+    <meta property="og:title" content="正则表达式在线测试与常用正则速查表 - 纯前端 | DevHub" />
     <meta property="og:description" content="实时正则语法测试高亮，内置常用手机/邮箱/IP正则模板，带 ReDoS 防死锁防护。" />
     <meta property="og:url" content="https://yunitytech.top/tools/regex/" />
     <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="正则表达式在线测试与常用正则速查 - DevHub" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="正则表达式在线测试与常用正则速查表 - 纯前端 | DevHub" />
     <meta name="twitter:description" content="实时正则语法测试高亮，内置常用手机/邮箱/IP正则模板，带 ReDoS 防死锁防护。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
 
-    <!-- 结构化数据 (JSON-LD) -->
+    <!-- 结构化数据 (JSON-LD) 包含 WebApp、面包屑与 FAQ 问答 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "DevHub 正则表达式测试器",
-      "url": "https://yunitytech.top/tools/regex/",
-      "description": "纯前端正则表达式在线测试与常用正则速查模板工具",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://yunitytech.top/tools/regex/#webapp",
+          "name": "DevHub 正则测试与速查",
+          "url": "https://yunitytech.top/tools/regex/",
+          "description": "纯前端在线正则表达式测试器与常用模板速查表",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://yunitytech.top/tools/regex/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DevHub 首页",
+              "item": "https://yunitytech.top/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "开发者工具箱",
+              "item": "https://yunitytech.top/#tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "正则测试与速查",
+              "item": "https://yunitytech.top/tools/regex/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://yunitytech.top/tools/regex/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "常用的正则表达式修饰符（Flags）代表什么？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "g (Global) 代表全局匹配，找到目标字符串中所有符合条件的结果而非在命中首项后退出；i (Ignore Case) 代表忽略英文大小写；m (Multiline) 代表多行匹配，让 ^ 和 $ 可以分别定位每行的行首与行尾；s (Dot All) 允许点号 '.' 匹配换行符。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "什么是正则表达式拒绝服务攻击 (ReDoS)？如何预防？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "当正则表达式包含大量嵌套分组、重叠交替以及贪婪量词（例如 (a+)+$）时，面对精心构造的不匹配长输入，正则引擎会发生天文数字级别的灾难性回溯（Catastrophic Backtracking），导致 CPU 满载假死。DevHub 通过文本长度截断与最多循环限制进行安全防死锁。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "如何用正则准确匹配包含汉字中文字符的内容？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "基本中文字符的 Unicode 范围为 [\\u4e00-\\u9fa5]。若要匹配全汉字字符串，可使用 ^[\\u4e00-\\u9fa5]+$；在现代 ES2018+ 还可以使用 Unicode 属性转义 /\\p{Script=Han}+/u。"
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
   </head>
   <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
-    <div id="app"></div>
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>正则测试与速查</span>
+        </nav>
+        
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">正则表达式在线测试与常用正则速查表 (Regex Tester)</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          专为前端表单校验、爬虫提取与服务端日志分析打造的轻快正则调试器。支持实时多项匹配结果列表呈现，集成 200ms 防抖与 ReDoS 防假死保护，预置 6 款工业级常用模板。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">常用正则表达式速查模板清单</h2>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid #e2e8f0; color: #475569;">
+                <th style="padding: 8px 4px; width: 130px;">业务场景</th>
+                <th style="padding: 8px 4px;">正则表达式模式 Pattern</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">电子邮箱 (Email)</td>
+                <td style="padding: 8px 4px; font-family: monospace; color: #0369a1; word-break: break-all;">[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">中国手机号码</td>
+                <td style="padding: 8px 4px; font-family: monospace; color: #0369a1; word-break: break-all;">1[3-9]\d{9}</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">IPv4 地址</td>
+                <td style="padding: 8px 4px; font-family: monospace; color: #0369a1; word-break: break-all;">(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">HTTP/HTTPS 链接</td>
+                <td style="padding: 8px 4px; font-family: monospace; color: #0369a1; word-break: break-all;">https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&amp;\/=]*)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">中文字符匹配</td>
+                <td style="padding: 8px 4px; font-family: monospace; color: #0369a1; word-break: break-all;">[\u4e00-\u9fa5]+</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 4px; font-weight: 600;">中国二代身份证号</td>
+                <td style="padding: 8px 4px; font-family: monospace; color: #0369a1; word-break: break-all;">[1-9]\d{5}(?:18|19|20)\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])\d{3}[\dXx]</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么测试大文本时有时页面会卡死？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 复杂的贪婪正则在遇到长文本时容易发生灾难性回溯。DevHub 增加了 200ms 防抖响应并对极长文本进行分块保护，杜绝浏览器假死。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 如何在匹配时不仅获取全字符串，还获取捕获分组？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 当去掉修饰符中的全局标记 g 时，RegExp.exec 会输出完整的捕获分组详情（$1, $2 等）。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
     <noscript>
       <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
         <h1>正则表达式在线测试与常用正则速查</h1>
-        <p>支持 JavaScript 正则表达式语法实时匹配高亮、修饰符（g, i, m）调整，内置电子邮箱、中国手机号、标准 IPv4、HTTP 链接、汉字中文字符及身份证号等高频模板一键载入。内置 200ms 防抖与字符截断，防止正则回溯卡死标签页。</p>
-        <p><a href="/">返回 DevHub 开发者工作台首页</a></p>
+        <p>支持实时正则匹配高亮、多匹配项列表展示，内置防抖与防死锁保护，预置常用正则模板。</p>
+        <p><a href="/">返回 DevHub 首页</a></p>
       </div>
     </noscript>
     <script type="module" src="/src/main.ts"></script>
