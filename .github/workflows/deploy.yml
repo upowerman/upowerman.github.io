@@ -55,3 +55,22 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Ping IndexNow (Bing & Search Engines)
+        continue-on-error: true
+        run: |
+          curl -s -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            -d '{
+              "host": "yunitytech.top",
+              "key": "a6c429d2975949509df659b85c1894d8",
+              "keyLocation": "https://yunitytech.top/a6c429d2975949509df659b85c1894d8.txt",
+              "urlList": [
+                "https://yunitytech.top/",
+                "https://yunitytech.top/tools/json/",
+                "https://yunitytech.top/tools/timestamp/",
+                "https://yunitytech.top/tools/jwt/",
+                "https://yunitytech.top/tools/codec/",
+                "https://yunitytech.top/tools/regex/"
+              ]
+            }'

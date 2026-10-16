@@ -162,7 +162,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import {
   Wrench,
   Plus,
@@ -232,4 +232,66 @@ function handlePinnedClick(item: NavItem | ToolItem) {
     window.open(item.url, '_blank')
   }
 }
+
+// SEO 路径与工具 ID 映射
+const toolToPathMap: Record<string, string> = {
+  'tool-json': '/tools/json/',
+  'tool-timestamp': '/tools/timestamp/',
+  'tool-jwt': '/tools/jwt/',
+  'tool-codec': '/tools/codec/',
+  'tool-regex': '/tools/regex/'
+}
+
+const pathToToolMap: Record<string, string> = {
+  '/tools/json': 'tool-json',
+  '/tools/timestamp': 'tool-timestamp',
+  '/tools/jwt': 'tool-jwt',
+  '/tools/codec': 'tool-codec',
+  '/tools/regex': 'tool-regex'
+}
+
+function handlePopState() {
+  const path = window.location.pathname.replace(/\/$/, '')
+  if (pathToToolMap[path]) {
+    store.openTool(pathToToolMap[path])
+  } else {
+    store.closeTool()
+  }
+}
+
+// 监听活动工具变化，平滑同步 URL
+watch(
+  () => store.activeToolId,
+  (newId) => {
+    if (newId && toolToPathMap[newId]) {
+      const targetPath = toolToPathMap[newId]
+      if (window.location.pathname !== targetPath) {
+        history.pushState({ toolId: newId }, '', targetPath)
+      }
+    } else if (!newId) {
+      if (window.location.pathname.startsWith('/tools/')) {
+        history.pushState(null, '', '/')
+      }
+    }
+  }
+)
+
+onMounted(() => {
+  // 检查直接从搜索引擎点击进入的 URL 路径或参数
+  const path = window.location.pathname.replace(/\/$/, '')
+  const params = new URLSearchParams(window.location.search)
+  const toolParam = params.get('tool')
+
+  if (pathToToolMap[path]) {
+    store.openTool(pathToToolMap[path])
+  } else if (toolParam && pathToToolMap[`/tools/${toolParam}`]) {
+    store.openTool(pathToToolMap[`/tools/${toolParam}`])
+  }
+
+  window.addEventListener('popstate', handlePopState)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('popstate', handlePopState)
+})
 </script>
