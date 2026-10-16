@@ -9,6 +9,17 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src')
     }
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'pinia', '@vueuse/core'],
+          icons: ['lucide-vue-next'],
+          crypto: ['crypto-js']
+        }
+      }
+    }
+  },
   test: {
     environment: 'happy-dom'
   }
