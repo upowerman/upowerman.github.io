@@ -79,17 +79,22 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { refDebounced } from '@vueuse/core'
 import { testRegex, commonRegexTemplates } from '../../utils/regex-utils'
 
 const pattern = ref(commonRegexTemplates.email.pattern)
 const flags = ref('g')
 const testText = ref('你好，欢迎联系 devhub@yunitytech.top 或 support@github.com！')
 
+const debouncedPattern = refDebounced(pattern, 200)
+const debouncedFlags = refDebounced(flags, 200)
+const debouncedTestText = refDebounced(testText, 200)
+
 function applyTemplate(tplPattern: string) {
   pattern.value = tplPattern
 }
 
 const testResult = computed(() => {
-  return testRegex(pattern.value, flags.value, testText.value)
+  return testRegex(debouncedPattern.value, debouncedFlags.value, debouncedTestText.value)
 })
 </script>

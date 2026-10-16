@@ -110,16 +110,43 @@
           <span>我置顶收藏的网站与工具</span>
         </h3>
 
-        <div v-if="pinnedNavItems.length === 0" class="py-16 text-center text-slate-400 bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800">
+        <div v-if="pinnedItems.length === 0" class="py-16 text-center text-slate-400 bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800">
           <p>暂无收藏项，在任意卡片点击右上角 ⭐ 即可将网站或工具置顶到此处。</p>
         </div>
 
         <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5">
-          <NavCard
-            v-for="item in pinnedNavItems"
-            :key="item.id"
-            :item="item"
-          />
+          <template v-for="item in pinnedItems" :key="item.id">
+            <div
+              v-if="'keywords' in item"
+              @click="store.openTool(item.id)"
+              class="group relative flex items-start space-x-3 p-3.5 bg-white dark:bg-slate-900/80 rounded-xl border border-slate-200/80 dark:border-slate-800 hover:border-primary-500/50 hover:shadow-md transition-all cursor-pointer"
+            >
+              <div class="w-8 h-8 rounded-lg bg-primary-50 dark:bg-primary-950/80 text-primary-600 dark:text-primary-400 flex items-center justify-center shrink-0">
+                <component :is="getToolIcon(item.icon)" class="w-4 h-4" />
+              </div>
+              <div class="flex-1 min-w-0 pr-8">
+                <h4 class="text-sm font-semibold text-slate-800 dark:text-slate-100 group-hover:text-primary-600 transition-colors truncate">
+                  {{ item.name }}
+                </h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  {{ item.desc }}
+                </p>
+              </div>
+              <button
+                type="button"
+                @click.stop="store.togglePin(item.id)"
+                class="absolute top-2.5 right-2.5 p-1 rounded-md text-amber-500 dark:text-amber-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                title="取消置顶"
+              >
+                <Star class="w-4 h-4 fill-amber-400" />
+              </button>
+            </div>
+
+            <NavCard
+              v-else
+              :item="item"
+            />
+          </template>
         </div>
       </section>
     </main>
@@ -196,10 +223,6 @@ const pinnedItems = computed(() => {
     }
   })
   return result
-})
-
-const pinnedNavItems = computed(() => {
-  return allItems.value.filter(n => store.isPinned(n.id))
 })
 
 function handlePinnedClick(item: NavItem | ToolItem) {

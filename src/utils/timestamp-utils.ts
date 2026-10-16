@@ -1,5 +1,5 @@
 export function timestampToDate(ts: number, unit: 's' | 'ms' = 's'): { local: string; utc: string; iso: string; relative: string } {
-  if (isNaN(ts) || typeof ts !== 'number') {
+  if (isNaN(ts) || typeof ts !== 'number' || ts < 0) {
     return {
       local: '无效时间戳',
       utc: '',
@@ -44,10 +44,13 @@ export function timestampToDate(ts: number, unit: 's' | 'ms' = 's'): { local: st
   }
 }
 
-export function dateToTimestamp(dateStr: string): { seconds: number; milliseconds: number } {
+export function dateToTimestamp(dateStr: string): { seconds: number | null; milliseconds: number | null } {
+  if (!dateStr || !dateStr.trim()) {
+    return { seconds: null, milliseconds: null }
+  }
   const date = new Date(dateStr)
   if (isNaN(date.getTime())) {
-    return { seconds: 0, milliseconds: 0 }
+    return { seconds: null, milliseconds: null }
   }
   const ms = date.getTime()
   return {

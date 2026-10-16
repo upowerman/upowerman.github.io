@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full max-w-2xl mx-auto relative">
+  <div ref="searchContainerRef" class="w-full max-w-2xl mx-auto relative">
     <!-- 搜索引擎切换 Tabs -->
     <div class="flex items-center justify-center space-x-2 mb-2 text-xs font-medium">
       <button
@@ -74,7 +74,7 @@
           </div>
         </div>
         <span class="text-xs px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">
-          {{ 'component' in item ? '工具' : '网址' }}
+          {{ 'keywords' in item ? '工具' : '网址' }}
         </span>
       </div>
     </div>
@@ -84,6 +84,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Search, X } from 'lucide-vue-next'
+import { onClickOutside } from '@vueuse/core'
 import { useAppStore } from '../../stores/useAppStore'
 import SiteIcon from '../common/SiteIcon.vue'
 import type { SearchEngineType, NavItem, ToolItem } from '../../types'
@@ -91,6 +92,11 @@ import type { SearchEngineType, NavItem, ToolItem } from '../../types'
 const store = useAppStore()
 const query = ref('')
 const isFocused = ref(false)
+const searchContainerRef = ref<HTMLElement | null>(null)
+
+onClickOutside(searchContainerRef, () => {
+  isFocused.value = false
+})
 
 const engines: { id: SearchEngineType; name: string; url: string; placeholder: string }[] = [
   { id: 'google', name: 'Google', url: 'https://www.google.com/search?q=', placeholder: '搜索 Google 或输入工具/站内书签...' },
@@ -112,7 +118,7 @@ const suggestions = computed(() => {
     .filter(t => t.name.toLowerCase().includes(q) || t.keywords.some(k => k.toLowerCase().includes(q)))
     .map(t => ({ ...t, type: 'tool' as const }))
 
-  const allNavItems = store.defaultNavCategories.flatMap(c => c.items)
+  const allNavItems = [...store.customLinks, ...store.defaultNavCategories.flatMap(c => c.items)]
   const matchedNav: (NavItem & { type: 'nav' })[] = allNavItems
     .filter(n => n.name.toLowerCase().includes(q) || n.desc.toLowerCase().includes(q) || n.tags.some(t => t.toLowerCase().includes(q)))
     .map(n => ({ ...n, type: 'nav' as const }))

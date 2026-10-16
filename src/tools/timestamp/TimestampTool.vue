@@ -102,11 +102,15 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs">
         <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
           <span class="text-slate-400">秒时间戳 (10位):</span>
-          <div class="font-mono font-medium text-primary-600 dark:text-primary-400 mt-0.5">{{ convertedTimestamp.seconds }}</div>
+          <div class="font-mono font-medium text-primary-600 dark:text-primary-400 mt-0.5">
+            {{ convertedTimestamp.seconds !== null ? convertedTimestamp.seconds : '无效日期' }}
+          </div>
         </div>
         <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
           <span class="text-slate-400">毫秒时间戳 (13位):</span>
-          <div class="font-mono font-medium text-primary-600 dark:text-primary-400 mt-0.5">{{ convertedTimestamp.milliseconds }}</div>
+          <div class="font-mono font-medium text-primary-600 dark:text-primary-400 mt-0.5">
+            {{ convertedTimestamp.milliseconds !== null ? convertedTimestamp.milliseconds : '无效日期' }}
+          </div>
         </div>
       </div>
     </div>
@@ -164,7 +168,11 @@ function setDateNow() {
 }
 
 const convertedDate = computed(() => {
-  const num = Number(inputTimestamp.value.trim())
+  const raw = inputTimestamp.value.trim()
+  if (!raw) {
+    return { local: '请输入时间戳', utc: '-', iso: '-', relative: '-' }
+  }
+  const num = Number(raw)
   return timestampToDate(num, selectedUnit.value)
 })
 
