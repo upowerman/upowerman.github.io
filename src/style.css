@@ -16,6 +16,11 @@
   outline-offset: 2px;
 }
 
+/* 例外:搜索命令栏输入框不显示描边,闪烁光标即焦点指示 */
+.search-cmd-input:focus-visible {
+  outline: none;
+}
+
 /* 弹窗入场:用户触发的反馈动效 */
 @keyframes fadeIn {
   from {

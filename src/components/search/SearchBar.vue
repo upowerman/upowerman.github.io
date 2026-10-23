@@ -19,8 +19,8 @@
       </button>
     </div>
 
-    <!-- 搜索命令栏:与全站同色系,以 $ 提示符呼应终端身份 -->
-    <div class="relative flex items-center rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm pl-4 pr-1.5 py-1.5 transition-all focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500/40">
+    <!-- 搜索命令栏:与全站同色系,以 $ 提示符呼应终端身份;聚焦不显示高亮框,光标即焦点 -->
+    <div class="relative flex items-center rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm pl-4 pr-1.5 py-1.5">
       <span class="font-mono text-sm md:text-base text-primary-600 dark:text-primary-400 select-none mr-2 shrink-0" aria-hidden="true">$</span>
       <input
         v-model="query"
@@ -30,7 +30,7 @@
         :aria-expanded="isFocused && suggestions.length > 0"
         aria-controls="search-suggestions"
         aria-autocomplete="list"
-        class="flex-1 min-w-0 bg-transparent py-2.5 text-sm md:text-base text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 font-mono caret-primary-600 outline-none"
+        class="search-cmd-input flex-1 min-w-0 bg-transparent py-2.5 text-sm md:text-base text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 font-mono caret-primary-600 outline-none"
         @keydown.enter="handleEnter"
         @keydown.down.prevent="focusFirstSuggestion"
         @focus="isFocused = true"

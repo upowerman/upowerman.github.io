@@ -88,9 +88,6 @@
         </div>
       </section>
 
-      <!-- 导流通栏 Banner -->
-      <TrafficBanner @open-community="isCommunityOpen = true" />
-
       <!-- 模块 2：精选网址导航区域（当处于 all 或 nav 视图时渲染） -->
       <div v-if="store.activeTab === 'all' || store.activeTab === 'nav'">
         <!-- 自定义链接分类（如果有） -->
@@ -159,7 +156,6 @@
 
     <!-- 模态框容器 -->
     <AddLinkModal :is-open="isAddLinkOpen" @close="isAddLinkOpen = false" />
-    <CommunityModal :is-open="isCommunityOpen" @close="isCommunityOpen = false" />
   </div>
 </template>
 
@@ -182,16 +178,13 @@ import SearchBar from './components/search/SearchBar.vue'
 import NavCard from './components/navigation/NavCard.vue'
 import NavSection from './components/navigation/NavSection.vue'
 import SiteIcon from './components/common/SiteIcon.vue'
-import TrafficBanner from './components/traffic/TrafficBanner.vue'
 import AddLinkModal from './components/modal/AddLinkModal.vue'
-import CommunityModal from './components/traffic/CommunityModal.vue'
 import { toolPath } from './utils/tool-routes'
 import type { NavItem, ToolItem } from './types'
 
 const store = useAppStore()
 
 const isAddLinkOpen = ref(false)
-const isCommunityOpen = ref(false)
 
 const toolIcons: Record<string, any> = {
   FileJson,
