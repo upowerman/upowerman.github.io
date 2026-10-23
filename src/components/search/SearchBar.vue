@@ -149,7 +149,7 @@ function handleEnter() {
 
 function selectSuggestion(item: (ToolItem & { type: 'tool' }) | (NavItem & { type: 'nav' })) {
   if (item.type === 'tool') {
-    store.openTool(item.id)
+    store.navigateToTool(item.id)
   } else if ('url' in item) {
     window.open(item.url, '_blank')
   }

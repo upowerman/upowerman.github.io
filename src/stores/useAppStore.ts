@@ -3,6 +3,7 @@ import { useLocalStorage, useDark, useToggle } from '@vueuse/core'
 import type { NavItem, SearchEngineType, ViewTabType } from '../types'
 import { defaultNavCategories } from '../data/nav-categories'
 import { defaultToolsRegistry } from '../data/tools-registry'
+import { toolPath } from '../utils/tool-routes'
 
 export const useAppStore = defineStore('app', () => {
   // 主题管理
@@ -17,7 +18,6 @@ export const useAppStore = defineStore('app', () => {
   const customLinks = useLocalStorage<NavItem[]>('devhub_custom_links', [])
   const searchEngine = useLocalStorage<SearchEngineType>('devhub_search_engine', 'google')
   const activeTab = useLocalStorage<ViewTabType>('devhub_active_tab', 'all')
-  const activeToolId = useLocalStorage<string | null>('devhub_active_tool_id', null)
 
   // 辅助方法
   function isPinned(id: string): boolean {
@@ -48,12 +48,9 @@ export const useAppStore = defineStore('app', () => {
     activeTab.value = tab
   }
 
-  function openTool(toolId: string) {
-    activeToolId.value = toolId
-  }
-
-  function closeTool() {
-    activeToolId.value = null
+  function navigateToTool(toolId: string) {
+    const path = toolPath(toolId)
+    if (path) window.location.assign(path)
   }
 
   return {
@@ -63,7 +60,6 @@ export const useAppStore = defineStore('app', () => {
     customLinks,
     searchEngine,
     activeTab,
-    activeToolId,
     defaultNavCategories,
     defaultToolsRegistry,
     isPinned,
@@ -72,7 +68,6 @@ export const useAppStore = defineStore('app', () => {
     removeCustomLink,
     setSearchEngine,
     setActiveTab,
-    openTool,
-    closeTool
+    navigateToTool
   }
 })

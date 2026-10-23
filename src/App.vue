@@ -21,17 +21,30 @@
 
         <!-- 常用置顶快捷磁贴 -->
         <div class="mt-6 flex flex-wrap items-center justify-center gap-2 max-w-3xl mx-auto">
-          <div
-            v-for="item in pinnedItems"
-            :key="item.id"
-            @click="handlePinnedClick(item)"
-            class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-primary-500 shadow-sm hover:shadow transition-all cursor-pointer group"
-          >
-            <SiteIcon :name="item.name" :url="'url' in item ? item.url : undefined" />
-            <span class="text-xs font-semibold text-slate-700 dark:text-slate-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-              {{ item.name }}
-            </span>
-          </div>
+          <template v-for="item in pinnedItems" :key="item.id">
+            <a
+              v-if="'url' in item"
+              :href="item.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-primary-500 shadow-sm hover:shadow transition-all group"
+            >
+              <SiteIcon :name="item.name" :url="item.url" />
+              <span class="text-xs font-semibold text-slate-700 dark:text-slate-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                {{ item.name }}
+              </span>
+            </a>
+            <a
+              v-else
+              :href="toolPath(item.id) || '/'"
+              class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-primary-500 shadow-sm hover:shadow transition-all group"
+            >
+              <SiteIcon :name="item.name" />
+              <span class="text-xs font-semibold text-slate-700 dark:text-slate-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                {{ item.name }}
+              </span>
+            </a>
+          </template>
 
           <button
             type="button"
@@ -59,11 +72,11 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5">
-          <div
+          <a
             v-for="tool in store.defaultToolsRegistry"
             :key="tool.id"
-            @click="store.openTool(tool.id)"
-            class="group p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 hover:border-primary-500 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between"
+            :href="toolPath(tool.id) || '/#tools'"
+            class="group p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 hover:border-primary-500 hover:shadow-md transition-all flex flex-col justify-between"
           >
             <div>
               <div class="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/80 text-primary-600 dark:text-primary-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
@@ -81,7 +94,7 @@
               <span>立即使用</span>
               <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -116,10 +129,10 @@
 
         <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5">
           <template v-for="item in pinnedItems" :key="item.id">
-            <div
+            <a
               v-if="'keywords' in item"
-              @click="store.openTool(item.id)"
-              class="group relative flex items-start space-x-3 p-3.5 bg-white dark:bg-slate-900/80 rounded-xl border border-slate-200/80 dark:border-slate-800 hover:border-primary-500/50 hover:shadow-md transition-all cursor-pointer"
+              :href="toolPath(item.id) || '/'"
+              class="group relative flex items-start space-x-3 p-3.5 bg-white dark:bg-slate-900/80 rounded-xl border border-slate-200/80 dark:border-slate-800 hover:border-primary-500/50 hover:shadow-md transition-all"
             >
               <div class="w-8 h-8 rounded-lg bg-primary-50 dark:bg-primary-950/80 text-primary-600 dark:text-primary-400 flex items-center justify-center shrink-0">
                 <component :is="getToolIcon(item.icon)" class="w-4 h-4" />
@@ -134,13 +147,13 @@
               </div>
               <button
                 type="button"
-                @click.stop="store.togglePin(item.id)"
+                @click.stop.prevent="store.togglePin(item.id)"
                 class="absolute top-2.5 right-2.5 p-1 rounded-md text-amber-500 dark:text-amber-400 hover:bg-slate-100 dark:hover:bg-slate-800"
                 title="取消置顶"
               >
                 <Star class="w-4 h-4 fill-amber-400" />
               </button>
-            </div>
+            </a>
 
             <NavCard
               v-else
@@ -155,14 +168,13 @@
     <AppFooter @open-community="isCommunityOpen = true" />
 
     <!-- 模态框容器 -->
-    <ToolContainer />
     <AddLinkModal :is-open="isAddLinkOpen" @close="isAddLinkOpen = false" />
     <CommunityModal :is-open="isCommunityOpen" @close="isCommunityOpen = false" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed } from 'vue'
 import {
   Wrench,
   Plus,
@@ -182,9 +194,9 @@ import NavCard from './components/navigation/NavCard.vue'
 import NavSection from './components/navigation/NavSection.vue'
 import SiteIcon from './components/common/SiteIcon.vue'
 import TrafficBanner from './components/traffic/TrafficBanner.vue'
-import ToolContainer from './components/tools/ToolContainer.vue'
 import AddLinkModal from './components/modal/AddLinkModal.vue'
 import CommunityModal from './components/traffic/CommunityModal.vue'
+import { toolPath } from './utils/tool-routes'
 import type { NavItem, ToolItem } from './types'
 
 const store = useAppStore()
@@ -223,75 +235,5 @@ const pinnedItems = computed(() => {
     }
   })
   return result
-})
-
-function handlePinnedClick(item: NavItem | ToolItem) {
-  if ('component' in item || item.id.startsWith('tool-')) {
-    store.openTool(item.id)
-  } else if ('url' in item) {
-    window.open(item.url, '_blank')
-  }
-}
-
-// SEO 路径与工具 ID 映射
-const toolToPathMap: Record<string, string> = {
-  'tool-json': '/tools/json/',
-  'tool-timestamp': '/tools/timestamp/',
-  'tool-jwt': '/tools/jwt/',
-  'tool-codec': '/tools/codec/',
-  'tool-regex': '/tools/regex/'
-}
-
-const pathToToolMap: Record<string, string> = {
-  '/tools/json': 'tool-json',
-  '/tools/timestamp': 'tool-timestamp',
-  '/tools/jwt': 'tool-jwt',
-  '/tools/codec': 'tool-codec',
-  '/tools/regex': 'tool-regex'
-}
-
-function handlePopState() {
-  const path = window.location.pathname.replace(/\/$/, '')
-  if (pathToToolMap[path]) {
-    store.openTool(pathToToolMap[path])
-  } else {
-    store.closeTool()
-  }
-}
-
-// 监听活动工具变化，平滑同步 URL
-watch(
-  () => store.activeToolId,
-  (newId) => {
-    if (newId && toolToPathMap[newId]) {
-      const targetPath = toolToPathMap[newId]
-      if (window.location.pathname !== targetPath) {
-        history.pushState({ toolId: newId }, '', targetPath)
-      }
-    } else if (!newId) {
-      if (window.location.pathname.startsWith('/tools/')) {
-        history.pushState(null, '', '/')
-      }
-    }
-  }
-)
-
-onMounted(() => {
-  // 检查直接从搜索引擎点击进入的 URL 路径或参数
-  const path = window.location.pathname.replace(/\/$/, '')
-  const params = new URLSearchParams(window.location.search)
-  const toolParam = params.get('tool')
-
-  if (pathToToolMap[path]) {
-    store.openTool(pathToToolMap[path])
-  } else if (toolParam && pathToToolMap[`/tools/${toolParam}`]) {
-    store.openTool(pathToToolMap[`/tools/${toolParam}`])
-  }
-
-  window.addEventListener('popstate', handlePopState)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('popstate', handlePopState)
 })
 </script>

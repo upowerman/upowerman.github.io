@@ -2,7 +2,7 @@
   <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <!-- 品牌 Logo -->
-      <div class="flex items-center space-x-3 cursor-pointer" @click="store.setActiveTab('all')">
+      <div class="flex items-center space-x-3 cursor-pointer" @click="handleLogoClick">
         <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary-600 to-emerald-400 flex items-center justify-center text-white shadow-md shadow-primary-500/20">
           <Terminal class="w-5 h-5" />
         </div>
@@ -22,7 +22,7 @@
       </div>
 
       <!-- 视图切换 Tab -->
-      <nav class="hidden md:flex items-center space-x-1 p-1 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs font-semibold">
+      <nav v-if="!toolMode" class="hidden md:flex items-center space-x-1 p-1 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs font-semibold">
         <button
           type="button"
           @click="store.setActiveTab('all')"
@@ -78,6 +78,7 @@
       <div class="flex items-center space-x-2">
         <!-- 添加自定义书签 -->
         <button
+          v-if="!toolMode"
           type="button"
           @click="$emit('open-add-link')"
           class="hidden sm:flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-colors"
@@ -126,10 +127,22 @@
 import { Terminal, Star, Plus, Users, Github, Sun, Moon } from 'lucide-vue-next'
 import { useAppStore } from '../../stores/useAppStore'
 
+const props = defineProps<{
+  toolMode?: boolean
+}>()
+
 defineEmits<{
   (e: 'open-add-link'): void
   (e: 'open-community'): void
 }>()
 
 const store = useAppStore()
+
+function handleLogoClick() {
+  if (props.toolMode) {
+    window.location.assign('/')
+    return
+  }
+  store.setActiveTab('all')
+}
 </script>
