@@ -21,56 +21,24 @@
         </div>
       </div>
 
-      <!-- 视图切换 Tab -->
-      <nav v-if="!toolMode" class="hidden md:flex items-center space-x-1 p-1 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs font-semibold">
+      <!-- 视图切换 Tab(桌面) -->
+      <nav v-if="!toolMode" role="tablist" aria-label="视图切换" class="hidden md:flex items-center space-x-1 p-1 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs font-semibold">
         <button
+          v-for="t in viewTabs"
+          :key="t.id"
           type="button"
-          @click="store.setActiveTab('all')"
-          :class="[
-            'px-3 py-1.5 rounded-lg transition-all',
-            store.activeTab === 'all'
-              ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm'
-              : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
-          ]"
-        >
-          综合看板
-        </button>
-        <button
-          type="button"
-          @click="store.setActiveTab('nav')"
-          :class="[
-            'px-3 py-1.5 rounded-lg transition-all',
-            store.activeTab === 'nav'
-              ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm'
-              : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
-          ]"
-        >
-          资源导航
-        </button>
-        <button
-          type="button"
-          @click="store.setActiveTab('tools')"
-          :class="[
-            'px-3 py-1.5 rounded-lg transition-all',
-            store.activeTab === 'tools'
-              ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm'
-              : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
-          ]"
-        >
-          开发工具箱
-        </button>
-        <button
-          type="button"
-          @click="store.setActiveTab('pinned')"
+          role="tab"
+          :aria-selected="store.activeTab === t.id"
+          @click="store.setActiveTab(t.id)"
           :class="[
             'px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1',
-            store.activeTab === 'pinned'
+            store.activeTab === t.id
               ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm'
               : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
           ]"
         >
-          <Star class="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
-          <span>我的收藏</span>
+          <Star v-if="t.id === 'pinned'" class="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
+          <span>{{ t.label }}</span>
         </button>
       </nav>
 
@@ -120,12 +88,39 @@
         </button>
       </div>
     </div>
+
+    <!-- 移动端视图切换（可横滑） -->
+    <nav
+      v-if="!toolMode"
+      role="tablist"
+      aria-label="视图切换"
+      class="md:hidden flex items-center gap-1.5 px-4 pb-2.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    >
+      <button
+        v-for="t in viewTabs"
+        :key="t.id"
+        type="button"
+        role="tab"
+        :aria-selected="store.activeTab === t.id"
+        @click="store.setActiveTab(t.id)"
+        :class="[
+          'shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center space-x-1',
+          store.activeTab === t.id
+            ? 'bg-primary-600 text-white shadow-sm'
+            : 'bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400'
+        ]"
+      >
+        <Star v-if="t.id === 'pinned'" class="w-3.5 h-3.5 text-amber-400 fill-amber-300" />
+        <span>{{ t.label }}</span>
+      </button>
+    </nav>
   </header>
 </template>
 
 <script setup lang="ts">
 import { Terminal, Star, Plus, Users, Github, Sun, Moon } from 'lucide-vue-next'
 import { useAppStore } from '../../stores/useAppStore'
+import type { ViewTabType } from '../../types'
 
 const props = defineProps<{
   toolMode?: boolean
@@ -135,6 +130,13 @@ defineEmits<{
   (e: 'open-add-link'): void
   (e: 'open-community'): void
 }>()
+
+const viewTabs: { id: ViewTabType; label: string }[] = [
+  { id: 'all', label: '综合看板' },
+  { id: 'nav', label: '资源导航' },
+  { id: 'tools', label: '开发工具箱' },
+  { id: 'pinned', label: '我的收藏' }
+]
 
 const store = useAppStore()
 
