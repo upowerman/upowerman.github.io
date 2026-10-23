@@ -64,5 +64,21 @@ export const defaultToolsRegistry: ToolItem[] = [
     icon: 'Palette',
     category: 'design',
     keywords: ['颜色转换', 'hex', 'rgb', 'hsl', '对比度', '色值', 'color']
+  },
+  {
+    id: 'tool-aes',
+    name: 'AES 加解密实验室',
+    desc: 'CBC/ECB/CTR 全模式、PKCS7 填充、Base64/Hex 编解码及 Java/Python/Go 多语言联调代码生成',
+    icon: 'ShieldCheck',
+    category: 'crypto',
+    keywords: ['aes', 'encrypt', 'decrypt', 'cbc', 'ecb', 'pkcs7', '加密', '解密', '对称加密']
+  },
+  {
+    id: 'tool-case',
+    name: '变量命名风格转换',
+    desc: '小驼峰/大驼峰/下划线/短横线/常量等 8 种代码命名风格实时互转与多行批量处理',
+    icon: 'CaseUpper',
+    category: 'format',
+    keywords: ['case', 'camelCase', 'pascalCase', 'snake_case', 'kebab-case', '命名转换', '驼峰', '下划线']
   }
 ]

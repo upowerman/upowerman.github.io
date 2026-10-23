@@ -6,7 +6,9 @@ export const TOOL_ROUTES: Record<string, string> = {
   'tool-regex': 'regex',
   'tool-cron': 'cron',
   'tool-uuid': 'uuid',
-  'tool-color': 'color'
+  'tool-color': 'color',
+  'tool-aes': 'aes',
+  'tool-case': 'case'
 }
 
 const idBySlug: Record<string, string> = Object.fromEntries(

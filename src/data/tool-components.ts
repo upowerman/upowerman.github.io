@@ -7,6 +7,8 @@ import RegexTool from '../tools/regex/RegexTool.vue'
 import CronTool from '../tools/cron/CronTool.vue'
 import UuidTool from '../tools/uuid/UuidTool.vue'
 import ColorTool from '../tools/color/ColorTool.vue'
+import AesTool from '../tools/aes/AesTool.vue'
+import CaseTool from '../tools/case/CaseTool.vue'
 
 export const toolComponents: Record<string, Component> = {
   'tool-json': JsonTool,
@@ -16,5 +18,7 @@ export const toolComponents: Record<string, Component> = {
   'tool-regex': RegexTool,
   'tool-cron': CronTool,
   'tool-uuid': UuidTool,
-  'tool-color': ColorTool
+  'tool-color': ColorTool,
+  'tool-aes': AesTool,
+  'tool-case': CaseTool
 }

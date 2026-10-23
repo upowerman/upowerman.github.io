@@ -287,5 +287,79 @@ export const toolPageContent: Record<string, ToolPageContent> = {
         a: '保持 H 与 S 不变、按档位递变 L,即可得到一组视觉上同族、明暗有序的色阶(如 50-950),这正是 Tailwind 等设计系统的调色板生成方式。用 RGB 手工派生很难保持这种规律感。'
       }
     ]
+  },
+  'tool-aes': {
+    h1: 'AES 在线加解密实验室与多语言联调工具',
+    intro:
+      '支持 CBC / ECB / CTR / OFB / CFB 全部分组工作模式，PKCS7 / ZeroPadding / NoPadding 等多种填充，Base64 与 Hex 密文编码。内置 Java、Python、Node.js、Go 生产级联调代码即时生成，数据纯本地客户端计算绝不上报。',
+    extra: {
+      title: 'AES 工作模式与安全性对比速查',
+      head: ['模式', '全称', '需要 IV', '安全性与特点', '建议场景'],
+      monoCols: [0],
+      rows: [
+        ['CBC', 'Cipher Block Chaining', '是 (16字节)', '分组串联，最成熟普及；密文块被破坏仅影响两块', '通用 API 交互、数据库敏感字段存储'],
+        ['ECB', 'Electronic Codebook', '否', '相同明文块产生相同密文块，泄露明文模式，不安全', '仅用于单块测试或已废弃遗留系统兼容'],
+        ['CTR', 'Counter Mode', '是 (16字节计数器)', '流加密特性，支持并发加解密且无填充开销', '高性能传输、流媒体、并发数据管道'],
+        ['OFB', 'Output Feedback', '是 (16字节)', '将分组密码转换为同步流密码，抗信道误码传播', '卫星通信、容错数据传输通道']
+      ]
+    },
+    faqs: [
+      {
+        q: '为什么前后端联调 AES 经常出现解密失败？',
+        a: '最常见原因有四点：1. 模式或填充不匹配（Java 默认 AES 实际为 AES/ECB/PKCS5Padding，而常见前端库默认 CBC）；2. IV 缺失或长度不满足 16 字节；3. 密钥编码不一致（如 UTF-8 字符串与 Hex 16进制混淆）；4. 输出编码不一致（Base64 与 Hex 字符大小写）。DevHub 提供了 Java、Python、Go 等多语言联调代码生成，复制即可对齐双方配置。'
+      },
+      {
+        q: 'PKCS#5 和 PKCS#7 填充有什么区别？',
+        a: '本质上算法完全相同：PKCS#5 规范规定块大小固定为 8 字节（最初用于 DES）；而 PKCS#7 允许块大小为 1 到 255 字节。由于 AES 的分组块固定为 16 字节（128位），严格来说 AES 使用的是 PKCS#7。在 Java 中由于历史原因写为 PKCS5Padding，实际在 AES 下就是 PKCS#7，二者完全通用。'
+      },
+      {
+        q: '为什么强烈不推荐在生产环境中使用 AES-ECB 模式？',
+        a: 'ECB（电子密码本）模式将明文拆分为独立的 16 字节块各自加密，相同的明文块永远输出相同的密文块。攻击者即使不知道密钥，也可以通过分析密文重复模式窥探出原始图像轮廓或报文结构（如著名的 ECB 企鹅图），且极易遭受重放攻击与块重组攻击。推荐使用 CBC 或 CTR 模式。'
+      },
+      {
+        q: 'AES 的 128 位、192 位和 256 位密钥有什么差别？',
+        a: '数字代表密钥长度：128 位需要 16 字节，192 位需要 24 字节，256 位需要 32 字节。加密轮数分别为 10、12、14 轮。在当代密码学中，AES-128 已足以抵御暴力破解；金融、政企与极高敏感级系统常规范要求采用 AES-256。密钥越长对 CPU 的算力消耗略有增加，但在现代支持硬件加速的 CPU 上性能差异极小。'
+      },
+      {
+        q: '在线使用 AES 工具会有密钥或明文泄露风险吗？',
+        a: '传统服务端在线工具会把您的密钥和数据发送到远端服务器，存在日志记录和网络劫持泄露风险。DevHub 采用纯前端 WebAssembly 与 JavaScript 纯本地客户端运算，全程在当前浏览器内存执行，绝不向任何后端接口上传数据，断网亦可正常工作。'
+      }
+    ]
+  },
+  'tool-case': {
+    h1: '变量命名风格转换与多行批量处理工具',
+    intro:
+      '支持 camelCase、PascalCase、snake_case、kebab-case、CONSTANT_CASE、Title Case、dot.case、path/case 8 种主流编程命名风格实时互转。智能识别连续大写缩写词（如 HTTP、JSON），支持多行数据库字段批量转换为 Java/TS 实体属性。',
+    extra: {
+      title: '各主流编程语言与技术栈命名规范推荐',
+      head: ['技术栈 / 语言', '变量与方法', '类名 / 接口 / 类型', '常量 / 环境变量', '数据库列名'],
+      monoCols: [1, 2, 3, 4],
+      rows: [
+        ['JavaScript / TS', 'camelCase', 'PascalCase', 'CONSTANT_CASE', 'snake_case'],
+        ['Java', 'camelCase', 'PascalCase', 'CONSTANT_CASE', 'snake_case'],
+        ['Python', 'snake_case', 'PascalCase', 'CONSTANT_CASE', 'snake_case'],
+        ['Go', 'camelCase / PascalCase', 'PascalCase', 'CONSTANT_CASE', 'snake_case'],
+        ['Rust', 'snake_case', 'PascalCase', 'CONSTANT_CASE', 'snake_case'],
+        ['CSS / HTML', 'kebab-case', 'kebab-case', 'kebab-case', 'N/A']
+      ]
+    },
+    faqs: [
+      {
+        q: '什么是小驼峰 (camelCase) 与大驼峰 (PascalCase)？',
+        a: '驼峰命名法（CamelCase）通过单词首字母大写消除空格以模拟骆驼驼峰。小驼峰（lowerCamelCase）首字母小写（如 userName），在 JS、Java、Swift、Go（私有）中广泛用于局部变量与方法；大驼峰（UpperCamelCase 或 PascalCase）首字母大写（如 UserProfile），通常用于类名、接口、React 组件或 Go 导出的公共属性。'
+      },
+      {
+        q: '遇到类似 getHTTPResponse 的连续大写缩写词时如何智能分词？',
+        a: '简单粗暴的正则会把 HTTPResponse 拆分成每个单独大写字母或拆错词。DevHub 内置智能分词算法：将连续大写字母作为一个整体单词识别，但当后面紧跟小写字母时自动将最后一个大写字母归入后续词（例如 HTTPResponse 正确拆解为 HTTP 与 Response），精准还原缩写意图。'
+      },
+      {
+        q: '如何高效把 SQL 数据库列名批量转为后端 Java 或前端 TS 变量？',
+        a: '在日常开发中，从建表 DDL 导出的字段往往是下划线风格（如 user_account_id）。切换到本工具的"批量多行转换"模式，将数据库列名多行粘贴在左侧，选择目标命名风格为"小驼峰 camelCase"，右侧即可一键生成对齐的实体属性列表，支持一键复制到 IDE 中。'
+      },
+      {
+        q: '为什么 URL 路径和 CSS 类名推荐 kebab-case 而不是 camelCase？',
+        a: 'URL 规范中部分协议或 CDN 缓存服务器对大小写可能不敏感（导致 itemDetail 与 itemdetail 被判定为同一资源或缓存混乱）；而在 CSS 中选择器也是大小写不敏感的，且使用短横线（kebab-case）具有极高的可读性，例如 user-avatar-image，这是前端规范事实上的黄金标准。'
+      }
+    ]
   }
 }

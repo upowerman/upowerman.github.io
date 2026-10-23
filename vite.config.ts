@@ -21,6 +21,8 @@ export default defineConfig({
         'tools/cron': path.resolve(__dirname, 'tools/cron/index.html'),
         'tools/uuid': path.resolve(__dirname, 'tools/uuid/index.html'),
         'tools/color': path.resolve(__dirname, 'tools/color/index.html'),
+        'tools/aes': path.resolve(__dirname, 'tools/aes/index.html'),
+        'tools/case': path.resolve(__dirname, 'tools/case/index.html'),
         privacy: path.resolve(__dirname, 'privacy/index.html')
       },
       output: {

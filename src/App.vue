@@ -175,7 +175,9 @@ import {
   Regex,
   CalendarClock,
   Fingerprint,
-  Palette
+  Palette,
+  ShieldCheck,
+  CaseUpper
 } from 'lucide-vue-next'
 import { useAppStore } from './stores/useAppStore'
 import AppHeader from './components/layout/AppHeader.vue'
@@ -201,7 +203,9 @@ const toolIcons: Record<string, any> = {
   Regex,
   CalendarClock,
   Fingerprint,
-  Palette
+  Palette,
+  ShieldCheck,
+  CaseUpper
 }
 
 function getToolIcon(iconName: string) {
