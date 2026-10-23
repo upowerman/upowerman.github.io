@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      ;(function () {
+        try {
+          var s = localStorage.getItem('vueuse-color-scheme')
+          var dark = s === 'dark' || ((!s || s === 'auto') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          if (dark) document.documentElement.classList.add('dark')
+        } catch (e) {}
+      })()
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UUID 在线批量生成器 (v4/v7) - GUID 生成 | DevHub</title>
+
+    <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
+    <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
+
+    <meta name="description" content="免费在线 UUID/GUID 批量生成器:加密安全随机源生成 v4 与 v7 版本 UUID,支持大小写、连字符与批量复制。纯前端本地生成,绝不联网。" />
+    <meta name="keywords" content="uuid在线生成,guid生成器,uuid v4,uuid v7,批量uuid,唯一标识,DevHub" />
+    <meta name="author" content="upowerman" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yunitytech.top/tools/uuid/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="UUID 在线批量生成器 (v4/v7) - GUID 生成 | DevHub" />
+    <meta property="og:description" content="加密安全随机源批量生成 v4/v7 UUID,支持大小写、连字符与批量复制。" />
+    <meta property="og:url" content="https://yunitytech.top/tools/uuid/" />
+    <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="UUID 在线批量生成器 (v4/v7) | DevHub" />
+    <meta name="twitter:description" content="加密安全随机源批量生成 v4/v7 UUID,支持批量复制。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebApplication",
+            "@id": "https://yunitytech.top/tools/uuid/#webapp",
+            "name": "DevHub UUID 生成器",
+            "url": "https://yunitytech.top/tools/uuid/",
+            "description": "纯前端 UUID v4/v7 批量在线生成器",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "All",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yunitytech.top/tools/uuid/#breadcrumb",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "DevHub 首页", "item": "https://yunitytech.top/" },
+              { "@type": "ListItem", "position": 2, "name": "开发者工具箱", "item": "https://yunitytech.top/#tools" },
+              { "@type": "ListItem", "position": 3, "name": "UUID 生成器", "item": "https://yunitytech.top/tools/uuid/" }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://yunitytech.top/tools/uuid/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "UUID v1、v4、v7 应该怎么选?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "v4(122 位随机)是通用默认,无信息泄露;v7 前 48 位是毫秒时间戳,天然按时间排序,做数据库主键时 B+ 树插入局部性远好于随机的 v4,是新版主流推荐;v1 含 MAC 地址有隐私问题,新项目不应使用。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "UUID 真的会重复吗?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "理论上会,实际上概率可以忽略:随机 122 位的 v4,生成 103 万亿个后碰撞概率才约 10⁻¹²。日常业务量级下可以放心当作全局唯一标识使用,无需查重。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "为什么不用 Math.random 生成 UUID?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Math.random 是非加密安全的伪随机数,可被预测与重现;UUID 用作令牌或 ID 时必须使用加密安全随机源。本工具使用浏览器原生 crypto.getRandomValues,与后端 crypto 库同等强度。"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>UUID 生成器</span>
+        </nav>
+
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">UUID 在线批量生成器 (UUID / GUID Generator)</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          基于浏览器加密安全随机源(crypto.getRandomValues)批量生成 UUID:v4 全随机版本与 v7 时间戳有序版本,支持 1-100 个批量产出、大写与连字符开关、单条或全部一键复制。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">UUID 版本选型速查</h2>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid #e2e8f0; color: #475569;">
+                <th style="padding: 8px 4px;">版本</th>
+                <th style="padding: 8px 4px;">生成方式</th>
+                <th style="padding: 8px 4px;">有序性</th>
+                <th style="padding: 8px 4px;">典型场景</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 8px 4px; font-family: monospace; font-weight: 600;">v1</td><td style="padding: 8px 4px;">MAC 地址 + 时间戳</td><td style="padding: 8px 4px;">时间有序</td><td style="padding: 8px 4px; color: #475569;">遗留系统,已因隐私问题很少使用</td></tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 8px 4px; font-family: monospace; font-weight: 600;">v4</td><td style="padding: 8px 4px;">122 位纯随机</td><td style="padding: 8px 4px;">无序</td><td style="padding: 8px 4px; color: #475569;">绝大多数场景的默认选择:主键、请求 ID、文件名</td></tr>
+              <tr><td style="padding: 8px 4px; font-family: monospace; font-weight: 600;">v7</td><td style="padding: 8px 4px;">48 位毫秒时间戳 + 随机</td><td style="padding: 8px 4px;">毫秒有序</td><td style="padding: 8px 4px; color: #475569;">数据库主键(插入局部性好)、日志追踪、可排序令牌</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: UUID v1、v4、v7 应该怎么选?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: v4 是通用默认;v7 时间戳有序、做数据库主键性能更好,是新版主流推荐;v1 含 MAC 地址有隐私问题,不应再使用。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: UUID 真的会重复吗?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 随机 122 位的 v4,生成 103 万亿个后碰撞概率才约 10⁻¹²,日常业务可放心当作全局唯一标识。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么不用 Math.random 生成 UUID?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: Math.random 非加密安全、可被预测;UUID 用作令牌时必须使用 crypto.getRandomValues 这类加密安全随机源。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
+    <noscript>
+      <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+        <h1>UUID 在线批量生成器</h1>
+        <p>加密安全随机源批量生成 v4/v7 UUID,支持大小写、连字符与批量复制,纯前端本地生成。</p>
+        <p><a href="/">返回 DevHub 首页</a></p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

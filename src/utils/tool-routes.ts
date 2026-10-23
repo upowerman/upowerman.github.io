@@ -4,7 +4,8 @@ export const TOOL_ROUTES: Record<string, string> = {
   'tool-jwt': 'jwt',
   'tool-codec': 'codec',
   'tool-regex': 'regex',
-  'tool-cron': 'cron'
+  'tool-cron': 'cron',
+  'tool-uuid': 'uuid'
 }
 
 const idBySlug: Record<string, string> = Object.fromEntries(

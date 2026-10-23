@@ -48,5 +48,13 @@ export const defaultToolsRegistry: ToolItem[] = [
     icon: 'CalendarClock',
     category: 'schedule',
     keywords: ['cron', 'crontab', '定时任务', 'quartz', '调度', '表达式', '下一次执行']
+  },
+  {
+    id: 'tool-uuid',
+    name: 'UUID 生成器',
+    desc: '批量生成 v4 随机与 v7 时间戳有序 UUID,支持大小写与连字符开关',
+    icon: 'Fingerprint',
+    category: 'id',
+    keywords: ['uuid', 'guid', 'v4', 'v7', '生成器', '唯一 id', '批量']
   }
 ]
