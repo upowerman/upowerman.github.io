@@ -179,7 +179,9 @@ import {
   ShieldCheck,
   CaseUpper,
   Database,
-  Terminal
+  Terminal,
+  GitCompare,
+  Code2
 } from 'lucide-vue-next'
 import { useAppStore } from './stores/useAppStore'
 import AppHeader from './components/layout/AppHeader.vue'
@@ -209,7 +211,9 @@ const toolIcons: Record<string, any> = {
   ShieldCheck,
   CaseUpper,
   Database,
-  Terminal
+  Terminal,
+  GitCompare,
+  Code2
 }
 
 function getToolIcon(iconName: string) {

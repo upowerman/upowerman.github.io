@@ -25,6 +25,8 @@ export default defineConfig({
         'tools/case': path.resolve(__dirname, 'tools/case/index.html'),
         'tools/sql': path.resolve(__dirname, 'tools/sql/index.html'),
         'tools/curl': path.resolve(__dirname, 'tools/curl/index.html'),
+        'tools/diff': path.resolve(__dirname, 'tools/diff/index.html'),
+        'tools/json-to-type': path.resolve(__dirname, 'tools/json-to-type/index.html'),
         privacy: path.resolve(__dirname, 'privacy/index.html')
       },
       output: {

@@ -10,7 +10,9 @@ export const TOOL_ROUTES: Record<string, string> = {
   'tool-aes': 'aes',
   'tool-case': 'case',
   'tool-sql': 'sql',
-  'tool-curl': 'curl'
+  'tool-curl': 'curl',
+  'tool-diff': 'diff',
+  'tool-json-to-type': 'json-to-type'
 }
 
 const idBySlug: Record<string, string> = Object.fromEntries(

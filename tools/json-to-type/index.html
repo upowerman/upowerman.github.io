@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+  (function () {
+    try {
+      var s = localStorage.getItem('vueuse-color-scheme')
+      var dark = s === 'dark' || ((!s || s === 'auto') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      if (dark) document.documentElement.classList.add('dark')
+    } catch (e) {}
+  })()
+</script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-8846399986169251" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8846399986169251" crossorigin="anonymous"></script>
+    <title>JSON 转 TS/Go 类型声明与结构体工具 - 纯前端一键生成 Interface/Struct | DevHub</title>
+    
+    <!-- 搜索引擎站长认证 (Google & Bing) -->
+    <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
+    <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
+
+    <!-- SEO 核心元标签 -->
+    <meta name="description" content="将任意复杂嵌套 JSON 快速解析为强类型定义。支持 TypeScript Interface、Go Struct（自动生成 json tag 标签）以及 Python Pydantic BaseModel 模型。智能解析嵌套对象、数组类型推断，100% 浏览器本地运算。" />
+    <meta name="keywords" content="JSON转TS,JSON转TypeScript,JSON转Go结构体,json to struct,json to interface,pydantic生成,类型生成器,DevHub" />
+    <meta name="author" content="upowerman" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yunitytech.top/tools/json-to-type/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="JSON 转 TS/Go 类型声明与结构体工具 - 纯前端离线 | DevHub" />
+    <meta property="og:description" content="JSON 一键生成 TypeScript Interface、Go Struct 结构体与 Python Pydantic 模型，100% 本地运算。" />
+    <meta property="og:url" content="https://yunitytech.top/tools/json-to-type/" />
+    <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JSON 转 TS/Go 类型声明与结构体工具 - 纯前端离线 | DevHub" />
+    <meta name="twitter:description" content="JSON 一键生成 TypeScript Interface、Go Struct 结构体与 Python Pydantic 模型，100% 本地运算。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
+
+    <!-- 结构化数据 (JSON-LD) 包含 WebApp、面包屑导航与 FAQ 问答富摘要 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://yunitytech.top/tools/json-to-type/#webapp",
+          "name": "DevHub JSON 转类型定义工具",
+          "url": "https://yunitytech.top/tools/json-to-type/",
+          "description": "纯前端离线 JSON 转 TypeScript、Go Struct 与 Python 类型工具",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://yunitytech.top/tools/json-to-type/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DevHub 首页",
+              "item": "https://yunitytech.top/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "开发者工具箱",
+              "item": "https://yunitytech.top/#tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "JSON 转 TS/Go 类型声明",
+              "item": "https://yunitytech.top/tools/json-to-type/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://yunitytech.top/tools/json-to-type/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "JSON 转 Go 结构体时，下划线字段名如何正确映射？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Go 语言要求首字母大写的导出字段（如 UserId）才能被外部 json.Marshal/Unmarshal 访问，而 JSON 字段通常是下划线风格（如 user_id）。DevHub 会自动将字段转为大驼峰 PascalCase，并在后方紧跟标准结构体标签 json:\"user_id\"，完全符合 Go 官方最佳实践。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "遇到深层嵌套的 JSON 对象时，工具是如何组织子类型的？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "DevHub 采用递归类型提炼机制：遇到内部嵌套的 Object 或复杂数组时，会自动提取出独立的子接口或子结构体，并按依赖顺序排列。例如用户档案中的 profile 会被提取为 Profile 接口，使代码模块化且极具可维护性。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "生成 TypeScript 类型时支持可选字段与可空值吗？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "当 JSON 字段值为 null 或在复杂列表中偶尔缺失时，工具会智能将其推断为 any 或复合类型。生成的接口代码开箱即用，支持一键粘贴到 .ts 文件中与 Axios / Fetch 请求响应配合使用。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "在线转换会有业务数据外泄风险吗？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "绝无风险。DevHub 严格遵守纯前端离线客户端计算规范，所有 JSON 语法解析、AST 提取与类型代码拼接均在浏览器本地主线程内执行，断网亦可正常工作。"
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>JSON 转 TS/Go 类型声明</span>
+        </nav>
+        
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">JSON 转 TS/Go 类型声明与结构体工具</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          将任意复杂嵌套 JSON 快速解析为强类型定义。支持 TypeScript Interface、Go Struct（自动生成 json tag 标签）以及 Python Pydantic BaseModel 模型。智能解析嵌套对象、数组类型推断，100% 浏览器本地运算。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">核心特性一览</h2>
+          <ul style="padding-left: 20px; color: #334155; font-size: 14px; line-height: 1.8;">
+            <li><strong>TypeScript 智能提炼</strong>：深层嵌套对象自动拆解为独立子接口，数组自动推导 <code>T[]</code>。</li>
+            <li><strong>Go 语言规范结构体</strong>：大驼峰字段命名，严格对齐 <code>`json:"field"`</code> 标签。</li>
+            <li><strong>Python Pydantic 类支持</strong>：无缝对接现代 FastAPI 及数据校验工程。</li>
+            <li><strong>100% 浏览器客户端安全运算</strong>：输入接口与业务响应数据绝不上报服务器。</li>
+          </ul>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: JSON 转 Go 结构体时，下划线字段名如何正确映射？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: Go 语言要求首字母大写的导出字段（如 UserId）才能被外部 json.Marshal/Unmarshal 访问，而 JSON 字段通常是下划线风格（如 user_id）。DevHub 会自动将字段转为大驼峰 PascalCase，并在后方紧跟标准结构体标签 json:"user_id"，完全符合 Go 官方最佳实践。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 遇到深层嵌套的 JSON 对象时，工具是如何组织子类型的？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: DevHub 采用递归类型提炼机制：遇到内部嵌套的 Object 或复杂数组时，会自动提取出独立的子接口或子结构体，并按依赖顺序排列。例如用户档案中的 profile 会被提取为 Profile 接口，使代码模块化且极具可维护性。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 生成 TypeScript 类型时支持可选字段与可空值吗？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 当 JSON 字段值为 null 或在复杂列表中偶尔缺失时，工具会智能将其推断为 any 或复合类型。生成的接口代码开箱即用，支持一键粘贴到 .ts 文件中与 Axios / Fetch 请求响应配合使用。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 在线转换会有业务数据外泄风险吗？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 绝无风险。DevHub 严格遵守纯前端离线客户端计算规范，所有 JSON 语法解析、AST 提取与类型代码拼接均在浏览器本地主线程内执行，断网亦可正常工作。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 解码器</a>
+            <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
+            <a href="/tools/uuid/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">UUID 生成器</a>
+            <a href="/tools/color/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">颜色转换器</a>
+            <a href="/tools/aes/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">AES 加解密</a>
+            <a href="/tools/case/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">变量命名转换</a>
+            <a href="/tools/sql/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">SQL 格式化</a>
+            <a href="/tools/curl/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">cURL 转代码</a>
+            <a href="/tools/diff/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Diff 文本对比</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
+    <noscript>
+      <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+        <h1>JSON 转 TS/Go 类型声明与结构体工具</h1>
+        <p>DevHub 提供的纯前端离线类型生成工具：支持将 JSON 报文生成 TypeScript Interface、Go Struct 结构体与 Python Pydantic 类。所有处理 100% 在客户端浏览器内存中完成，无需向服务器上传代码与隐私数据。</p>
+        <p><a href="/">返回 DevHub 开发者工作台首页</a></p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

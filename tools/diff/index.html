@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+  (function () {
+    try {
+      var s = localStorage.getItem('vueuse-color-scheme')
+      var dark = s === 'dark' || ((!s || s === 'auto') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      if (dark) document.documentElement.classList.add('dark')
+    } catch (e) {}
+  })()
+</script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-8846399986169251" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8846399986169251" crossorigin="anonymous"></script>
+    <title>文本与代码 Diff 在线对比工具 - 纯前端差异比对与 Git 补丁导出 | DevHub</title>
+    
+    <!-- 搜索引擎站长认证 (Google & Bing) -->
+    <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
+    <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
+
+    <!-- SEO 核心元标签 -->
+    <meta name="description" content="纯前端离线文本与代码差异对比工具。支持行级与字符级高亮、忽略空白字符开关、Unified 单栏与 Git 统一补丁 (Patch) 导出。数据 100% 本地运算，绝不上报私有代码或配置。" />
+    <meta name="keywords" content="文本对比,代码比对,diff在线,代码diff,git patch生成,diff checker,文本差异比较,DevHub" />
+    <meta name="author" content="upowerman" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yunitytech.top/tools/diff/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="文本与代码 Diff 在线对比工具 - 纯前端离线 | DevHub" />
+    <meta property="og:description" content="行级与字符级差异高亮展示、忽略空白开关与标准 Git 统一补丁 (Patch) 导出，100% 本地运算。" />
+    <meta property="og:url" content="https://yunitytech.top/tools/diff/" />
+    <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="文本与代码 Diff 在线对比工具 - 纯前端离线 | DevHub" />
+    <meta name="twitter:description" content="行级与字符级差异高亮展示、忽略空白开关与标准 Git 统一补丁 (Patch) 导出，100% 本地运算。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
+
+    <!-- 结构化数据 (JSON-LD) 包含 WebApp、面包屑导航与 FAQ 问答富摘要 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://yunitytech.top/tools/diff/#webapp",
+          "name": "DevHub 文本与代码 Diff 对比工具",
+          "url": "https://yunitytech.top/tools/diff/",
+          "description": "纯前端离线文本与代码差异对比工具，支持统一视图与 Git 补丁导出",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://yunitytech.top/tools/diff/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DevHub 首页",
+              "item": "https://yunitytech.top/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "开发者工具箱",
+              "item": "https://yunitytech.top/#tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "文本与代码 Diff 对比",
+              "item": "https://yunitytech.top/tools/diff/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://yunitytech.top/tools/diff/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "为什么推荐使用纯前端在线 Diff 工具比较敏感代码或配置？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "传统在线对比网站会将两个版本的文本上传至远端服务器进行比对，若文本中包含数据库连接串、私钥、API Token 或专有业务逻辑，极易造成严重的数据泄露。DevHub 100% 在当前浏览器主线程本地运行 Myers 差异算法，断网即可使用，数据绝不离手。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "单栏视图 (Unified) 与 Git 补丁 (Patch) 各有什么优势？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "单栏视图将增删改以行号顺序同屏平铺展示，适合快速审查代码审查 PR 或阅读配置文件改动；Git 补丁格式完全遵循 POSIX / Git 标准规范，可直接复制后保存为 .patch 文件，并在本地终端通过 git apply 一键应用到仓库中。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "比较不同操作系统的文件时为什么会整篇报错或显示全部变动？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "这是由于 Windows 系统的换行符为 CRLF (\\r\\n)，而 Linux / macOS 为 LF (\\n)。如果换行符不一致，会导致整段文本行哈希不匹配。开启本工具的“忽略首尾空白与缩进”开关，或在 IDE 中统一转换为 LF 即可解决。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "大文本（上万行日志或大型代码文件）比对会卡死浏览器吗？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "几千行文本比对均能在几十毫秒内完成渲染。如果文本达到数万行甚至几十万行，浏览器渲染 DOM 节点会消耗较多显存，建议拆分段落比对或使用本地命令行 diff -u file1 file2。"
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>文本与代码 Diff 对比</span>
+        </nav>
+        
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">文本与代码 Diff 在线对比工具</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          纯前端离线文本与代码差异对比工具。支持行级与字符级高亮、忽略空白字符开关、Unified 单栏与 Git 统一补丁 (Patch) 导出。数据 100% 本地运算，绝不上报私有代码或配置。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">核心特性一览</h2>
+          <ul style="padding-left: 20px; color: #334155; font-size: 14px; line-height: 1.8;">
+            <li><strong>高精度行级差异对比</strong>：绿色新增、红色删除线标记，支持旧/新双行号定位。</li>
+            <li><strong>Git 标准统一补丁 (Patch) 导出</strong>：生成的补丁直接支持 <code>git apply</code> 终端应用。</li>
+            <li><strong>忽略空白与缩进选项</strong>：过滤由空格、Tab 或换行符不一致引发的无关干扰。</li>
+            <li><strong>100% 浏览器客户端安全运算</strong>：敏感配置文件与业务核心代码杜绝云端上传。</li>
+          </ul>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么推荐使用纯前端在线 Diff 工具比较敏感代码或配置？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 传统在线对比网站会将两个版本的文本上传至远端服务器进行比对，若文本中包含数据库连接串、私钥、API Token 或专有业务逻辑，极易造成严重的数据泄露。DevHub 100% 在当前浏览器主线程本地运行 Myers 差异算法，断网即可使用，数据绝不离手。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 单栏视图 (Unified) 与 Git 补丁 (Patch) 各有什么优势？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 单栏视图将增删改以行号顺序同屏平铺展示，适合快速审查代码审查 PR 或阅读配置文件改动；Git 补丁格式完全遵循 POSIX / Git 标准规范，可直接复制后保存为 .patch 文件，并在本地终端通过 git apply 一键应用到仓库中。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 比较不同操作系统的文件时为什么会整篇报错或显示全部变动？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 这是由于 Windows 系统的换行符为 CRLF (\r\n)，而 Linux / macOS 为 LF (\n)。如果换行符不一致，会导致整段文本行哈希不匹配。开启本工具的“忽略首尾空白与缩进”开关，或在 IDE 中统一转换为 LF 即可解决。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 大文本（上万行日志或大型代码文件）比对会卡死浏览器吗？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 几千行文本比对均能在几十毫秒内完成渲染。如果文本达到数万行甚至几十万行，浏览器渲染 DOM 节点会消耗较多显存，建议拆分段落比对或使用本地命令行 diff -u file1 file2。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 解码器</a>
+            <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
+            <a href="/tools/uuid/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">UUID 生成器</a>
+            <a href="/tools/color/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">颜色转换器</a>
+            <a href="/tools/aes/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">AES 加解密</a>
+            <a href="/tools/case/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">变量命名转换</a>
+            <a href="/tools/sql/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">SQL 格式化</a>
+            <a href="/tools/curl/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">cURL 转代码</a>
+            <a href="/tools/json-to-type/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 转类型</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
+    <noscript>
+      <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+        <h1>文本与代码 Diff 在线对比工具</h1>
+        <p>DevHub 提供的纯前端离线文本与代码差异比对工具：支持行级变动高亮、统一单栏与 Git 补丁导出。所有处理 100% 在客户端浏览器内存中完成，无需向服务器上传代码与隐私数据。</p>
+        <p><a href="/">返回 DevHub 开发者工作台首页</a></p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

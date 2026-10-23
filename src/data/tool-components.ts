@@ -11,6 +11,8 @@ import AesTool from '../tools/aes/AesTool.vue'
 import CaseTool from '../tools/case/CaseTool.vue'
 import SqlTool from '../tools/sql/SqlTool.vue'
 import CurlTool from '../tools/curl/CurlTool.vue'
+import DiffTool from '../tools/diff/DiffTool.vue'
+import JsonToTypeTool from '../tools/json-to-type/JsonToTypeTool.vue'
 
 export const toolComponents: Record<string, Component> = {
   'tool-json': JsonTool,
@@ -24,5 +26,7 @@ export const toolComponents: Record<string, Component> = {
   'tool-aes': AesTool,
   'tool-case': CaseTool,
   'tool-sql': SqlTool,
-  'tool-curl': CurlTool
+  'tool-curl': CurlTool,
+  'tool-diff': DiffTool,
+  'tool-json-to-type': JsonToTypeTool
 }

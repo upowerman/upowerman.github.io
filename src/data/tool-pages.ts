@@ -432,5 +432,75 @@ export const toolPageContent: Record<string, ToolPageContent> = {
         a: '完全支持。DevHub 内置高级 Bash 词法分词器，完美兼容单引号、双引号嵌套以及 Chrome 默认导出的多行反斜杠 (\\) 格式命令。'
       }
     ]
+  },
+  'tool-diff': {
+    h1: '文本与代码 Diff 在线对比工具',
+    intro:
+      '纯前端离线文本与代码差异对比工具。支持行级与字符级高亮、忽略空白字符开关、Unified 单栏与 Git 统一补丁 (Patch) 导出。数据 100% 本地运算，绝不上报私有代码或配置。',
+    extra: {
+      title: 'Git Diff 符号与输出语义速查',
+      head: ['符号 / 标记', '中文名称', '含义与说明'],
+      monoCols: [0],
+      rows: [
+        ['+', 'Added (新增行)', '在新版本中新增的内容，绿色高亮'],
+        ['-', 'Deleted (删除行)', '在旧版本中存在、但在新版本中被移除的内容，红色删除线'],
+        ['@@ -a,b +c,d @@', 'Hunk Header (差异块头)', '表示差异块在旧文件 (从第 a 行起共 b 行) 与新文件 (从第 c 行起共 d 行) 中的定位'],
+        ['\\ No newline at end of file', '文件末尾无换行', '提醒该文件末尾缺少标准 POSIX 规范换行符']
+      ]
+    },
+    faqs: [
+      {
+        q: '为什么推荐使用纯前端在线 Diff 工具比较敏感代码或配置？',
+        a: '传统在线对比网站会将两个版本的文本上传至远端服务器进行比对，若文本中包含数据库连接串、私钥、API Token 或专有业务逻辑，极易造成严重的数据泄露。DevHub 100% 在当前浏览器主线程本地运行 Myers 差异算法，断网即可使用，数据绝不离手。'
+      },
+      {
+        q: '单栏视图 (Unified) 与 Git 补丁 (Patch) 各有什么优势？',
+        a: '单栏视图将增删改以行号顺序同屏平铺展示，适合快速审查代码审查 PR 或阅读配置文件改动；Git 补丁格式完全遵循 POSIX / Git 标准规范，可直接复制后保存为 .patch 文件，并在本地终端通过 git apply 一键应用到仓库中。'
+      },
+      {
+        q: '比较不同操作系统的文件时为什么会整篇报错或显示全部变动？',
+        a: '这是由于 Windows 系统的换行符为 CRLF (\\r\\n)，而 Linux / macOS 为 LF (\\n)。如果换行符不一致，会导致整段文本行哈希不匹配。开启本工具的“忽略首尾空白与缩进”开关，或在 IDE 中统一转换为 LF 即可解决。'
+      },
+      {
+        q: '大文本（上万行日志或大型代码文件）比对会卡死浏览器吗？',
+        a: '几千行文本比对均能在几十毫秒内完成渲染。如果文本达到数万行甚至几十万行，浏览器渲染 DOM 节点会消耗较多显存，建议拆分段落比对或使用本地命令行 diff -u file1 file2。'
+      }
+    ]
+  },
+  'tool-json-to-type': {
+    h1: 'JSON 转 TS/Go 类型声明与结构体工具',
+    intro:
+      '将任意复杂嵌套 JSON 快速解析为强类型定义。支持 TypeScript Interface、Go Struct（自动生成 json tag 标签）以及 Python Pydantic BaseModel 模型。智能解析嵌套对象、数组类型推断，100% 浏览器本地运算。',
+    extra: {
+      title: '各语言 JSON 序列化标签与类型映射速查',
+      head: ['JSON 原生类型', 'TypeScript', 'Go (golang)', 'Python (Pydantic)'],
+      monoCols: [0, 1, 2, 3],
+      rows: [
+        ['String 字符串', 'string', 'string', 'str'],
+        ['Integer 整数', 'number', 'int64', 'int'],
+        ['Float 浮点数', 'number', 'float64', 'float'],
+        ['Boolean 布尔值', 'boolean', 'bool', 'bool'],
+        ['Array 数组', 'T[]', '[]T', 'List[T]'],
+        ['Object 嵌套对象', 'Interface', 'struct', 'BaseModel']
+      ]
+    },
+    faqs: [
+      {
+        q: 'JSON 转 Go 结构体时，下划线字段名如何正确映射？',
+        a: 'Go 语言要求首字母大写的导出字段（如 UserId）才能被外部 json.Marshal/Unmarshal 访问，而 JSON 字段通常是下划线风格（如 user_id）。DevHub 会自动将字段转为大驼峰 PascalCase，并在后方紧跟标准结构体标签 json:"user_id"，完全符合 Go 官方最佳实践。'
+      },
+      {
+        q: '遇到深层嵌套的 JSON 对象时，工具是如何组织子类型的？',
+        a: 'DevHub 采用递归类型提炼机制：遇到内部嵌套的 Object 或复杂数组时，会自动提取出独立的子接口或子结构体，并按依赖顺序排列。例如用户档案中的 profile 会被提取为 Profile 接口，使代码模块化且极具可维护性。'
+      },
+      {
+        q: '生成 TypeScript 类型时支持可选字段与可空值吗？',
+        a: '当 JSON 字段值为 null 或在复杂列表中偶尔缺失时，工具会智能将其推断为 any 或复合类型。生成的接口代码开箱即用，支持一键粘贴到 .ts 文件中与 Axios / Fetch 请求响应配合使用。'
+      },
+      {
+        q: '在线转换会有业务数据外泄风险吗？',
+        a: '绝无风险。DevHub 严格遵守纯前端离线客户端计算规范，所有 JSON 语法解析、AST 提取与类型代码拼接均在浏览器本地主线程内执行，断网亦可正常工作。'
+      }
+    ]
   }
 }

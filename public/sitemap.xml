@@ -91,6 +91,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- 文本与代码 Diff 对比 -->
+  <url>
+    <loc>https://yunitytech.top/tools/diff/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- JSON 转 TS/Go 类型声明 -->
+  <url>
+    <loc>https://yunitytech.top/tools/json-to-type/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <!-- 隐私政策与服务条款 -->
   <url>
     <loc>https://yunitytech.top/privacy/</loc>

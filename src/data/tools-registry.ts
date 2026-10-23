@@ -96,5 +96,21 @@ export const defaultToolsRegistry: ToolItem[] = [
     icon: 'Terminal',
     category: 'code',
     keywords: ['curl', 'fetch', 'axios', 'python', 'requests', 'golang', 'java', '代码生成', 'http']
+  },
+  {
+    id: 'tool-diff',
+    name: '文本与代码 Diff 对比',
+    desc: '行级差异着色高亮、忽略空白开关与标准 Git 统一补丁 (Patch) 一键导出',
+    icon: 'GitCompare',
+    category: 'code',
+    keywords: ['diff', 'compare', '文本对比', '代码比对', 'patch', '差异比较', 'git']
+  },
+  {
+    id: 'tool-json-to-type',
+    name: 'JSON 转 TS/Go 类型声明',
+    desc: 'JSON 数据一键生成 TypeScript Interface、Go Struct 结构体与 Python Pydantic 类',
+    icon: 'Code2',
+    category: 'code',
+    keywords: ['json to type', 'json to ts', 'json to go', 'struct', 'interface', 'pydantic', '类型生成']
   }
 ]
