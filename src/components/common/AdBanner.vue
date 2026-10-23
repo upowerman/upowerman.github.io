@@ -37,7 +37,7 @@ const props = withDefaults(
   }>(),
   {
     adSlot: '',
-    adClient: 'ca-pub-9649405900209784',
+    adClient: 'ca-pub-8846399986169251',
     adFormat: 'auto',
     responsive: true
   }

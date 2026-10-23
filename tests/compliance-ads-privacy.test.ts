@@ -9,7 +9,7 @@ describe('Compliance: Google AdSense ads.txt & Privacy Policy', () => {
     const adsTxtPath = join(ROOT, 'public', 'ads.txt')
     expect(existsSync(adsTxtPath), 'public/ads.txt should exist').toBe(true)
     const content = readFileSync(adsTxtPath, 'utf-8')
-    expect(content).toContain('google.com, pub-9649405900209784, DIRECT, f08c47fec0942fa0')
+    expect(content).toContain('google.com, pub-8846399986169251, DIRECT, f08c47fec0942fa0')
   })
 
   it('privacy/index.html exists and contains necessary compliance sections', () => {
@@ -54,7 +54,7 @@ describe('Compliance: Google AdSense ads.txt & Privacy Policy', () => {
       'tools/uuid/index.html',
       'tools/color/index.html'
     ]
-    const scriptPattern = 'pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9649405900209784'
+    const scriptPattern = 'pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8846399986169251'
     for (const file of htmlFiles) {
       const content = readFileSync(join(ROOT, file), 'utf-8')
       expect(content, `${file} should contain adsbygoogle.js script`).toContain(scriptPattern)

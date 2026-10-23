@@ -31,14 +31,14 @@ describe('AdBanner.vue Component', () => {
     const pushSpy = vi.spyOn((window as any).adsbygoogle, 'push')
     const { host, unmount } = mountBanner({
       adSlot: '1234567890',
-      adClient: 'ca-pub-9649405900209784'
+      adClient: 'ca-pub-8846399986169251'
     })
     await nextTick()
 
     const ins = host.querySelector('ins.adsbygoogle')
     expect(ins).toBeTruthy()
     expect(ins?.getAttribute('data-ad-slot')).toBe('1234567890')
-    expect(ins?.getAttribute('data-ad-client')).toBe('ca-pub-9649405900209784')
+    expect(ins?.getAttribute('data-ad-client')).toBe('ca-pub-8846399986169251')
     expect(pushSpy).toHaveBeenCalled()
     unmount()
   })
