@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var s = localStorage.getItem('vueuse-color-scheme')
+          var dark = s === 'dark' || ((!s || s === 'auto') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          if (dark) document.documentElement.classList.add('dark')
+        } catch (e) {}
+      })()
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-9649405900209784" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9649405900209784" crossorigin="anonymous"></script>
+    <title>隐私政策与服务条款 - DevHub 开发者工作台</title>
+    
+    <meta name="description" content="DevHub 隐私政策与使用条款。阐述纯前端离线开发者小工具数据安全承诺、Google AdSense 广告投放政策、Cookie 说明及用户隐私保护细则。" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yunitytech.top/privacy/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="隐私政策与服务条款 - DevHub 开发者工作台" />
+    <meta property="og:description" content="DevHub 纯前端离线数据安全承诺与 Google AdSense 隐私条款。" />
+    <meta property="og:url" content="https://yunitytech.top/privacy/" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+
+    <script type="module">
+      import '/src/style.css'
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+      <!-- 顶部导航 -->
+      <nav class="flex items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800">
+        <a href="/" class="flex items-center gap-2 group">
+          <div class="w-8 h-8 rounded-lg bg-primary-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">
+            D
+          </div>
+          <span class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+            DevHub
+          </span>
+        </a>
+        <a href="/" class="text-xs sm:text-sm font-semibold text-primary-600 dark:text-primary-400 hover:underline flex items-center gap-1">
+          ← 返回首页
+        </a>
+      </nav>
+
+      <!-- 标题 -->
+      <header class="space-y-2">
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          隐私政策与服务条款
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+          最近更新日期：2026 年 10 月 23 日 · 生效日期：2026 年 10 月 23 日
+        </p>
+      </header>
+
+      <!-- 正文内容区 -->
+      <main class="space-y-8 text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300">
+        <!-- 导言 -->
+        <section class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 space-y-3">
+          <p>
+            欢迎访问 <strong>DevHub</strong>（访问地址为 <a href="https://yunitytech.top/" class="text-primary-600 hover:underline">https://yunitytech.top/</a>）。我们高度尊重并承诺竭尽全力保护您的个人隐私与数据安全。本隐私政策旨在向您说明本网站如何处理用户数据、我们采用的纯前端离线技术保障、以及我们与包括 Google 在内的第三方服务商所遵循的合规机制。
+          </p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            当您访问或使用 DevHub 时，即代表您同意本隐私政策中描述的所有条款和实践。
+          </p>
+        </section>
+
+        <!-- 1. 核心承诺：100% 纯前端离线数据计算 -->
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            1. 核心隐私保证：纯前端离线运行
+          </h2>
+          <div class="space-y-2 pl-4 border-l-2 border-emerald-500/50">
+            <p>
+              DevHub 内置的全部开发者生产力小工具（包括但不限于：<strong>JSON 实验室、时间戳转换、JWT 解码器、编解码与哈希计算、正则表达式测试、Cron 表达式工具、UUID 生成器、颜色转换器</strong>），其所有数据运算均 <strong>100% 运行在您的客户端本地浏览器主线程或内存中</strong>。
+            </p>
+            <p>
+              我们<strong>绝不会</strong>将您在工具中输入的任何代码片段、业务报文、身份令牌 (JWT Token)、敏感密码/密钥或测试数据上传、记录或传输至任何远程服务器或云端。您的数据始终完全掌控在您自己的设备上。
+            </p>
+          </div>
+        </section>
+
+        <!-- 2. 本地存储 (LocalStorage) 说明 -->
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-primary-500"></span>
+            2. 浏览器本地存储 (Local Storage) 的使用
+          </h2>
+          <div class="space-y-2 pl-4 border-l-2 border-primary-500/50">
+            <p>
+              为了向您提供更加人性化的使用体验，DevHub 可能会使用浏览器本地存储机制（如 <code>localStorage</code>）：
+            </p>
+            <ul class="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-300">
+              <li><strong>外观偏好</strong>：记录您的深色模式 (Dark Mode) 或浅色模式选择；</li>
+              <li><strong>个性化定制</strong>：记录您在本地收藏或置顶的常用工具和网站磁贴，以及您自定义添加的本地书签；</li>
+              <li><strong>状态记忆</strong>：临时记录各工具最近一次的本地选项（如 JSON 缩进空格数）。</li>
+            </ul>
+            <p class="text-xs text-slate-500 dark:text-slate-400">
+              这些配置仅保存在您的个人浏览器本地，您可以随时通过清空浏览器缓存或本地存储来清除这些信息。
+            </p>
+          </div>
+        </section>
+
+        <!-- 3. Google AdSense 与 Cookie 政策 (核心过审条款) -->
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            3. Google AdSense 广告服务与 Cookie 政策
+          </h2>
+          <div class="space-y-3 pl-4 border-l-2 border-amber-500/50">
+            <p>
+              为了维持 DevHub 基础设施的日常运营并保持向所有开发者永久免费提供服务，本网站可能会投放来自 <strong>Google AdSense</strong> 的广告。为此，我们需要向您特别说明以下合规事项：
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-300">
+              <li>
+                <strong>第三方供应商 Cookie</strong>：Google 作为第三方供应商，会在本网站上使用 Cookie 来投放广告。
+              </li>
+              <li>
+                <strong>个性化广告投放</strong>：Google 会使用广告 Cookie，根据用户此前访问本网站或其他互联网站点的历史记录向用户投放合适的广告。
+              </li>
+              <li>
+                <strong>停用个性化广告</strong>：用户有权随时选择停用个性化广告。您可以访问 Google 官方的 <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 underline font-medium">Google 广告设置 (Ads Settings)</a> 来管理您的偏好。您也可以访问 <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 underline font-medium">www.aboutads.info</a> 停用第三方供应商为投放个性化广告而使用的 Cookie。
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 4. 服务器日志与网络请求 -->
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+            4. 服务器日志与静态托管
+          </h2>
+          <div class="space-y-2 pl-4 border-l-2 border-blue-500/50">
+            <p>
+              DevHub 托管在公共静态托管服务（如 GitHub Pages、Cloudflare 等）上。像大多数网站托管服务一样，服务器可能会自动记录标准的 HTTP 访问日志（包括访问 IP 地址、浏览器客户端类型、引荐来源页面及访问时间戳）。此类日志信息仅用于网络攻击防御、网络状态监测与日常运维，不会与任何个人身份信息进行关联。
+            </p>
+          </div>
+        </section>
+
+        <!-- 5. 外部链接与第三方网站 -->
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+            5. 垂直生态导航与外部链接
+          </h2>
+          <div class="space-y-2 pl-4 border-l-2 border-indigo-500/50">
+            <p>
+              本站包含指向众多优质第三方开源技术文档、社区及工具的外部超链接。我们不对这些独立站点的隐私实践或内容承担任何责任。建议您在访问任何第三方网站时，仔细阅读其各自的隐私政策与服务条款。
+            </p>
+          </div>
+        </section>
+
+        <!-- 6. 免责声明与知识产权 -->
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+            6. 免责声明与使用条款
+          </h2>
+          <div class="space-y-2 pl-4 border-l-2 border-slate-400/50">
+            <p>
+              DevHub 提供的所有工具和信息均按“现状 (AS IS)”提供，不附带任何明示或暗示的保证。虽然我们力求算法的精确度与稳定性，但在任何情况下，DevHub 及其开发者均不对因使用或无法使用本站工具所产生的任何直接、间接或附带损失承担责任。使用者需自行对生成数据与代码的可用性负责。
+            </p>
+          </div>
+        </section>
+
+        <!-- 7. 联系方式与修订 -->
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            7. 政策修订与联系我们
+          </h2>
+          <div class="space-y-2 pl-4 border-l-2 border-emerald-500/50">
+            <p>
+              我们可能会不定期更新本隐私政策，以适应技术升级、法律法规演进或广告政策调整。所有重大变更都会在此页面直接更新。
+            </p>
+            <p>
+              如果您对本隐私政策或 DevHub 的数据安全有任何疑问、意见或反馈，欢迎通过我们的开源仓库提交沟通：
+            </p>
+            <p class="pt-1">
+              <a href="https://github.com/upowerman/upowerman.github.io/issues" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-primary-50 dark:hover:bg-primary-950 text-slate-700 dark:text-slate-200 hover:text-primary-600 dark:hover:text-primary-400 border border-slate-200 dark:border-slate-700 text-xs font-semibold transition-colors">
+                前往 GitHub Issues 提交反馈
+              </a>
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <!-- 页脚 -->
+      <footer class="pt-8 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-500 dark:text-slate-400 space-y-2">
+        <p>
+          © 2026 DevHub · <a href="https://yunitytech.top/" class="hover:underline">yunitytech.top</a> · 专为程序员打造的高频工作台
+        </p>
+        <div class="flex items-center justify-center gap-4">
+          <a href="/" class="hover:text-primary-600">DevHub 首页</a>
+          <span>·</span>
+          <a href="/tools/json/" class="hover:text-primary-600">JSON 实验室</a>
+          <span>·</span>
+          <a href="/privacy/" class="text-primary-600 font-medium">隐私政策与条款</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

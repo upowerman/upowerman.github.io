@@ -8,6 +8,9 @@
         <a href="https://github.com/upowerman/upowerman.github.io/issues" target="_blank" class="hover:text-primary-600 transition-colors">
           提交新网站 / 工具建议
         </a>
+        <a href="/privacy/" class="hover:text-primary-600 transition-colors">
+          隐私政策与条款
+        </a>
       </div>
 
       <div class="text-xs text-slate-500 dark:text-slate-400">

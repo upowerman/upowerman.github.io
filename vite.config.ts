@@ -20,7 +20,8 @@ export default defineConfig({
         'tools/regex': path.resolve(__dirname, 'tools/regex/index.html'),
         'tools/cron': path.resolve(__dirname, 'tools/cron/index.html'),
         'tools/uuid': path.resolve(__dirname, 'tools/uuid/index.html'),
-        'tools/color': path.resolve(__dirname, 'tools/color/index.html')
+        'tools/color': path.resolve(__dirname, 'tools/color/index.html'),
+        privacy: path.resolve(__dirname, 'privacy/index.html')
       },
       output: {
         manualChunks: {

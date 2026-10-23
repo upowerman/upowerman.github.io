@@ -34,6 +34,9 @@
         <component :is="toolComponent" />
       </div>
 
+      <!-- 广告展示位（工具主卡片与下方速查表之间，保障高可见度同时避免误触） -->
+      <AdBanner />
+
       <!-- 附加速查表 -->
       <section v-if="content.extra" class="mt-10 p-4 md:p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800">
         <h2 class="text-lg font-bold text-slate-900 dark:text-white mb-4">{{ content.extra.title }}</h2>
@@ -92,6 +95,7 @@ import { computed } from 'vue'
 import { FileJson, Clock, KeyRound, Binary, Regex, CalendarClock, Fingerprint, Palette, Wrench } from 'lucide-vue-next'
 import AppHeader from './components/layout/AppHeader.vue'
 import AppFooter from './components/layout/AppFooter.vue'
+import AdBanner from './components/common/AdBanner.vue'
 import { useAppStore } from './stores/useAppStore'
 import { toolPageContent } from './data/tool-pages'
 import { toolComponents } from './data/tool-components'

@@ -47,6 +47,9 @@
         </div>
       </section>
 
+      <!-- 广告展示位（快捷磁贴与工具卡片之间，兼顾曝光度且不阻断顶部搜索） -->
+      <AdBanner />
+
       <!-- 模块 1：常用开发者小工具区域（当处于 all 或 tools 视图时渲染） -->
       <section v-if="store.activeTab === 'all' || store.activeTab === 'tools'" id="tools" class="scroll-mt-20">
         <div class="flex items-center justify-between mb-4">
@@ -177,6 +180,7 @@ import {
 import { useAppStore } from './stores/useAppStore'
 import AppHeader from './components/layout/AppHeader.vue'
 import AppFooter from './components/layout/AppFooter.vue'
+import AdBanner from './components/common/AdBanner.vue'
 import SearchBar from './components/search/SearchBar.vue'
 import NavCard from './components/navigation/NavCard.vue'
 import NavSection from './components/navigation/NavSection.vue'
