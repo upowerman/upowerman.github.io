@@ -8,9 +8,6 @@
         <a href="https://github.com/upowerman/upowerman.github.io/issues" target="_blank" class="hover:text-primary-600 transition-colors">
           提交新网站 / 工具建议
         </a>
-        <button type="button" @click="$emit('open-community')" class="hover:text-primary-600 transition-colors">
-          微信技术社群 & 公众号
-        </button>
       </div>
 
       <div class="text-xs text-slate-500 dark:text-slate-400">
@@ -19,7 +16,7 @@
           <span>隐私保证：所有内置小工具均为纯前端运行，数据 100% 留存在您的本地浏览器，绝不上报服务器。</span>
         </p>
         <p class="mt-1">
-          © {{ currentYear }} <a href="https://yunitytech.top" class="hover:underline font-medium text-slate-600 dark:text-slate-400">yunitytech.top</a> · 专为程序员打造的高频工作台
+          © {{ currentYear }} <a href="https://yunitytech.top" class="hover:underline font-medium text-slate-600 dark:text-slate-400">yunitytech.top</a>
         </p>
       </div>
     </div>
@@ -29,10 +26,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Lock } from 'lucide-vue-next'
-
-defineEmits<{
-  (e: 'open-community'): void
-}>()
 
 const currentYear = computed(() => new Date().getFullYear())
 </script>

@@ -3,7 +3,6 @@
     <!-- 顶部导航栏 -->
     <AppHeader
       @open-add-link="isAddLinkOpen = true"
-      @open-community="isCommunityOpen = true"
     />
 
     <!-- 页面核心区域 -->
@@ -45,15 +44,6 @@
               </span>
             </a>
           </template>
-
-          <button
-            type="button"
-            @click="isAddLinkOpen = true"
-            class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 hover:border-primary-500 text-slate-500 hover:text-primary-600 text-xs font-medium transition-colors"
-          >
-            <Plus class="w-3.5 h-3.5" />
-            <span>自定义</span>
-          </button>
         </div>
       </section>
 
@@ -165,7 +155,7 @@
     </main>
 
     <!-- 页脚与隐私声明 -->
-    <AppFooter @open-community="isCommunityOpen = true" />
+    <AppFooter />
 
     <!-- 模态框容器 -->
     <AddLinkModal :is-open="isAddLinkOpen" @close="isAddLinkOpen = false" />
@@ -177,7 +167,6 @@
 import { ref, computed } from 'vue'
 import {
   Wrench,
-  Plus,
   ArrowRight,
   Star,
   FileJson,

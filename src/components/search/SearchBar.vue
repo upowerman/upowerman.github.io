@@ -19,9 +19,9 @@
       </button>
     </div>
 
-    <!-- 终端命令栏:全站视觉锚点,明暗主题均为深色 -->
-    <div class="relative flex items-center rounded-2xl bg-slate-900 dark:bg-black/60 border border-slate-700/80 dark:border-slate-800 shadow-lg shadow-slate-900/15 pl-4 pr-1.5 py-1.5 transition-all focus-within:border-primary-500/70 focus-within:ring-2 focus-within:ring-primary-500/40">
-      <span class="font-mono text-sm md:text-base text-primary-400 select-none mr-2 shrink-0" aria-hidden="true">$</span>
+    <!-- 搜索命令栏:与全站同色系,以 $ 提示符呼应终端身份 -->
+    <div class="relative flex items-center rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm pl-4 pr-1.5 py-1.5 transition-all focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500/40">
+      <span class="font-mono text-sm md:text-base text-primary-600 dark:text-primary-400 select-none mr-2 shrink-0" aria-hidden="true">$</span>
       <input
         v-model="query"
         type="text"
@@ -30,7 +30,7 @@
         :aria-expanded="isFocused && suggestions.length > 0"
         aria-controls="search-suggestions"
         aria-autocomplete="list"
-        class="flex-1 min-w-0 bg-transparent py-2.5 text-sm md:text-base text-slate-100 placeholder:text-slate-500 font-mono caret-primary-400 outline-none"
+        class="flex-1 min-w-0 bg-transparent py-2.5 text-sm md:text-base text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 font-mono caret-primary-600 outline-none"
         @keydown.enter="handleEnter"
         @keydown.down.prevent="focusFirstSuggestion"
         @focus="isFocused = true"
@@ -39,30 +39,30 @@
         v-if="query"
         type="button"
         @click="query = ''"
-        class="p-2 text-slate-500 hover:text-slate-300 shrink-0"
+        class="p-2 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300 shrink-0"
         aria-label="清空搜索词"
       >
         <X class="w-4 h-4" />
       </button>
-      <kbd class="hidden md:inline-flex mr-2 px-1.5 py-0.5 rounded border border-slate-700 text-[10px] font-mono text-slate-500 shrink-0" aria-hidden="true">Enter</kbd>
+      <kbd class="hidden md:inline-flex mr-2 px-1.5 py-0.5 rounded border border-slate-300 dark:border-slate-700 text-[10px] font-mono text-slate-400 dark:text-slate-500 shrink-0" aria-hidden="true">Enter</kbd>
       <button
         type="button"
         @click="executeSearch"
-        class="shrink-0 whitespace-nowrap px-4 py-2 bg-primary-600 hover:bg-primary-500 text-white text-sm font-semibold rounded-xl transition-colors"
+        class="shrink-0 whitespace-nowrap px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold rounded-lg transition-colors"
       >
         搜索
       </button>
     </div>
 
-    <!-- 站内快捷匹配建议下拉框(与命令栏同族的深色面板) -->
+    <!-- 站内快捷匹配建议下拉框 -->
     <div
       v-if="query && isFocused && suggestions.length > 0"
       id="search-suggestions"
       role="listbox"
       ref="suggestionsRef"
-      class="absolute left-0 right-0 mt-1.5 bg-slate-900 dark:bg-black/70 rounded-xl shadow-2xl border border-slate-700/80 dark:border-slate-800 z-50 overflow-hidden divide-y divide-slate-800"
+      class="absolute left-0 right-0 mt-1.5 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 dark:border-slate-800 z-50 overflow-hidden divide-y divide-slate-100 dark:divide-slate-800"
     >
-      <div class="p-2 text-xs font-semibold text-slate-500 px-3" aria-hidden="true">
+      <div class="p-2 text-xs font-semibold text-slate-500 dark:text-slate-400 px-3" aria-hidden="true">
         站内直达推荐
       </div>
       <a
@@ -73,20 +73,20 @@
         :href="suggestionHref(item)"
         :target="'url' in item ? '_blank' : undefined"
         :rel="'url' in item ? 'noopener noreferrer' : undefined"
-        class="flex items-center justify-between p-3 hover:bg-slate-800/80 cursor-pointer transition-colors"
+        class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-800/60 cursor-pointer transition-colors"
       >
         <div class="flex items-center space-x-3">
           <SiteIcon :name="item.name" :url="'url' in item ? item.url : undefined" />
           <div>
-            <div class="text-sm font-medium text-slate-200">
+            <div class="text-sm font-medium text-slate-800 dark:text-slate-200">
               {{ item.name }}
             </div>
-            <div class="text-xs text-slate-400 truncate max-w-xs md:max-w-md">
+            <div class="text-xs text-slate-500 dark:text-slate-400 truncate max-w-xs md:max-w-md">
               {{ item.desc }}
             </div>
           </div>
         </div>
-        <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+        <span class="text-xs px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">
           {{ 'keywords' in item ? '工具' : '网址' }}
         </span>
       </a>

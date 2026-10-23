@@ -39,37 +39,17 @@
 
       <!-- 右侧动作区 -->
       <div class="flex items-center space-x-2">
-        <!-- 添加自定义书签 -->
+        <!-- 添加自定义书签(唯一的自定义入口) -->
         <button
           v-if="!toolMode"
           type="button"
           @click="$emit('open-add-link')"
-          class="hidden sm:flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-colors"
+          class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-colors"
           title="添加自定义书签"
         >
           <Plus class="w-3.5 h-3.5 text-primary-600" />
           <span>添加书签</span>
         </button>
-
-        <!-- 社群交流入口（导流核心） -->
-        <button
-          type="button"
-          @click="$emit('open-community')"
-          class="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 text-xs font-bold transition-all border border-emerald-200 dark:border-emerald-800"
-        >
-          <Users class="w-3.5 h-3.5" />
-          <span>交流群 / 资源</span>
-        </button>
-
-        <!-- GitHub 仓库 -->
-        <a
-          href="https://github.com/upowerman/upowerman.github.io"
-          target="_blank"
-          class="p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors"
-          title="GitHub 开源仓库"
-        >
-          <Github class="w-4 h-4" />
-        </a>
 
         <!-- 深浅主题切换 -->
         <button
@@ -113,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import { Terminal, Star, Plus, Users, Github, Sun, Moon } from 'lucide-vue-next'
+import { Terminal, Star, Plus, Sun, Moon } from 'lucide-vue-next'
 import { useAppStore } from '../../stores/useAppStore'
 import type { ViewTabType } from '../../types'
 
@@ -123,7 +103,6 @@ const props = defineProps<{
 
 defineEmits<{
   (e: 'open-add-link'): void
-  (e: 'open-community'): void
 }>()
 
 const viewTabs: { id: ViewTabType; label: string }[] = [

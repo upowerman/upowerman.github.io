@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors selection:bg-primary-500 selection:text-white">
-    <AppHeader tool-mode @open-community="isCommunityOpen = true" />
+    <AppHeader tool-mode />
 
     <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-8">
       <!-- 面包屑 -->
@@ -83,17 +83,15 @@
       </section>
     </main>
 
-    <AppFooter @open-community="isCommunityOpen = true" />
-    <CommunityModal :is-open="isCommunityOpen" @close="isCommunityOpen = false" />
+    <AppFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { FileJson, Clock, KeyRound, Binary, Regex, Wrench } from 'lucide-vue-next'
 import AppHeader from './components/layout/AppHeader.vue'
 import AppFooter from './components/layout/AppFooter.vue'
-import CommunityModal from './components/traffic/CommunityModal.vue'
 import { useAppStore } from './stores/useAppStore'
 import { toolPageContent } from './data/tool-pages'
 import { toolComponents } from './data/tool-components'
@@ -104,7 +102,6 @@ const props = defineProps<{
 }>()
 
 const store = useAppStore()
-const isCommunityOpen = ref(false)
 
 const toolIcons: Record<string, any> = { FileJson, Clock, KeyRound, Binary, Regex }
 
