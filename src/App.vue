@@ -64,12 +64,12 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5">
           <a
             v-for="tool in store.defaultToolsRegistry"
             :key="tool.id"
             :href="toolPath(tool.id) || '/#tools'"
-            class="group p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 hover:border-primary-500 hover:shadow-md transition-all flex flex-col justify-between"
+            class="group p-3.5 sm:p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 hover:border-primary-500 hover:shadow-md transition-all flex flex-col justify-between"
           >
             <div>
               <div class="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/80 text-primary-600 dark:text-primary-400 flex items-center justify-center mb-3">
