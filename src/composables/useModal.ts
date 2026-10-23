@@ -32,12 +32,19 @@ export function useModal(isOpen: Ref<boolean>, onClose: () => void) {
     }
     const first = items[0]
     const last = items[items.length - 1]
-    if (e.shiftKey && (document.activeElement === first || document.activeElement === panelRef.value)) {
-      e.preventDefault()
-      last.focus()
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault()
-      first.focus()
+    // 焦点不在弹窗内可聚焦元素上(如 body、面板自身)时,原生 Tab 会逃出弹窗,这里一律拦回
+    const active = document.activeElement
+    const activeInItems = active instanceof HTMLElement && items.includes(active)
+    if (e.shiftKey) {
+      if (!activeInItems || active === first) {
+        e.preventDefault()
+        last.focus()
+      }
+    } else {
+      if (!activeInItems || active === last) {
+        e.preventDefault()
+        first.focus()
+      }
     }
   }
 

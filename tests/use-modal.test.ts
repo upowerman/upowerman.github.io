@@ -73,4 +73,37 @@ describe('useModal', () => {
     expect(document.activeElement?.id).toBe('last')
     m.unmount()
   })
+
+  it('Tab does not escape when focus is on body', async () => {
+    const m = mountModal()
+    await nextTick()
+    document.body.focus()
+    expect(document.activeElement === document.body || document.activeElement === null).toBe(true)
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }))
+    await nextTick()
+    expect(document.activeElement?.id).toBe('first')
+    m.unmount()
+  })
+
+  it('Shift+Tab does not escape backwards when focus is on body', async () => {
+    const m = mountModal()
+    await nextTick()
+    document.body.focus()
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true }))
+    await nextTick()
+    expect(document.activeElement?.id).toBe('last')
+    m.unmount()
+  })
+
+  it('Tab does not escape when focus is on the panel itself', async () => {
+    const m = mountModal()
+    await nextTick()
+    const panel = document.querySelector('[tabindex="-1"]') as HTMLElement
+    panel.focus()
+    expect(document.activeElement).toBe(panel)
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }))
+    await nextTick()
+    expect(document.activeElement?.id).toBe('first')
+    m.unmount()
+  })
 })
