@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+  (function () {
+    try {
+      var s = localStorage.getItem('vueuse-color-scheme')
+      var dark = s === 'dark' || ((!s || s === 'auto') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      if (dark) document.documentElement.classList.add('dark')
+    } catch (e) {}
+  })()
+</script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-8846399986169251" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8846399986169251" crossorigin="anonymous"></script>
+    <title>SQL 在线格式化与美化工具 - MySQL/Postgres/SQLite多方言支持 | DevHub</title>
+    
+    <!-- 搜索引擎站长认证 (Google & Bing) -->
+    <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
+    <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
+
+    <!-- SEO 核心元标签 -->
+    <meta name="description" content="纯前端离线 SQL 在线格式化与美化实验室。支持 MySQL、PostgreSQL、SQLite、SQL Server、Oracle 等主流方言语法，提供 2 空格/4 空格层级缩进、SQL 关键字大写/小写转换与单行极简压缩。本地计算，零数据库敏感数据外泄风险。" />
+    <meta name="keywords" content="SQL格式化,SQL美化,SQL在线格式化,MySQL格式化,PostgreSQL美化,SQL压缩,SQL minify,SQL formatter online,DevHub" />
+    <meta name="author" content="upowerman" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yunitytech.top/tools/sql/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="SQL 在线格式化与美化工具 - 纯前端离线 | DevHub" />
+    <meta property="og:description" content="多方言语法美化、2/4空格缩进、关键字大小写与单行极简压缩，100% 本地运算零泄漏。" />
+    <meta property="og:url" content="https://yunitytech.top/tools/sql/" />
+    <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SQL 在线格式化与美化工具 - 纯前端离线 | DevHub" />
+    <meta name="twitter:description" content="多方言语法美化、2/4空格缩进、关键字大小写与单行极简压缩，100% 本地运算零泄漏。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
+
+    <!-- 结构化数据 (JSON-LD) 包含 WebApp、面包屑导航与 FAQ 问答富摘要 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://yunitytech.top/tools/sql/#webapp",
+          "name": "DevHub SQL 格式化与美化工具",
+          "url": "https://yunitytech.top/tools/sql/",
+          "description": "纯前端离线 SQL 格式化与美化工具，支持多种数据库方言与关键字大小写转换",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://yunitytech.top/tools/sql/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DevHub 首页",
+              "item": "https://yunitytech.top/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "开发者工具箱",
+              "item": "https://yunitytech.top/#tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "SQL 格式化与美化",
+              "item": "https://yunitytech.top/tools/sql/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://yunitytech.top/tools/sql/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "为什么推荐在开发中将 SQL 关键字全部大写？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "在复杂的多表关联与长子查询中，将保留关键字（如 SELECT、FROM、LEFT JOIN、WHERE、GROUP BY）全大写，表名、列名保持小写或驼峰，能形成极其强烈的视觉层次对比，极大降低代码 Review 与排障成本，符合业界如阿里巴巴 Java 开发手册及主流 DBA 规范。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "单行压缩 (Minify) SQL 有什么实际使用场景？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "格式化排版适合开发者在 IDE 或 Navicat/DBeaver 中阅读调试；而在微服务日志输出、MyBatis XML 映射文件内嵌、应用监控 APM 埋点以及传输高频 REST API 查询请求时，单行压缩能够消除全部冗余空白换行与注释，减少网络传输负载与日志磁盘占用。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "为什么在线格式化 SQL 工具必须使用纯前端离线实现？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "SQL 语句中通常包含大量敏感业务元数据（例如公司真实的表名、列名、租户标识 ID、甚至 WHERE 条件中夹带的用户手机号、密码哈希与订单金额）。如果上传到远端第三方后端服务器，存在严重的数据泄露与合规风险。DevHub 100% 采用浏览器本地主线程计算，不发任何网络请求。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "复杂嵌套子查询或几千行的存储过程在这里会卡顿吗？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "常规几十行至上千行的 DDL/DML 查询在浏览器中均能在几十毫秒内完成美化渲染。对于数万行的数据库备份 dump 文件，建议使用专用命令行工具处理。"
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>SQL 格式化与美化</span>
+        </nav>
+        
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">SQL 在线格式化与美化工具</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          免费强大的纯前端离线 SQL 格式化与美化实验室。支持 MySQL、PostgreSQL、SQLite、SQL Server、Oracle 等主流方言语法，提供 2 空格/4 空格层级缩进、SQL 关键字大写/小写转换与单行极简压缩。本地计算，零数据库敏感数据外泄风险。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">核心特性一览</h2>
+          <ul style="padding-left: 20px; color: #334155; font-size: 14px; line-height: 1.8;">
+            <li><strong>主流数据库方言全支持</strong>：MySQL、PostgreSQL、SQLite、Oracle (PL/SQL)、SQL Server (T-SQL)。</li>
+            <li><strong>规范排版定制</strong>：支持 2 格/4 格层级折进与关键字 UPPERCASE/lowercase 自由转换。</li>
+            <li><strong>单行极简压缩 (Minify)</strong>：一键移除注释与无用空白换行，轻量化日志与 MyBatis XML 语句。</li>
+            <li><strong>100% 浏览器客户端安全运算</strong>：纯本地运算，任何生产数据库查询均不离本地。</li>
+          </ul>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么推荐在开发中将 SQL 关键字全部大写？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 在复杂的多表关联与长子查询中，将保留关键字（如 SELECT、FROM、LEFT JOIN、WHERE、GROUP BY）全大写，表名、列名保持小写或驼峰，能形成极其强烈的视觉层次对比，极大降低代码 Review 与排障成本，符合业界如阿里巴巴 Java 开发手册及主流 DBA 规范。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 单行压缩 (Minify) SQL 有什么实际使用场景？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 格式化排版适合开发者在 IDE 或 Navicat/DBeaver 中阅读调试；而在微服务日志输出、MyBatis XML 映射文件内嵌、应用监控 APM 埋点以及传输高频 REST API 查询请求时，单行压缩能够消除全部冗余空白换行与注释，减少网络传输负载与日志磁盘占用。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么在线格式化 SQL 工具必须使用纯前端离线实现？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: SQL 语句中通常包含大量敏感业务元数据（例如公司真实的表名、列名、租户标识 ID、甚至 WHERE 条件中夹带的用户手机号、密码哈希与订单金额）。如果上传到远端第三方后端服务器，存在严重的数据泄露与合规风险。DevHub 100% 采用浏览器本地主线程计算，不发任何网络请求。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 复杂嵌套子查询或几千行的存储过程在这里会卡顿吗？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 常规几十行至上千行的 DDL/DML 查询在浏览器中均能在几十毫秒内完成美化渲染。对于数万行的数据库备份 dump 文件，建议使用专用命令行工具处理。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 解码器</a>
+            <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
+            <a href="/tools/uuid/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">UUID 生成器</a>
+            <a href="/tools/color/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">颜色转换器</a>
+            <a href="/tools/aes/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">AES 加解密</a>
+            <a href="/tools/case/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">变量命名转换</a>
+            <a href="/tools/curl/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">cURL 转代码</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
+    <noscript>
+      <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+        <h1>SQL 在线格式化与美化工具</h1>
+        <p>DevHub 提供的纯前端离线 SQL 格式化工具：支持 MySQL/PostgreSQL/SQLite/Oracle 等多方言格式化、关键字大小写转换与单行压缩。所有处理 100% 在客户端浏览器内存中完成，无需向服务器上传代码与隐私数据。</p>
+        <p><a href="/">返回 DevHub 开发者工作台首页</a></p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

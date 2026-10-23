@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+  (function () {
+    try {
+      var s = localStorage.getItem('vueuse-color-scheme')
+      var dark = s === 'dark' || ((!s || s === 'auto') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      if (dark) document.documentElement.classList.add('dark')
+    } catch (e) {}
+  })()
+</script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-8846399986169251" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8846399986169251" crossorigin="anonymous"></script>
+    <title>cURL 转多语言代码工具 - 纯前端一键生成 Fetch/Axios/Python/Go/Java | DevHub</title>
+    
+    <!-- 搜索引擎站长认证 (Google & Bing) -->
+    <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
+    <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
+
+    <!-- SEO 核心元标签 -->
+    <meta name="description" content="将浏览器 Network 或 Postman 导出的 cURL 命令一键转换为 JavaScript Fetch、Axios、Python Requests、Go net/http 以及 Java HttpClient 生产级代码。支持多行反斜杠、JSON 请求体与鉴权头自动解析，100% 浏览器客户端运算。" />
+    <meta name="keywords" content="curl转代码,curl to fetch,curl to python,curl to axios,curl to go,curl converter,代码生成器,DevHub" />
+    <meta name="author" content="upowerman" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yunitytech.top/tools/curl/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="cURL 转多语言代码工具 - 纯前端离线 | DevHub" />
+    <meta property="og:description" content="cURL 命令行一键转 Fetch、Axios、Python requests、Go 及 Java，100% 浏览器本地运算零泄漏。" />
+    <meta property="og:url" content="https://yunitytech.top/tools/curl/" />
+    <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="cURL 转多语言代码工具 - 纯前端离线 | DevHub" />
+    <meta name="twitter:description" content="cURL 命令行一键转 Fetch、Axios、Python requests、Go 及 Java，100% 浏览器本地运算零泄漏。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
+
+    <!-- 结构化数据 (JSON-LD) 包含 WebApp、面包屑导航与 FAQ 问答富摘要 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://yunitytech.top/tools/curl/#webapp",
+          "name": "DevHub cURL 转多语言代码工具",
+          "url": "https://yunitytech.top/tools/curl/",
+          "description": "纯前端离线 cURL 转换工具，支持 Fetch、Axios、Python、Go、Java 多语言代码即时生成",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://yunitytech.top/tools/curl/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DevHub 首页",
+              "item": "https://yunitytech.top/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "开发者工具箱",
+              "item": "https://yunitytech.top/#tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "cURL 转多语言代码",
+              "item": "https://yunitytech.top/tools/curl/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://yunitytech.top/tools/curl/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "从 Chrome 复制的 cURL 命令如何快速转为 Python 或前端代码？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "在 Chrome 开发者工具的“网络 (Network)”面板中，右键任意已发起的请求，选择“复制 -> 作为 cURL (bash) 复制”。打开 DevHub 本工具，直接粘贴在左侧输入框，顶部点击 Python (requests) 或 JS (fetch)，右侧即刻生成包含完整 Headers、Cookies 与 Payload 的生产代码，一键复制即可运行。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "工具能自动识别 POST 请求与 JSON 报文吗？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "可以。只要命令中包含 -d、--data、--data-raw 或 --json 参数，工具会自动推断请求方法为 POST，并将 JSON 字符串格式化为各语言标准的数据字典或结构体（如 Python 字典或 JS 对象），省去手动拼接字符串转义符的麻烦。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "转换涉及 Authorization 密钥或 Token，会不会有安全泄露？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "绝不会。DevHub 坚持纯前端离线计算理念，所有 cURL 命令的词法解析与代码生成逻辑均通过本地 JavaScript 引擎在当前浏览器沙箱中执行，零网络上报，杜绝生产环境敏感鉴权 Token 与私有接口外泄。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "支持带有换行反斜杠 (\\) 的多行 cURL 命令吗？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "完全支持。DevHub 内置高级 Bash 词法分词器，完美兼容单引号、双引号嵌套以及 Chrome 默认导出的多行反斜杠 (\\) 格式命令。"
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>cURL 转多语言代码</span>
+        </nav>
+        
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">cURL 转多语言代码工具 (cURL Converter)</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          将浏览器控制台 Network 复制的 cURL 命令或 API 文档片段，一键秒级转换为生产级 JavaScript Fetch、Axios、Python Requests、Go net/http 以及 Java HttpClient 代码。自动解析 URL、Method、Header、Cookie、Basic Auth 与 JSON Body，100% 本地运算。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">核心特性一览</h2>
+          <ul style="padding-left: 20px; color: #334155; font-size: 14px; line-height: 1.8;">
+            <li><strong>多语言即时生成</strong>：支持原生 Fetch、Axios、Python Requests、Go net/http 与 Java 11 HttpClient。</li>
+            <li><strong>精准 Bash 词法分词</strong>：完美应对 Chrome、Firefox 复制的多行反斜杠换行与各类单双引号。</li>
+            <li><strong>JSON 请求体与 Header 自动提取</strong>：智能还原 JSON 数据结构，格式化清晰可读。</li>
+            <li><strong>100% 浏览器客户端安全运算</strong>：敏感鉴权 Bearer Token 与 Cookie 绝不上报服务器。</li>
+          </ul>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 从 Chrome 复制的 cURL 命令如何快速转为 Python 或前端代码？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 在 Chrome 开发者工具的“网络 (Network)”面板中，右键任意已发起的请求，选择“复制 -> 作为 cURL (bash) 复制”。打开 DevHub 本工具，直接粘贴在左侧输入框，顶部点击 Python (requests) 或 JS (fetch)，右侧即刻生成包含完整 Headers、Cookies 与 Payload 的生产代码，一键复制即可运行。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 工具能自动识别 POST 请求与 JSON 报文吗？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 可以。只要命令中包含 -d、--data、--data-raw 或 --json 参数，工具会自动推断请求方法为 POST，并将 JSON 字符串格式化为各语言标准的数据字典或结构体（如 Python 字典或 JS 对象），省去手动拼接字符串转义符的麻烦。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 转换涉及 Authorization 密钥或 Token，会不会有安全泄露？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 绝不会。DevHub 坚持纯前端离线计算理念，所有 cURL 命令的词法解析与代码生成逻辑均通过本地 JavaScript 引擎在当前浏览器沙箱中执行，零网络上报，杜绝生产环境敏感鉴权 Token 与私有接口外泄。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 支持带有换行反斜杠 (\) 的多行 cURL 命令吗？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 完全支持。DevHub 内置高级 Bash 词法分词器，完美兼容单引号、双引号嵌套以及 Chrome 默认导出的多行反斜杠 (\) 格式命令。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 解码器</a>
+            <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
+            <a href="/tools/uuid/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">UUID 生成器</a>
+            <a href="/tools/color/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">颜色转换器</a>
+            <a href="/tools/aes/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">AES 加解密</a>
+            <a href="/tools/case/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">变量命名转换</a>
+            <a href="/tools/sql/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">SQL 格式化</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
+    <noscript>
+      <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+        <h1>cURL 转多语言代码工具</h1>
+        <p>DevHub 提供的纯前端离线 cURL 转换工具：支持将 cURL 命令行转为 Fetch、Axios、Python requests、Go net/http 以及 Java HttpClient 代码。所有处理 100% 在客户端浏览器内存中完成，无需向服务器上传代码与隐私数据。</p>
+        <p><a href="/">返回 DevHub 开发者工作台首页</a></p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

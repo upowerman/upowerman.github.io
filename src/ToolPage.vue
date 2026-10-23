@@ -92,7 +92,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { FileJson, Clock, KeyRound, Binary, Regex, CalendarClock, Fingerprint, Palette, ShieldCheck, CaseUpper, Wrench } from 'lucide-vue-next'
+import { FileJson, Clock, KeyRound, Binary, Regex, CalendarClock, Fingerprint, Palette, ShieldCheck, CaseUpper, Database, Terminal, Wrench } from 'lucide-vue-next'
 import AppHeader from './components/layout/AppHeader.vue'
 import AppFooter from './components/layout/AppFooter.vue'
 import AdBanner from './components/common/AdBanner.vue'
@@ -107,7 +107,7 @@ const props = defineProps<{
 
 const store = useAppStore()
 
-const toolIcons: Record<string, any> = { FileJson, Clock, KeyRound, Binary, Regex, CalendarClock, Fingerprint, Palette, ShieldCheck, CaseUpper }
+const toolIcons: Record<string, any> = { FileJson, Clock, KeyRound, Binary, Regex, CalendarClock, Fingerprint, Palette, ShieldCheck, CaseUpper, Database, Terminal }
 
 const tool = computed(() => store.defaultToolsRegistry.find(t => t.id === props.toolId))
 const content = computed(() => toolPageContent[props.toolId])

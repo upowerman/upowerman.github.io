@@ -80,5 +80,21 @@ export const defaultToolsRegistry: ToolItem[] = [
     icon: 'CaseUpper',
     category: 'format',
     keywords: ['case', 'camelCase', 'pascalCase', 'snake_case', 'kebab-case', '命名转换', '驼峰', '下划线']
+  },
+  {
+    id: 'tool-sql',
+    name: 'SQL 格式化与美化',
+    desc: 'MySQL/PostgreSQL/SQLite/Oracle 等多方言格式化排版、关键字大小写转换与单行压缩',
+    icon: 'Database',
+    category: 'format',
+    keywords: ['sql', 'format', 'minify', 'mysql', 'postgresql', 'sqlite', '格式化', '美化']
+  },
+  {
+    id: 'tool-curl',
+    name: 'cURL 转多语言代码',
+    desc: '浏览器/Postman cURL 命令一键转换原生 Fetch、Axios、Python requests、Go 及 Java 代码',
+    icon: 'Terminal',
+    category: 'code',
+    keywords: ['curl', 'fetch', 'axios', 'python', 'requests', 'golang', 'java', '代码生成', 'http']
   }
 ]

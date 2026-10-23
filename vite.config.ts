@@ -23,6 +23,8 @@ export default defineConfig({
         'tools/color': path.resolve(__dirname, 'tools/color/index.html'),
         'tools/aes': path.resolve(__dirname, 'tools/aes/index.html'),
         'tools/case': path.resolve(__dirname, 'tools/case/index.html'),
+        'tools/sql': path.resolve(__dirname, 'tools/sql/index.html'),
+        'tools/curl': path.resolve(__dirname, 'tools/curl/index.html'),
         privacy: path.resolve(__dirname, 'privacy/index.html')
       },
       output: {

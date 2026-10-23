@@ -17,6 +17,7 @@
     "crypto-js": "^4.2.0",
     "lucide-vue-next": "^0.368.0",
     "pinia": "^2.1.7",
+    "sql-formatter": "^15.9.0",
     "vue": "^3.4.21"
   },
   "devDependencies": {

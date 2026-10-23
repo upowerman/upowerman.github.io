@@ -9,6 +9,8 @@ import UuidTool from '../tools/uuid/UuidTool.vue'
 import ColorTool from '../tools/color/ColorTool.vue'
 import AesTool from '../tools/aes/AesTool.vue'
 import CaseTool from '../tools/case/CaseTool.vue'
+import SqlTool from '../tools/sql/SqlTool.vue'
+import CurlTool from '../tools/curl/CurlTool.vue'
 
 export const toolComponents: Record<string, Component> = {
   'tool-json': JsonTool,
@@ -20,5 +22,7 @@ export const toolComponents: Record<string, Component> = {
   'tool-uuid': UuidTool,
   'tool-color': ColorTool,
   'tool-aes': AesTool,
-  'tool-case': CaseTool
+  'tool-case': CaseTool,
+  'tool-sql': SqlTool,
+  'tool-curl': CurlTool
 }

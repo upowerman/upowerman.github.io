@@ -361,5 +361,76 @@ export const toolPageContent: Record<string, ToolPageContent> = {
         a: 'URL 规范中部分协议或 CDN 缓存服务器对大小写可能不敏感（导致 itemDetail 与 itemdetail 被判定为同一资源或缓存混乱）；而在 CSS 中选择器也是大小写不敏感的，且使用短横线（kebab-case）具有极高的可读性，例如 user-avatar-image，这是前端规范事实上的黄金标准。'
       }
     ]
+  },
+  'tool-sql': {
+    h1: 'SQL 在线格式化与美化工具',
+    intro:
+      '免费强大的纯前端离线 SQL 格式化与美化实验室。支持 MySQL、PostgreSQL、SQLite、SQL Server、Oracle 等主流方言语法，提供 2 空格/4 空格层级缩进、SQL 关键字大写/小写转换与单行极简压缩。本地计算，零数据库敏感数据外泄风险。',
+    extra: {
+      title: '标准 SQL 子句语法书写与执行顺序速查',
+      head: ['执行顺序', 'SQL 子句', '作用说明', '优化关注点'],
+      monoCols: [1],
+      rows: [
+        ['1', 'FROM / JOIN', '确定数据源表并执行笛卡尔积或关联过滤 (ON 条件)', '小表驱动大表，JOIN 字段务必建立索引'],
+        ['2', 'WHERE', '对基础行执行行级条件过滤', '避免函数计算导致索引失效 (如 WHERE YEAR(d)=2026)'],
+        ['3', 'GROUP BY', '对筛选后的数据进行分组聚合', '尽量配合聚合字段，避免隐式排序'],
+        ['4', 'HAVING', '对分组聚合后的结果进行二次过滤', '非聚合条件的过滤应前置放入 WHERE 中'],
+        ['5', 'SELECT', '提取指定字段或执行表达式投影', '严禁生产环境中使用 SELECT * 增加网络与解析开销'],
+        ['6', 'ORDER BY', '对结果集执行排序', '尽量利用联合索引的已有顺序，避免 filesort 磁盘排序'],
+        ['7', 'LIMIT / OFFSET', '限制返回行数并执行分页', '深度分页 (如 LIMIT 1000000, 10) 需采用延迟关联优化']
+      ]
+    },
+    faqs: [
+      {
+        q: '为什么推荐在开发中将 SQL 关键字全部大写？',
+        a: '在复杂的多表关联与长子查询中，将保留关键字（如 SELECT、FROM、LEFT JOIN、WHERE、GROUP BY）全大写，表名、列名保持小写或驼峰，能形成极其强烈的视觉层次对比，极大降低代码 Review 与排障成本，符合业界如阿里巴巴 Java 开发手册及主流 DBA 规范。'
+      },
+      {
+        q: '单行压缩 (Minify) SQL 有什么实际使用场景？',
+        a: '格式化排版适合开发者在 IDE 或 Navicat/DBeaver 中阅读调试；而在微服务日志输出、MyBatis XML 映射文件内嵌、应用监控 APM 埋点以及传输高频 REST API 查询请求时，单行压缩能够消除全部冗余空白换行与注释，减少网络传输负载与日志磁盘占用。'
+      },
+      {
+        q: '为什么在线格式化 SQL 工具必须使用纯前端离线实现？',
+        a: 'SQL 语句中通常包含大量敏感业务元数据（例如公司真实的表名、列名、租户标识 ID、甚至 WHERE 条件中夹带的用户手机号、密码哈希与订单金额）。如果上传到远端第三方后端服务器，存在严重的数据泄露与合规风险。DevHub 100% 采用浏览器本地主线程计算，不发任何网络请求。'
+      },
+      {
+        q: '复杂嵌套子查询或几千行的存储过程在这里会卡顿吗？',
+        a: '常规几十行至上千行的 DDL/DML 查询在浏览器中均能在几十毫秒内完成美化渲染。对于数万行的数据库备份 dump 文件，建议使用专用命令行工具处理。'
+      }
+    ]
+  },
+  'tool-curl': {
+    h1: 'cURL 转多语言代码工具 (cURL Converter)',
+    intro:
+      '将浏览器控制台 Network 复制的 cURL 命令或 API 文档片段，一键秒级转换为生产级 JavaScript Fetch、Axios、Python Requests、Go net/http 以及 Java HttpClient 代码。自动解析 URL、Method、Header、Cookie、Basic Auth 与 JSON Body，100% 本地运算。',
+    extra: {
+      title: '浏览器各内核一键复制 cURL 方式速查',
+      head: ['浏览器 / 平台', '操作路径', '推荐格式'],
+      monoCols: [1],
+      rows: [
+        ['Chrome / Edge', 'F12 打开控制台 -> Network -> 右键请求条目 -> Copy -> Copy as cURL (bash)', 'cURL (bash)'],
+        ['Firefox 火狐', 'F12 控制台 -> 网络 -> 右键请求 -> 复制 -> 复制为 cURL', 'cURL'],
+        ['Postman', '右侧侧边栏 -> 点击 </> Code 按钮 -> 选择 cURL', 'cURL'],
+        ['ApiFox / Apipost', '接口文档右上角 -> 点击“生成代码” -> 复制 cURL', 'cURL']
+      ]
+    },
+    faqs: [
+      {
+        q: '从 Chrome 复制的 cURL 命令如何快速转为 Python 或前端代码？',
+        a: '在 Chrome 开发者工具的“网络 (Network)”面板中，右键任意已发起的请求，选择“复制 -> 作为 cURL (bash) 复制”。打开 DevHub 本工具，直接粘贴在左侧输入框，顶部点击 Python (requests) 或 JS (fetch)，右侧即刻生成包含完整 Headers、Cookies 与 Payload 的生产代码，一键复制即可运行。'
+      },
+      {
+        q: '工具能自动识别 POST 请求与 JSON 报文吗？',
+        a: '可以。只要命令中包含 -d、--data、--data-raw 或 --json 参数，工具会自动推断请求方法为 POST，并将 JSON 字符串格式化为各语言标准的数据字典或结构体（如 Python 字典或 JS 对象），省去手动拼接字符串转义符的麻烦。'
+      },
+      {
+        q: '转换涉及 Authorization 密钥或 Token，会不会有安全泄露？',
+        a: '绝不会。DevHub 坚持纯前端离线计算理念，所有 cURL 命令的词法解析与代码生成逻辑均通过本地 JavaScript 引擎在当前浏览器沙箱中执行，零网络上报，杜绝生产环境敏感鉴权 Token 与私有接口外泄。'
+      },
+      {
+        q: '支持带有换行反斜杠 (\\) 的多行 cURL 命令吗？',
+        a: '完全支持。DevHub 内置高级 Bash 词法分词器，完美兼容单引号、双引号嵌套以及 Chrome 默认导出的多行反斜杠 (\\) 格式命令。'
+      }
+    ]
   }
 }

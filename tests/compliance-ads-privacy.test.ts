@@ -41,7 +41,7 @@ describe('Compliance: Google AdSense ads.txt & Privacy Policy', () => {
     expect(viteConfigContent).toMatch(/['"]?privacy['"]?\s*:\s*path\.resolve\(__dirname,\s*['"]privacy\/index\.html['"]\)/)
   })
 
-  it('all 12 active HTML entry files include Google AdSense script', () => {
+  it('all 14 active HTML entry files include Google AdSense script', () => {
     const htmlFiles = [
       'index.html',
       'privacy/index.html',
@@ -54,7 +54,9 @@ describe('Compliance: Google AdSense ads.txt & Privacy Policy', () => {
       'tools/uuid/index.html',
       'tools/color/index.html',
       'tools/aes/index.html',
-      'tools/case/index.html'
+      'tools/case/index.html',
+      'tools/sql/index.html',
+      'tools/curl/index.html'
     ]
     const scriptPattern = 'pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8846399986169251'
     for (const file of htmlFiles) {

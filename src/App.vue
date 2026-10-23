@@ -177,7 +177,9 @@ import {
   Fingerprint,
   Palette,
   ShieldCheck,
-  CaseUpper
+  CaseUpper,
+  Database,
+  Terminal
 } from 'lucide-vue-next'
 import { useAppStore } from './stores/useAppStore'
 import AppHeader from './components/layout/AppHeader.vue'
@@ -205,7 +207,9 @@ const toolIcons: Record<string, any> = {
   Fingerprint,
   Palette,
   ShieldCheck,
-  CaseUpper
+  CaseUpper,
+  Database,
+  Terminal
 }
 
 function getToolIcon(iconName: string) {
