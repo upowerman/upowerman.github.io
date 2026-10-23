@@ -23,6 +23,7 @@
     <div class="relative flex items-center rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm pl-4 pr-1.5 py-1.5">
       <span class="font-mono text-sm md:text-base text-primary-600 dark:text-primary-400 select-none mr-2 shrink-0" aria-hidden="true">$</span>
       <input
+        ref="inputRef"
         v-model="query"
         type="text"
         :placeholder="currentPlaceholder"
@@ -33,6 +34,7 @@
         class="search-cmd-input flex-1 min-w-0 bg-transparent py-2.5 text-sm md:text-base text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 font-mono caret-primary-600 outline-none"
         @keydown.enter="handleEnter"
         @keydown.down.prevent="focusFirstSuggestion"
+        @keydown.escape="collapseToInput"
         @focus="isFocused = true"
       />
       <button
@@ -74,6 +76,9 @@
         :target="'url' in item ? '_blank' : undefined"
         :rel="'url' in item ? 'noopener noreferrer' : undefined"
         class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-800/60 cursor-pointer transition-colors"
+        @keydown.up.prevent="focusSibling($event, -1)"
+        @keydown.down.prevent="focusSibling($event, 1)"
+        @keydown.escape="collapseToInput"
       >
         <div class="flex items-center space-x-3">
           <SiteIcon :name="item.name" :url="'url' in item ? item.url : undefined" />
@@ -108,6 +113,7 @@ const query = ref('')
 const isFocused = ref(false)
 const searchContainerRef = ref<HTMLElement | null>(null)
 const suggestionsRef = ref<HTMLElement | null>(null)
+const inputRef = ref<HTMLInputElement | null>(null)
 
 onClickOutside(searchContainerRef, () => {
   isFocused.value = false
@@ -147,6 +153,19 @@ function suggestionHref(item: (ToolItem & { type: 'tool' }) | (NavItem & { type:
 
 function focusFirstSuggestion() {
   suggestionsRef.value?.querySelector('a')?.focus()
+}
+
+function focusSibling(e: Event, dir: 1 | -1) {
+  const items = Array.from(suggestionsRef.value?.querySelectorAll('a') ?? []) as HTMLElement[]
+  const idx = items.indexOf(e.currentTarget as HTMLElement)
+  const next = items[(idx + dir + items.length) % items.length]
+  next?.focus()
+}
+
+function collapseToInput() {
+  query.value = ''
+  isFocused.value = false
+  inputRef.value?.focus()
 }
 
 function executeSearch() {

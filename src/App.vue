@@ -6,7 +6,7 @@
     />
 
     <!-- 页面核心区域 -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <main id="main-view" role="tabpanel" aria-label="主内容区" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       <!-- 聚合搜索与快速直达 -->
       <section class="text-center pt-2 pb-4">
         <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-2">

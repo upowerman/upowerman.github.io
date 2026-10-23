@@ -21,10 +21,14 @@
         <button
           v-for="t in viewTabs"
           :key="t.id"
+          :id="'view-tab-' + t.id"
           type="button"
           role="tab"
           :aria-selected="store.activeTab === t.id"
+          aria-controls="main-view"
+          :tabindex="store.activeTab === t.id ? 0 : -1"
           @click="store.setActiveTab(t.id)"
+          @keydown="onTabKeydown($event, t.id)"
           :class="[
             'px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1',
             store.activeTab === t.id
@@ -74,10 +78,14 @@
       <button
         v-for="t in viewTabs"
         :key="t.id"
+        :id="'view-tab-m-' + t.id"
         type="button"
         role="tab"
         :aria-selected="store.activeTab === t.id"
+        aria-controls="main-view"
+        :tabindex="store.activeTab === t.id ? 0 : -1"
         @click="store.setActiveTab(t.id)"
+        @keydown="onTabKeydown($event, t.id)"
         :class="[
           'shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center space-x-1',
           store.activeTab === t.id
@@ -93,6 +101,7 @@
 </template>
 
 <script setup lang="ts">
+import { nextTick } from 'vue'
 import { Terminal, Star, Plus, Sun, Moon } from 'lucide-vue-next'
 import { useAppStore } from '../../stores/useAppStore'
 import type { ViewTabType } from '../../types'
@@ -120,5 +129,17 @@ function handleLogoClick() {
     return
   }
   store.setActiveTab('all')
+}
+
+function onTabKeydown(e: KeyboardEvent, currentId: ViewTabType) {
+  if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
+  e.preventDefault()
+  const idx = viewTabs.findIndex(t => t.id === currentId)
+  const next = viewTabs[(idx + (e.key === 'ArrowRight' ? 1 : -1) + viewTabs.length) % viewTabs.length]
+  store.setActiveTab(next.id)
+  const prefix = (e.currentTarget as HTMLElement).id.startsWith('view-tab-m-') ? 'view-tab-m-' : 'view-tab-'
+  nextTick(() => {
+    document.getElementById(prefix + next.id)?.focus()
+  })
 }
 </script>
