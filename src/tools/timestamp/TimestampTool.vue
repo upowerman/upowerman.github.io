@@ -11,7 +11,7 @@
           <span class="text-xs px-2 py-0.5 rounded bg-primary-100 dark:bg-primary-950 text-primary-700 dark:text-primary-300 font-mono">
             秒 (s)
           </span>
-          <span class="text-sm font-mono text-slate-400">
+          <span class="text-sm font-mono text-slate-500 dark:text-slate-400">
             {{ currentMilliseconds }} ms
           </span>
         </div>
@@ -62,19 +62,19 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs">
         <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-          <span class="text-slate-400">北京时间 (Local):</span>
+          <span class="text-slate-500 dark:text-slate-400">北京时间 (Local):</span>
           <div class="font-mono font-medium text-slate-800 dark:text-slate-200 mt-0.5">{{ convertedDate.local }}</div>
         </div>
         <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-          <span class="text-slate-400">ISO 8601 (UTC):</span>
+          <span class="text-slate-500 dark:text-slate-400">ISO 8601 (UTC):</span>
           <div class="font-mono font-medium text-slate-800 dark:text-slate-200 mt-0.5">{{ convertedDate.iso || '-' }}</div>
         </div>
         <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-          <span class="text-slate-400">相对时间:</span>
+          <span class="text-slate-500 dark:text-slate-400">相对时间:</span>
           <div class="font-mono font-medium text-slate-800 dark:text-slate-200 mt-0.5">{{ convertedDate.relative || '-' }}</div>
         </div>
         <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-          <span class="text-slate-400">UTC 格式:</span>
+          <span class="text-slate-500 dark:text-slate-400">UTC 格式:</span>
           <div class="font-mono font-medium text-slate-800 dark:text-slate-200 mt-0.5 truncate">{{ convertedDate.utc || '-' }}</div>
         </div>
       </div>
@@ -101,13 +101,13 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs">
         <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-          <span class="text-slate-400">秒时间戳 (10位):</span>
+          <span class="text-slate-500 dark:text-slate-400">秒时间戳 (10位):</span>
           <div class="font-mono font-medium text-primary-600 dark:text-primary-400 mt-0.5">
             {{ convertedTimestamp.seconds !== null ? convertedTimestamp.seconds : '无效日期' }}
           </div>
         </div>
         <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-          <span class="text-slate-400">毫秒时间戳 (13位):</span>
+          <span class="text-slate-500 dark:text-slate-400">毫秒时间戳 (13位):</span>
           <div class="font-mono font-medium text-primary-600 dark:text-primary-400 mt-0.5">
             {{ convertedTimestamp.milliseconds !== null ? convertedTimestamp.milliseconds : '无效日期' }}
           </div>

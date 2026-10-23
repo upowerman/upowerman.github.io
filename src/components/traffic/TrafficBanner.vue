@@ -25,16 +25,17 @@
       <a
         href="https://github.com/upowerman/upowerman.github.io"
         target="_blank"
-        class="px-4 py-2 text-xs font-bold rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-all"
+        class="flex items-center space-x-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-all"
       >
-        GitHub 贡献 ⭐
+        <Github class="w-3.5 h-3.5" />
+        <span>GitHub 贡献</span>
       </a>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Sparkles } from 'lucide-vue-next'
+import { Sparkles, Github } from 'lucide-vue-next'
 
 defineEmits<{
   (e: 'open-community'): void

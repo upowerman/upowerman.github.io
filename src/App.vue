@@ -79,7 +79,7 @@
             class="group p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 hover:border-primary-500 hover:shadow-md transition-all flex flex-col justify-between"
           >
             <div>
-              <div class="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/80 text-primary-600 dark:text-primary-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <div class="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/80 text-primary-600 dark:text-primary-400 flex items-center justify-center mb-3">
                 <component :is="getToolIcon(tool.icon)" class="w-5 h-5" />
               </div>
               <h4 class="text-sm font-bold text-slate-900 dark:text-slate-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
@@ -90,7 +90,7 @@
               </p>
             </div>
 
-            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-400 group-hover:text-primary-600">
+            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 group-hover:text-primary-600">
               <span>立即使用</span>
               <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -123,8 +123,8 @@
           <span>我置顶收藏的网站与工具</span>
         </h3>
 
-        <div v-if="pinnedItems.length === 0" class="py-16 text-center text-slate-400 bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800">
-          <p>暂无收藏项，在任意卡片点击右上角 ⭐ 即可将网站或工具置顶到此处。</p>
+        <div v-if="pinnedItems.length === 0" class="py-16 text-center text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800">
+          <p>暂无收藏项，在任意卡片点击右上角的星标即可将网站或工具置顶到此处。</p>
         </div>
 
         <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5">

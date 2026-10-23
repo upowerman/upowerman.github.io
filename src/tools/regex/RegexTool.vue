@@ -20,14 +20,14 @@
     <!-- 正则表达式输入 -->
     <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2">
       <div class="flex items-center space-x-2">
-        <span class="font-mono text-slate-400 text-sm">/</span>
+        <span class="font-mono text-slate-500 dark:text-slate-400 text-sm">/</span>
         <input
           v-model="pattern"
           type="text"
           placeholder="输入正则表达式模式..."
           class="flex-1 px-2 py-1.5 font-mono text-sm bg-transparent outline-none text-slate-800 dark:text-slate-100"
         />
-        <span class="font-mono text-slate-400 text-sm">/</span>
+        <span class="font-mono text-slate-500 dark:text-slate-400 text-sm">/</span>
         <input
           v-model="flags"
           type="text"
@@ -68,7 +68,7 @@
           >
             #{{ idx + 1 }}: {{ match }}
           </div>
-          <div v-if="testResult.matches.length === 0" class="text-slate-400 py-4 text-center">
+          <div v-if="testResult.matches.length === 0" class="text-slate-500 dark:text-slate-400 py-4 text-center">
             暂无匹配项
           </div>
         </div>

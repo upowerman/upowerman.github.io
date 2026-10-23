@@ -2,24 +2,19 @@
   <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <!-- 品牌 Logo -->
-      <div class="flex items-center space-x-3 cursor-pointer" @click="handleLogoClick">
+      <button type="button" class="flex items-center space-x-3" @click="handleLogoClick" aria-label="DevHub 首页">
         <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary-600 to-emerald-400 flex items-center justify-center text-white shadow-md shadow-primary-500/20">
           <Terminal class="w-5 h-5" />
         </div>
-        <div>
-          <div class="flex items-center space-x-1.5">
-            <span class="text-base font-extrabold tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-200 bg-clip-text text-transparent">
-              DevHub
-            </span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-primary-100 dark:bg-primary-950 text-primary-700 dark:text-primary-300 font-semibold uppercase">
-              Pro
-            </span>
-          </div>
-          <span class="hidden sm:block text-[11px] text-slate-400 font-medium leading-none">
+        <div class="text-left">
+          <span class="block text-base font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+            DevHub
+          </span>
+          <span class="hidden sm:block text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-none">
             程序员复合型工作台
           </span>
         </div>
-      </div>
+      </button>
 
       <!-- 视图切换 Tab(桌面) -->
       <nav v-if="!toolMode" role="tablist" aria-label="视图切换" class="hidden md:flex items-center space-x-1 p-1 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs font-semibold">

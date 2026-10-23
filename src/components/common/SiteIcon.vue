@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 const props = defineProps<{
   url?: string
@@ -27,6 +27,11 @@ const props = defineProps<{
 }>()
 
 const hasError = ref(false)
+
+// favicon 源变化时重置错误态,避免残留字母徽章
+watch(() => [props.url, props.icon], () => {
+  hasError.value = false
+})
 
 const faviconUrl = computed(() => {
   if (props.icon) return props.icon
@@ -44,16 +49,15 @@ const initialChar = computed(() => {
   return trimmed ? trimmed.charAt(0).toUpperCase() : '?'
 })
 
+// 全站主题色深浅两档 fallback 徽章,避免随机彩虹色块喧宾夺主
+const badgePalette = ['#15803d', '#166534', '#0f766e', '#115e59']
+
 const badgeColor = computed(() => {
-  const colors = [
-    '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6',
-    '#ec4899', '#06b6d4', '#14b8a6', '#6366f1', '#f97316'
-  ]
   let hash = 0
   for (let i = 0; i < props.name.length; i++) {
     hash = props.name.charCodeAt(i) + ((hash << 5) - hash)
   }
-  return colors[Math.abs(hash) % colors.length]
+  return badgePalette[Math.abs(hash) % badgePalette.length]
 })
 
 function handleError() {

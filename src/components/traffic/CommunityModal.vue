@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <div class="mt-4 text-[11px] text-slate-400">
+      <div class="mt-4 text-[11px] text-slate-500 dark:text-slate-400">
         关注公众号「极客工作台」获取出海产品工具包
       </div>
     </div>

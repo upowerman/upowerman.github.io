@@ -13,8 +13,11 @@
         </button>
       </div>
 
-      <div class="text-xs text-slate-400 dark:text-slate-500">
-        <p>🔒 隐私保证：所有内置小工具均为纯前端运行，数据 100% 留存在您的本地浏览器，绝不上报服务器。</p>
+      <div class="text-xs text-slate-500 dark:text-slate-400">
+        <p class="flex items-center justify-center gap-1.5">
+          <Lock class="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+          <span>隐私保证：所有内置小工具均为纯前端运行，数据 100% 留存在您的本地浏览器，绝不上报服务器。</span>
+        </p>
         <p class="mt-1">
           © {{ currentYear }} <a href="https://yunitytech.top" class="hover:underline font-medium text-slate-600 dark:text-slate-400">yunitytech.top</a> · 专为程序员打造的高频工作台
         </p>
@@ -25,6 +28,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { Lock } from 'lucide-vue-next'
 
 defineEmits<{
   (e: 'open-community'): void
