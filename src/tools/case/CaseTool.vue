@@ -168,6 +168,9 @@ import {
   convertBatchText,
   type NamingCaseType
 } from '../../utils/case-utils'
+import { useToast } from '../../composables/useToast'
+
+const toast = useToast()
 
 const activeMode = ref<'all' | 'batch'>('all')
 const singleInput = ref('user_account_balance')
@@ -228,6 +231,7 @@ async function copyText(text: string, key: string) {
   if (!text) return
   await navigator.clipboard.writeText(text)
   copiedKey.value = key
+  toast.show(`已复制 ${key} 风格变量名！`)
   setTimeout(() => {
     if (copiedKey.value === key) copiedKey.value = ''
   }, 1800)
@@ -237,6 +241,7 @@ async function copyBatch() {
   if (!batchOutput.value) return
   await navigator.clipboard.writeText(batchOutput.value)
   copiedBatch.value = true
+  toast.show('已复制批量转换结果！')
   setTimeout(() => (copiedBatch.value = false), 1800)
 }
 </script>

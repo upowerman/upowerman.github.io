@@ -58,6 +58,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { parseColor, rgbToHex, rgbToHsl, contrastRatio, type Rgb } from '../../utils/color-utils'
+import { useToast } from '../../composables/useToast'
+
+const toast = useToast()
 
 const input = ref('#16a34a')
 const copied = ref('')
@@ -85,6 +88,7 @@ const ratioBlack = computed(() => (rgb.value ? contrastRatio(rgb.value, BLACK) :
 function copyText(s: string) {
   navigator.clipboard.writeText(s).then(() => {
     copied.value = s
+    toast.show(`已复制颜色: ${s}`)
     setTimeout(() => (copied.value = ''), 1500)
   })
 }

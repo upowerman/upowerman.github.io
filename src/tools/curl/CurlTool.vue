@@ -104,6 +104,9 @@ import {
   generateCurlCode,
   type CurlTargetLanguage
 } from '../../utils/curl-utils'
+import { useToast } from '../../composables/useToast'
+
+const toast = useToast()
 
 const activeLang = ref<CurlTargetLanguage>('fetch')
 const inputCurl = ref(
@@ -165,6 +168,7 @@ async function copyCode() {
   if (!generatedCode.value) return
   await navigator.clipboard.writeText(generatedCode.value)
   copied.value = true
+  toast.show(`已复制 ${activeLang.value.toUpperCase()} 代码到剪贴板！`)
   setTimeout(() => (copied.value = false), 1800)
 }
 

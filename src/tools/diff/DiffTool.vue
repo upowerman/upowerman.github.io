@@ -143,6 +143,9 @@ import {
   computeLineDiff,
   computeUnifiedPatch
 } from '../../utils/diff-utils'
+import { useToast } from '../../composables/useToast'
+
+const toast = useToast()
 
 const viewMode = ref<'unified' | 'patch'>('unified')
 const ignoreWhitespace = ref(false)
@@ -214,6 +217,7 @@ async function copyPatch() {
   if (!patchText.value) return
   await navigator.clipboard.writeText(patchText.value)
   copiedPatch.value = true
+  toast.show('已复制标准 Git Patch 补丁到剪贴板！')
   setTimeout(() => (copiedPatch.value = false), 1800)
 }
 </script>

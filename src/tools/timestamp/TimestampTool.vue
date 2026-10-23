@@ -120,6 +120,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { timestampToDate, dateToTimestamp } from '../../utils/timestamp-utils'
+import { useToast } from '../../composables/useToast'
+
+const toast = useToast()
 
 const currentSeconds = ref(Math.floor(Date.now() / 1000))
 const currentMilliseconds = ref(Date.now())
@@ -152,6 +155,7 @@ function toggleTicker() {
 function copyCurrent() {
   navigator.clipboard.writeText(String(currentSeconds.value)).then(() => {
     copied.value = true
+    toast.show(`已复制 Unix 时间戳 (${currentSeconds.value})`)
     setTimeout(() => {
       copied.value = false
     }, 2000)

@@ -133,6 +133,9 @@ import {
   type SqlDialect,
   type SqlKeywordCase
 } from '../../utils/sql-utils'
+import { useToast } from '../../composables/useToast'
+
+const toast = useToast()
 
 const dialect = ref<SqlDialect>('mysql')
 const indent = ref<2 | 4>(2)
@@ -178,6 +181,7 @@ async function copyResult() {
   if (!outputSql.value) return
   await navigator.clipboard.writeText(outputSql.value)
   copiedResult.value = true
+  toast.show('已复制格式化 SQL 到剪贴板！')
   setTimeout(() => (copiedResult.value = false), 1800)
 }
 

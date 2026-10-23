@@ -91,6 +91,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { safeBase64Encode, safeBase64Decode, safeUrlEncode, safeUrlDecode, calculateHashes } from '../../utils/codec-utils'
+import { useToast } from '../../composables/useToast'
+
+const toast = useToast()
 
 const subTabs = [
   { id: 'base64', label: 'Base64 编解码' },
@@ -131,6 +134,7 @@ function copyText(str: string) {
   if (!str) return
   navigator.clipboard.writeText(str).then(() => {
     copied.value = true
+    toast.show('已复制结果到剪贴板！')
     setTimeout(() => {
       copied.value = false
     }, 2000)

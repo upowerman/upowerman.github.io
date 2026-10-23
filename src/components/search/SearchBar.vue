@@ -46,7 +46,14 @@
       >
         <X class="w-4 h-4" />
       </button>
-      <kbd class="hidden md:inline-flex mr-2 px-1.5 py-0.5 rounded border border-slate-300 dark:border-slate-700 text-[10px] font-mono text-slate-400 dark:text-slate-500 shrink-0" aria-hidden="true">Enter</kbd>
+      <div class="hidden sm:inline-flex items-center mr-2 shrink-0 select-none">
+        <kbd
+          class="px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-[10px] font-mono text-slate-400 dark:text-slate-500 shadow-[0_1px_0_rgba(0,0,0,0.06)] dark:shadow-[0_1px_0_rgba(0,0,0,0.4)]"
+          :title="`按下 ${shortcutLabel} 或 / 聚焦搜索`"
+        >
+          {{ query ? 'Enter ↵' : shortcutLabel }}
+        </kbd>
+      </div>
       <button
         type="button"
         @click="executeSearch"
@@ -100,7 +107,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { X } from 'lucide-vue-next'
 import { onClickOutside } from '@vueuse/core'
 import { useAppStore } from '../../stores/useAppStore'
@@ -114,6 +121,43 @@ const isFocused = ref(false)
 const searchContainerRef = ref<HTMLElement | null>(null)
 const suggestionsRef = ref<HTMLElement | null>(null)
 const inputRef = ref<HTMLInputElement | null>(null)
+
+const isMac = computed(() => {
+  if (typeof navigator === 'undefined') return true
+  return /Mac|iPhone|iPod|iPad/.test(navigator.platform || navigator.userAgent)
+})
+const shortcutLabel = computed(() => (isMac.value ? '⌘K' : 'Ctrl+K'))
+
+function onGlobalKeydown(e: KeyboardEvent) {
+  const activeEl = document.activeElement
+  const isInput = activeEl instanceof HTMLInputElement || activeEl instanceof HTMLTextAreaElement || (activeEl as HTMLElement)?.isContentEditable
+
+  // ⌘K 或 Ctrl+K 全局任意处唤醒并聚焦
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault()
+    inputRef.value?.focus()
+    inputRef.value?.select()
+    isFocused.value = true
+    return
+  }
+
+  // 非输入框编辑状态下按 '/' 快捷聚焦
+  if (e.key === '/' && !isInput) {
+    e.preventDefault()
+    inputRef.value?.focus()
+    inputRef.value?.select()
+    isFocused.value = true
+    return
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', onGlobalKeydown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', onGlobalKeydown)
+})
 
 onClickOutside(searchContainerRef, () => {
   isFocused.value = false

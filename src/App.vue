@@ -157,8 +157,9 @@
     <!-- 页脚与隐私声明 -->
     <AppFooter />
 
-    <!-- 模态框容器 -->
+    <!-- 模态框容器与全局反馈 -->
     <AddLinkModal :is-open="isAddLinkOpen" @close="isAddLinkOpen = false" />
+    <GlobalToast />
   </div>
 </template>
 
@@ -187,6 +188,7 @@ import { useAppStore } from './stores/useAppStore'
 import AppHeader from './components/layout/AppHeader.vue'
 import AppFooter from './components/layout/AppFooter.vue'
 import AdBanner from './components/common/AdBanner.vue'
+import GlobalToast from './components/common/GlobalToast.vue'
 import SearchBar from './components/search/SearchBar.vue'
 import NavCard from './components/navigation/NavCard.vue'
 import NavSection from './components/navigation/NavSection.vue'

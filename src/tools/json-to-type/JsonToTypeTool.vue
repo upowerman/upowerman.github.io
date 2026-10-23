@@ -121,6 +121,9 @@ import {
   jsonToPython,
   type TargetTypeLanguage
 } from '../../utils/json-to-type-utils'
+import { useToast } from '../../composables/useToast'
+
+const toast = useToast()
 
 const targetLang = ref<TargetTypeLanguage>('typescript')
 const rootName = ref('UserProfile')
@@ -213,6 +216,7 @@ async function copyResult() {
   if (!outputCode.value) return
   await navigator.clipboard.writeText(outputCode.value)
   copied.value = true
+  toast.show(`已复制 ${targetLang.value.toUpperCase()} 类型声明！`)
   setTimeout(() => (copied.value = false), 1800)
 }
 

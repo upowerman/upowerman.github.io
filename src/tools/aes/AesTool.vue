@@ -266,6 +266,9 @@ import {
   type AesPadding,
   type AesEncoding
 } from '../../utils/aes-utils'
+import { useToast } from '../../composables/useToast'
+
+const toast = useToast()
 
 const action = ref<'encrypt' | 'decrypt'>('encrypt')
 const mode = ref<AesMode>('CBC')
@@ -369,6 +372,7 @@ async function copyResult() {
   if (!outputText.value) return
   await navigator.clipboard.writeText(outputText.value)
   copiedResult.value = true
+  toast.show(action.value === 'encrypt' ? '已复制 AES 密文到剪贴板！' : '已复制解密明文到剪贴板！')
   setTimeout(() => (copiedResult.value = false), 1800)
 }
 
@@ -380,6 +384,7 @@ async function copySnippet() {
   if (!currentSnippet.value) return
   await navigator.clipboard.writeText(currentSnippet.value)
   copiedSnippet.value = true
+  toast.show(`已复制 ${activeLang.value.toUpperCase()} 联调代码！`)
   setTimeout(() => (copiedSnippet.value = false), 1800)
 }
 </script>

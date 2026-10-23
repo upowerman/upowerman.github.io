@@ -70,7 +70,9 @@
 import { ref } from 'vue'
 import { Copy, Trash2, AlertCircle } from 'lucide-vue-next'
 import { formatJson, compressJson } from '../../utils/json-utils'
+import { useToast } from '../../composables/useToast'
 
+const toast = useToast()
 const inputContent = ref('{\n  "title": "DevHub",\n  "description": "专为开发者设计的高频工作台",\n  "version": 1,\n  "offline": true\n}')
 const errorMessage = ref('')
 const copied = ref(false)
@@ -80,6 +82,7 @@ function handleFormat(indent: number = 2) {
   const res = formatJson(inputContent.value, indent)
   if (res.success) {
     inputContent.value = res.result
+    toast.show(`已成功美化排版 (${indent} 空格缩进)`)
   } else {
     errorMessage.value = res.error || 'JSON 解析失败'
   }
@@ -90,6 +93,7 @@ function handleCompress() {
   const res = compressJson(inputContent.value)
   if (res.success) {
     inputContent.value = res.result
+    toast.show('已成功执行单行极简压缩')
   } else {
     errorMessage.value = res.error || 'JSON 解析失败'
   }
@@ -99,6 +103,7 @@ function copyResult() {
   if (!inputContent.value) return
   navigator.clipboard.writeText(inputContent.value).then(() => {
     copied.value = true
+    toast.show('已复制 JSON 内容到剪贴板！')
     setTimeout(() => {
       copied.value = false
     }, 2000)

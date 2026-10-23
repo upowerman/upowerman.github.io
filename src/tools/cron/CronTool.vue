@@ -55,6 +55,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { describeCron, nextRuns } from '../../utils/cron-utils'
+import { useToast } from '../../composables/useToast'
+
+const toast = useToast()
 
 const presets = [
   { label: '每分钟', expr: '* * * * *' },
@@ -76,6 +79,8 @@ function pad(n: number) {
 }
 
 function copy(s: string) {
-  navigator.clipboard.writeText(s)
+  navigator.clipboard.writeText(s).then(() => {
+    toast.show(`已复制 Cron 表达式: ${s}`)
+  })
 }
 </script>

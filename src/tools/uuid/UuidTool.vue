@@ -69,6 +69,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { generateUuids, formatUuid } from '../../utils/uuid-utils'
+import { useToast } from '../../composables/useToast'
+
+const toast = useToast()
 
 const version = ref<'v4' | 'v7'>('v4')
 const count = ref(10)
@@ -89,6 +92,7 @@ function generate() {
 function copyOne(u: string) {
   navigator.clipboard.writeText(u).then(() => {
     copied.value = u
+    toast.show(`已复制 UUID: ${u.slice(0, 8)}...`)
     setTimeout(() => (copied.value = ''), 1500)
   })
 }
@@ -96,6 +100,7 @@ function copyOne(u: string) {
 function copyAll() {
   navigator.clipboard.writeText(list.value.join('\n')).then(() => {
     copiedAll.value = true
+    toast.show(`已复制全部 ${list.value.length} 个 UUID！`)
     setTimeout(() => (copiedAll.value = false), 1500)
   })
 }

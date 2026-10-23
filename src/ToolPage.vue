@@ -2,15 +2,32 @@
   <div class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors selection:bg-primary-500 selection:text-white">
     <AppHeader tool-mode />
 
-    <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-8">
-      <!-- 面包屑 -->
-      <nav aria-label="面包屑" class="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 mb-3">
-        <a href="/" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">DevHub 首页</a>
-        <span aria-hidden="true">/</span>
-        <a href="/#tools" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">开发者工具箱</a>
-        <span aria-hidden="true">/</span>
-        <span class="text-slate-700 dark:text-slate-300 font-medium">{{ tool?.name }}</span>
-      </nav>
+    <main
+      :class="[
+        'flex-1 w-full mx-auto px-4 sm:px-6 py-8 transition-all duration-300 ease-in-out',
+        isWide ? 'max-w-7xl' : 'max-w-4xl'
+      ]"
+    >
+      <!-- 面包屑与视图宽度切换 -->
+      <div class="flex items-center justify-between mb-3">
+        <nav aria-label="面包屑" class="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+          <a href="/" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">DevHub 首页</a>
+          <span aria-hidden="true">/</span>
+          <a href="/#tools" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">开发者工具箱</a>
+          <span aria-hidden="true">/</span>
+          <span class="text-slate-700 dark:text-slate-300 font-medium">{{ tool?.name }}</span>
+        </nav>
+
+        <button
+          type="button"
+          @click="toggleWide"
+          class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-slate-600 dark:text-slate-300 transition-all shadow-xs"
+          :title="isWide ? '切换至紧凑宽度' : '切换至宽屏工作台'"
+        >
+          <component :is="isWide ? Minimize2 : Maximize2" class="w-3.5 h-3.5" />
+          <span class="hidden sm:inline">{{ isWide ? '紧凑视图' : '宽屏工作台' }}</span>
+        </button>
+      </div>
 
       <!-- 标题与简介 -->
       <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
@@ -87,15 +104,35 @@
     </main>
 
     <AppFooter />
+    <GlobalToast />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { FileJson, Clock, KeyRound, Binary, Regex, CalendarClock, Fingerprint, Palette, ShieldCheck, CaseUpper, Database, Terminal, GitCompare, Code2, Wrench } from 'lucide-vue-next'
+import { ref, computed } from 'vue'
+import {
+  FileJson,
+  Clock,
+  KeyRound,
+  Binary,
+  Regex,
+  CalendarClock,
+  Fingerprint,
+  Palette,
+  ShieldCheck,
+  CaseUpper,
+  Database,
+  Terminal,
+  GitCompare,
+  Code2,
+  Wrench,
+  Maximize2,
+  Minimize2
+} from 'lucide-vue-next'
 import AppHeader from './components/layout/AppHeader.vue'
 import AppFooter from './components/layout/AppFooter.vue'
 import AdBanner from './components/common/AdBanner.vue'
+import GlobalToast from './components/common/GlobalToast.vue'
 import { useAppStore } from './stores/useAppStore'
 import { toolPageContent } from './data/tool-pages'
 import { toolComponents } from './data/tool-components'
@@ -106,6 +143,22 @@ const props = defineProps<{
 }>()
 
 const store = useAppStore()
+
+const isWide = ref(false)
+try {
+  isWide.value = localStorage.getItem('devhub_tool_wide_mode') === 'true'
+} catch {
+  /* ignore */
+}
+
+function toggleWide() {
+  isWide.value = !isWide.value
+  try {
+    localStorage.setItem('devhub_tool_wide_mode', String(isWide.value))
+  } catch {
+    /* ignore */
+  }
+}
 
 const toolIcons: Record<string, any> = { FileJson, Clock, KeyRound, Binary, Regex, CalendarClock, Fingerprint, Palette, ShieldCheck, CaseUpper, Database, Terminal, GitCompare, Code2 }
 
