@@ -61,7 +61,7 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5">
           <a
             v-for="tool in store.defaultToolsRegistry"
             :key="tool.id"
@@ -169,7 +169,8 @@ import {
   Clock,
   KeyRound,
   Binary,
-  Regex
+  Regex,
+  CalendarClock
 } from 'lucide-vue-next'
 import { useAppStore } from './stores/useAppStore'
 import AppHeader from './components/layout/AppHeader.vue'
@@ -191,7 +192,8 @@ const toolIcons: Record<string, any> = {
   Clock,
   KeyRound,
   Binary,
-  Regex
+  Regex,
+  CalendarClock
 }
 
 function getToolIcon(iconName: string) {

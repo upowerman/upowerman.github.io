@@ -40,5 +40,13 @@ export const defaultToolsRegistry: ToolItem[] = [
     icon: 'Regex',
     category: 'regex',
     keywords: ['regex', 'regexp', 'match', '正则', '表达式', '测试']
+  },
+  {
+    id: 'tool-cron',
+    name: 'Cron 表达式工具',
+    desc: '标准 5/6 位 Cron 解析、中文描述与下次执行时间计算',
+    icon: 'CalendarClock',
+    category: 'schedule',
+    keywords: ['cron', 'crontab', '定时任务', 'quartz', '调度', '表达式', '下一次执行']
   }
 ]

@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { toolPath, toolIdFromPath, legacyToolRedirect, TOOL_ROUTES } from '../src/utils/tool-routes'
+import { defaultToolsRegistry } from '../src/data/tools-registry'
 
 describe('toolPath', () => {
   it('maps registry ids to /tools/<slug>/', () => {
@@ -39,7 +40,10 @@ describe('legacyToolRedirect', () => {
 })
 
 describe('TOOL_ROUTES coverage', () => {
-  it('has 5 entries', () => {
-    expect(Object.keys(TOOL_ROUTES)).toHaveLength(5)
+  it('covers every registered tool', () => {
+    expect(Object.keys(TOOL_ROUTES).length).toBe(defaultToolsRegistry.length)
+    for (const t of defaultToolsRegistry) {
+      expect(TOOL_ROUTES[t.id], t.id).toBeTruthy()
+    }
   })
 })

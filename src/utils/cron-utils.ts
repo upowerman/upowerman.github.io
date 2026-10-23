@@ -77,7 +77,7 @@ export function parseCron(expr: string): CronParseResult {
     const r = parseField(fields[i], FIELD_RANGES[i].min, FIELD_RANGES[i].max, FIELD_RANGES[i].name)
     if (r.unsupported) return { valid: false, hasSeconds, unsupported: r.unsupported }
     if (r.error) return { valid: false, hasSeconds, error: r.error }
-    ;(result as Record<string, unknown>)[keys[i]] = r.values
+    ;(result as unknown as Record<string, unknown>)[keys[i]] = r.values
   }
   return result
 }

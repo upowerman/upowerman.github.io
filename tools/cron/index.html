@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      ;(function () {
+        try {
+          var s = localStorage.getItem('vueuse-color-scheme')
+          var dark = s === 'dark' || ((!s || s === 'auto') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          if (dark) document.documentElement.classList.add('dark')
+        } catch (e) {}
+      })()
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cron 表达式在线生成与解析工具 - 下次执行时间计算 | DevHub</title>
+
+    <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
+    <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
+
+    <meta name="description" content="免费好用的在线 Cron 表达式工具:输入 crontab 表达式即时生成中文语义解读,计算未来 5 次执行时间,内置每分钟/每小时/工作日/每周/每月常用模板。纯前端本地计算,数据不上报。" />
+    <meta name="keywords" content="cron表达式,cron解析,crontab,定时任务,quartz cron,下一次执行时间,cron在线生成,DevHub" />
+    <meta name="author" content="upowerman" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yunitytech.top/tools/cron/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Cron 表达式在线生成与解析工具 - 下次执行时间计算 | DevHub" />
+    <meta property="og:description" content="输入 crontab 表达式即时生成中文语义解读,计算未来 5 次执行时间,内置常用模板。" />
+    <meta property="og:url" content="https://yunitytech.top/tools/cron/" />
+    <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cron 表达式在线生成与解析工具 | DevHub" />
+    <meta name="twitter:description" content="输入 crontab 表达式即时生成中文语义解读,计算未来 5 次执行时间。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebApplication",
+            "@id": "https://yunitytech.top/tools/cron/#webapp",
+            "name": "DevHub Cron 表达式工具",
+            "url": "https://yunitytech.top/tools/cron/",
+            "description": "纯前端 Cron 表达式解析、中文语义描述与下次执行时间计算工具",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "All",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yunitytech.top/tools/cron/#breadcrumb",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "DevHub 首页", "item": "https://yunitytech.top/" },
+              { "@type": "ListItem", "position": 2, "name": "开发者工具箱", "item": "https://yunitytech.top/#tools" },
+              { "@type": "ListItem", "position": 3, "name": "Cron 表达式工具", "item": "https://yunitytech.top/tools/cron/" }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://yunitytech.top/tools/cron/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Cron 表达式 5 位和 7 位有什么区别?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Linux crontab 使用 5 位(分 时 日 月 周);Quartz 等 Java 调度框架常用 7 位(秒 分 时 日 月 周 年),并在日/周字段扩展了 L(最后)、W(最近工作日)、#(第 n 个周 x)等修饰符。DevHub 支持标准 5 位与含秒 6 位语法,Quartz 特有修饰符会明确提示暂不支持,避免给出错误结果。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Cron 里的 ? 和 * 有什么区别?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "两者都表示\"任意\",但 ? 只能用在日和周字段,用于在另一个字段已被指定时避免歧义(如每月 1 号执行 0 0 1 * ?)。标准 Linux crontab 不支持 ?,那两个位置用 * 即可。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Cron 任务用的是服务器时区还是 UTC?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "cron 守护进程按服务器本地时区匹配字段。容器化部署的服务器常默认 UTC,导致任务比预期早 8 小时(东八区视角)。排查时先 date 确认服务器时区,或在容器中设置 TZ=Asia/Shanghai。本工具按你的浏览器本地时区计算下次执行时间。"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>Cron 表达式工具</span>
+        </nav>
+
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Cron 表达式在线生成与解析工具 (Cron Expression Parser)</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          输入标准 5 位(分 时 日 月 周)或 6 位(含秒)Cron 表达式,即时获得中文语义描述与未来 5 次执行时间。支持 *、*/n、区间、列表等全部常用语法,100% 浏览器本地计算。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">Cron 五个字段速查</h2>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid #e2e8f0; color: #475569;">
+                <th style="padding: 8px 4px;">字段</th>
+                <th style="padding: 8px 4px;">允许值</th>
+                <th style="padding: 8px 4px;">允许的特殊字符</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 8px 4px; font-weight: 600;">分钟</td><td style="padding: 8px 4px;">0-59</td><td style="padding: 8px 4px; font-family: monospace;">* / - ,</td></tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 8px 4px; font-weight: 600;">小时</td><td style="padding: 8px 4px;">0-23</td><td style="padding: 8px 4px; font-family: monospace;">* / - ,</td></tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 8px 4px; font-weight: 600;">日(月份中的天)</td><td style="padding: 8px 4px;">1-31</td><td style="padding: 8px 4px; font-family: monospace;">* / - ,</td></tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 8px 4px; font-weight: 600;">月</td><td style="padding: 8px 4px;">1-12</td><td style="padding: 8px 4px; font-family: monospace;">* / - ,</td></tr>
+              <tr><td style="padding: 8px 4px; font-weight: 600;">星期(0 和 7 都表示周日)</td><td style="padding: 8px 4px;">0-7</td><td style="padding: 8px 4px; font-family: monospace;">* / - ,</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: Cron 表达式 5 位和 7 位有什么区别?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: Linux crontab 使用 5 位;Quartz 等 Java 调度框架常用 7 位(秒 分 时 日 月 周 年),并扩展了 L、W、# 修饰符。DevHub 支持标准 5 位与含秒 6 位语法,Quartz 特有修饰符会明确提示暂不支持。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: Cron 里的 ? 和 * 有什么区别?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 两者都表示"任意",但 ? 只能用在日和周字段,用于在另一个字段已被指定时避免歧义。标准 Linux crontab 不支持 ?,那两个位置用 * 即可。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: Cron 任务用的是服务器时区还是 UTC?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: cron 守护进程按服务器本地时区匹配字段。容器化部署常默认 UTC,导致任务比预期早 8 小时(东八区视角)。本工具按浏览器本地时区计算下次执行时间。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
+    <noscript>
+      <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+        <h1>Cron 表达式在线生成与解析工具</h1>
+        <p>输入 crontab 表达式即时生成中文语义解读,计算未来 5 次执行时间,内置常用模板。100% 浏览器本地计算。</p>
+        <p><a href="/">返回 DevHub 首页</a></p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -4,11 +4,13 @@ import TimestampTool from '../tools/timestamp/TimestampTool.vue'
 import JwtTool from '../tools/jwt/JwtTool.vue'
 import CodecTool from '../tools/codec/CodecTool.vue'
 import RegexTool from '../tools/regex/RegexTool.vue'
+import CronTool from '../tools/cron/CronTool.vue'
 
 export const toolComponents: Record<string, Component> = {
   'tool-json': JsonTool,
   'tool-timestamp': TimestampTool,
   'tool-jwt': JwtTool,
   'tool-codec': CodecTool,
-  'tool-regex': RegexTool
+  'tool-regex': RegexTool,
+  'tool-cron': CronTool
 }
