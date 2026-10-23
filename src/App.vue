@@ -28,7 +28,7 @@
               rel="noopener noreferrer"
               class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-primary-500 shadow-sm hover:shadow transition-all group"
             >
-              <SiteIcon :name="item.name" :url="item.url" />
+              <SiteIcon :name="item.name" :url="item.url" :icon="'icon' in item ? item.icon : undefined" />
               <span class="text-xs font-semibold text-slate-700 dark:text-slate-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                 {{ item.name }}
               </span>

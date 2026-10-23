@@ -37,22 +37,32 @@ describe('SiteIcon.vue', () => {
     unmount()
   })
 
-  it('falls back to letter badge when image load fails', async () => {
+  it('uses explicit props.icon directly when provided', () => {
     const { host, unmount } = mountIcon({
-      url: 'https://invalid-non-existent-domain-12345.xyz',
+      url: 'https://start.spring.io',
+      name: 'Spring Initializr',
+      icon: 'https://www.google.com/s2/favicons?domain=spring.io&sz=64'
+    })
+    const img = host.querySelector('img')
+    expect(img?.src).toBe('https://www.google.com/s2/favicons?domain=spring.io&sz=64')
+    unmount()
+  })
+
+  it('falls back to apex domain and then letter badge when image load fails', async () => {
+    const { host, unmount } = mountIcon({
+      url: 'https://invalid-subdomain.non-existent-xyz-12345.xyz',
       name: 'Claude'
     })
     const img = host.querySelector('img')
     expect(img).toBeTruthy()
 
-    // Trigger error on image
-    img?.dispatchEvent(new Event('error'))
-    await nextTick()
-    // If there is a second provider, trigger error again
-    const img2 = host.querySelector('img')
-    if (img2) {
-      img2.dispatchEvent(new Event('error'))
-      await nextTick()
+    // Trigger error on image repeatedly until exhausted
+    for (let i = 0; i < 4; i++) {
+      const el = host.querySelector('img')
+      if (el) {
+        el.dispatchEvent(new Event('error'))
+        await nextTick()
+      }
     }
 
     expect(host.querySelector('img')).toBeNull()

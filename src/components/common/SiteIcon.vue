@@ -29,10 +29,13 @@ const props = defineProps<{
 const hasError = ref(false)
 const providerIndex = ref(0)
 
-const providers = [
-  (domain: string) => `https://www.google.com/s2/favicons?domain=${domain}&sz=64`,
-  (domain: string) => `https://icons.duckduckgo.com/ip3/${domain}.ico`
-]
+function getApexDomain(hostname: string): string {
+  const parts = hostname.split('.')
+  if (parts.length > 2) {
+    return parts.slice(-2).join('.')
+  }
+  return hostname
+}
 
 // favicon 源变化时重置错误态,避免残留字母徽章
 watch(() => [props.url, props.icon], () => {
@@ -45,8 +48,16 @@ const faviconUrl = computed(() => {
   if (!props.url) return ''
   try {
     const domain = new URL(props.url).hostname
-    const getUrl = providers[providerIndex.value] || providers[0]
-    return getUrl(domain)
+    const apex = getApexDomain(domain)
+    const list: string[] = [
+      `https://www.google.com/s2/favicons?domain=${domain}&sz=64`
+    ]
+    if (apex !== domain) {
+      list.push(`https://www.google.com/s2/favicons?domain=${apex}&sz=64`)
+    }
+    list.push(`https://icons.duckduckgo.com/ip3/${domain}.ico`)
+
+    return list[providerIndex.value] || list[0]
   } catch {
     return ''
   }
@@ -69,9 +80,20 @@ const badgeColor = computed(() => {
 })
 
 function handleError() {
-  if (providerIndex.value < providers.length - 1) {
-    providerIndex.value++
-  } else {
+  if (!props.url) {
+    hasError.value = true
+    return
+  }
+  try {
+    const domain = new URL(props.url).hostname
+    const apex = getApexDomain(domain)
+    const maxIndex = apex !== domain ? 2 : 1
+    if (providerIndex.value < maxIndex) {
+      providerIndex.value++
+    } else {
+      hasError.value = true
+    }
+  } catch {
     hasError.value = true
   }
 }

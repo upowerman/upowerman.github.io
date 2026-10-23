@@ -105,6 +105,7 @@ export const defaultNavCategories: NavCategory[] = [
         name: 'Spring Initializr',
         url: 'https://start.spring.io',
         desc: 'Spring Boot 工程脚手架快速生成',
+        icon: 'https://www.google.com/s2/favicons?domain=spring.io&sz=64',
         categoryId: 'backend',
         tags: ['java', 'spring', 'boot']
       },
