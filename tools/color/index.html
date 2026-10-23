@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      ;(function () {
+        try {
+          var s = localStorage.getItem('vueuse-color-scheme')
+          var dark = s === 'dark' || ((!s || s === 'auto') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          if (dark) document.documentElement.classList.add('dark')
+        } catch (e) {}
+      })()
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>颜色格式在线转换 - HEX/RGB/HSL 互转与对比度检查 | DevHub</title>
+
+    <meta name="google-site-verification" content="hQ9erPqBH30Xp3w2vhYCbv0J6926dausslpRig-8S8I" />
+    <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
+
+    <meta name="description" content="在线颜色转换器:输入 HEX、RGB 或 HSL 即时互转三种格式并实时预览,自动计算对黑/白文本的 WCAG 对比度比值,标注 AA/AAA 达标状态。纯前端本地计算。" />
+    <meta name="keywords" content="颜色转换,hex转rgb,rgb转hsl,hsl转hex,颜色对比度,wcag对比度,色值转换,DevHub" />
+    <meta name="author" content="upowerman" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yunitytech.top/tools/color/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="颜色格式在线转换 - HEX/RGB/HSL 互转与对比度检查 | DevHub" />
+    <meta property="og:description" content="HEX/RGB/HSL 即时互转与实时预览,自动计算 WCAG 黑白对比度。" />
+    <meta property="og:url" content="https://yunitytech.top/tools/color/" />
+    <meta property="og:site_name" content="DevHub" />
+    <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="颜色格式在线转换与对比度检查 | DevHub" />
+    <meta name="twitter:description" content="HEX/RGB/HSL 即时互转与实时预览,自动计算 WCAG 对比度。" />
+    <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebApplication",
+            "@id": "https://yunitytech.top/tools/color/#webapp",
+            "name": "DevHub 颜色转换器",
+            "url": "https://yunitytech.top/tools/color/",
+            "description": "纯前端 HEX/RGB/HSL 颜色互转与 WCAG 对比度检查工具",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "All",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://yunitytech.top/tools/color/#breadcrumb",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "DevHub 首页", "item": "https://yunitytech.top/" },
+              { "@type": "ListItem", "position": 2, "name": "开发者工具箱", "item": "https://yunitytech.top/#tools" },
+              { "@type": "ListItem", "position": 3, "name": "颜色转换器", "item": "https://yunitytech.top/tools/color/" }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://yunitytech.top/tools/color/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "HSL 的 H、S、L 分别控制什么?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "H(Hue 色相)是色环角度:0 红、120 绿、240 蓝;S(Saturation 饱和度)越高颜色越纯,0% 即灰色;L(Lightness 亮度)0% 是黑、100% 是白、50% 是纯色。想要\"同一颜色的浅色版\",只改 L 就行——这是它比 RGB 直观的原因。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "正文文字的对比度要达到多少才合格?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "WCAG 2.1 标准:正常字号正文至少 4.5:1(AA),大字号(≥18pt 或 14pt 粗体)至少 3:1,增强级 AAA 为 7:1。本工具自动计算你输入的颜色对白色与黑色文本的比值并标注达标状态。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "为什么设计系统常用 HSL 派生色板?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "保持 H 与 S 不变、按档位递变 L,即可得到一组视觉上同族、明暗有序的色阶(如 50-950),这正是 Tailwind 等设计系统的调色板生成方式。用 RGB 手工派生很难保持这种规律感。"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen antialiased transition-colors duration-200">
+    <div id="app">
+      <!-- 搜索引擎预渲染静态语义内容 -->
+      <article style="max-width: 900px; margin: 0 auto; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;">
+        <nav style="font-size: 13px; color: #64748b; margin-bottom: 16px;">
+          <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>颜色转换器</span>
+        </nav>
+
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">颜色格式在线转换与对比度检查 (Color Converter)</h1>
+        <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
+          输入任意一种格式(#hex、rgb()、hsl())即时得到三种格式实时互转结果与色彩预览,并自动计算该颜色对黑/白文本的 WCAG 对比度比值与 AA/AAA 达标状态。
+        </p>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">常见颜色格式速查</h2>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid #e2e8f0; color: #475569;">
+                <th style="padding: 8px 4px;">格式</th>
+                <th style="padding: 8px 4px;">形式</th>
+                <th style="padding: 8px 4px;">示例</th>
+                <th style="padding: 8px 4px;">适用场景</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 8px 4px; font-family: monospace; font-weight: 600;">HEX</td><td style="padding: 8px 4px;">#RRGGBB 十六进制</td><td style="padding: 8px 4px; font-family: monospace; color: #0369a1;">#16a34a</td><td style="padding: 8px 4px; color: #475569;">CSS / 设计软件默认,最短书写</td></tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 8px 4px; font-family: monospace; font-weight: 600;">RGB</td><td style="padding: 8px 4px;">红绿蓝各 0-255</td><td style="padding: 8px 4px; font-family: monospace; color: #0369a1;">rgb(22, 163, 74)</td><td style="padding: 8px 4px; color: #475569;">需要单独操纵通道(渐变、滤镜)</td></tr>
+              <tr><td style="padding: 8px 4px; font-family: monospace; font-weight: 600;">HSL</td><td style="padding: 8px 4px;">色相 0-360 + 饱和度/亮度 %</td><td style="padding: 8px 4px; font-family: monospace; color: #0369a1;">hsl(142, 76%, 36%)</td><td style="padding: 8px 4px; color: #475569;">调明暗/饱和最直观,主题色派生</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: HSL 的 H、S、L 分别控制什么?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: H 是色环角度(0 红、120 绿、240 蓝),S 是饱和度,L 是亮度。想要同一颜色的浅色版只需调 L,比 RGB 直观得多。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 正文文字的对比度要达到多少才合格?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: WCAG 2.1:正常正文至少 4.5:1(AA),大字号至少 3:1,增强级 AAA 为 7:1。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么设计系统常用 HSL 派生色板?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 固定 H/S 递变 L 即可得到同族明暗有序的色阶(如 50-950),Tailwind 等设计系统的调色板正是这样生成的。</p>
+          </div>
+        </section>
+
+        <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
+            <a href="/tools/uuid/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">UUID 生成器</a>
+            <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
+          </div>
+        </section>
+      </article>
+    </div>
+    <noscript>
+      <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+        <h1>颜色格式在线转换与对比度检查</h1>
+        <p>HEX/RGB/HSL 即时互转与实时预览,自动计算 WCAG 黑白对比度比值,纯前端本地计算。</p>
+        <p><a href="/">返回 DevHub 首页</a></p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

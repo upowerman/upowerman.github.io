@@ -56,5 +56,13 @@ export const defaultToolsRegistry: ToolItem[] = [
     icon: 'Fingerprint',
     category: 'id',
     keywords: ['uuid', 'guid', 'v4', 'v7', '生成器', '唯一 id', '批量']
+  },
+  {
+    id: 'tool-color',
+    name: '颜色转换器',
+    desc: 'HEX/RGB/HSL 实时互转与 WCAG 黑白对比度达标检查',
+    icon: 'Palette',
+    category: 'design',
+    keywords: ['颜色转换', 'hex', 'rgb', 'hsl', '对比度', '色值', 'color']
   }
 ]

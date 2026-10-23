@@ -6,6 +6,7 @@ import CodecTool from '../tools/codec/CodecTool.vue'
 import RegexTool from '../tools/regex/RegexTool.vue'
 import CronTool from '../tools/cron/CronTool.vue'
 import UuidTool from '../tools/uuid/UuidTool.vue'
+import ColorTool from '../tools/color/ColorTool.vue'
 
 export const toolComponents: Record<string, Component> = {
   'tool-json': JsonTool,
@@ -14,5 +15,6 @@ export const toolComponents: Record<string, Component> = {
   'tool-codec': CodecTool,
   'tool-regex': RegexTool,
   'tool-cron': CronTool,
-  'tool-uuid': UuidTool
+  'tool-uuid': UuidTool,
+  'tool-color': ColorTool
 }
