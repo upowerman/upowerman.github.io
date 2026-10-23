@@ -193,16 +193,17 @@
         <section style="margin-bottom: 32px;">
           <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
           <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么测试大文本时有时页面会卡死？</h3>
-            <p style="font-size: 14px; color: #64748b;">A: 复杂的贪婪正则在遇到长文本时容易发生灾难性回溯。DevHub 增加了 200ms 防抖响应并对极长文本进行分块保护，杜绝浏览器假死。</p>
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 常用的正则表达式修饰符（Flags）代表什么？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: g (Global) 代表全局匹配，找到目标字符串中所有符合条件的结果而非在命中首项后退出；i (Ignore Case) 代表忽略英文大小写；m (Multiline) 代表多行匹配，让 ^ 和 $ 可以分别定位每行的行首与行尾；s (Dot All) 允许点号 '.' 匹配换行符。</p>
           </div>
           <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 如何在匹配时不仅获取全字符串，还获取捕获分组？</h3>
-            <p style="font-size: 14px; color: #64748b;">A: 当去掉修饰符中的全局标记 g 时，RegExp.exec 会输出完整的捕获分组详情（$1, $2 等）。</p>
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 什么是正则表达式拒绝服务攻击 (ReDoS)？如何预防？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 当正则表达式包含大量嵌套分组、重叠交替以及贪婪量词（例如 (a+)+$）时，面对精心构造的不匹配长输入，正则引擎会发生天文数字级别的灾难性回溯（Catastrophic Backtracking），导致 CPU 满载假死。DevHub 通过文本长度截断与最多循环限制进行安全防死锁。</p>
           </div>
-        </section>
-
-        
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 如何用正则准确匹配包含汉字中文字符的内容？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 基本中文字符的 Unicode 范围为 [\u4e00-\u9fa5]。若要匹配全汉字字符串，可使用 ^[\u4e00-\u9fa5]+$；在现代 ES2018+ 还可以使用 Unicode 属性转义 /\p{Script=Han}+/u。</p>
+          </div>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 贪婪匹配和非贪婪匹配有什么区别?</h3>
             <p style="font-size: 14px; color: #64748b;">A: 量词(*、+、?、{n,m})默认贪婪,尽量多吃字符;后跟 ? 变为非贪婪,尽量少吃。例如对 "a"b"c",/".*"/ 一口吞到底,而 /".*?"/ 依次匹配出 "a" 与 "c"。提取成对符号之间的内容时几乎总应使用非贪婪。</p>
@@ -211,13 +212,17 @@
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 正则的前瞻断言 (?=) 和 (?!) 是什么?</h3>
             <p style="font-size: 14px; color: #64748b;">A: (?=x) 表示"此处后面必须是 x"但不消耗字符;(?!x) 表示"此处后面不能是 x"。常用于"后面跟着单位的数字""不含某词的行"等场景。ES2018 起还支持后行断言 (?&lt;=) 与 (?&lt;!)。</p>
           </div>
+        
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">
             <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
-            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
-            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 解码器</a>
             <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
+            <a href="/tools/uuid/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">UUID 生成器</a>
+            <a href="/tools/color/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">颜色转换器</a>
             <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
           </div>
         </section>

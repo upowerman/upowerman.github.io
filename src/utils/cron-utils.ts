@@ -127,7 +127,7 @@ export function describeCron(expr: string): { valid: boolean; text?: string; err
   const secText = p.hasSeconds ? `, 秒: ${rangeText(sec, 0, 59)}` : ''
   return {
     valid: true,
-    text: `分钟: ${rangeText(min, 0, 59)}, 小时: ${rangeText(hour, 0, 23)}, 日: ${rangeText(dom, 1, 31)}, 月: ${rangeText(mon, 1, 12)}, 周: ${rangeText(dow, 0, 7)}${secText}`
+    text: `分钟: ${rangeText(min, 0, 59)}, 小时: ${rangeText(hour, 0, 23)}, 日: ${rangeText(dom, 1, 31)}, 月: ${rangeText(mon, 1, 12)}, 周: ${rangeText(dow, 0, 6)}${secText}`
   }
 }
 
@@ -144,18 +144,41 @@ function matches(d: Date, p: CronParseResult): boolean {
   return domOk && dowOk
 }
 
+/** 日级预扫:该日期的月/日/周字段是否可能匹配(不含时分秒) */
+function matchesDay(d: Date, p: CronParseResult): boolean {
+  if (!p.months!.includes(d.getMonth() + 1)) return false
+  const domAll = p.daysOfMonth!.length === 31
+  const dowAll = p.daysOfWeek!.length === 7
+  const domOk = p.daysOfMonth!.includes(d.getDate())
+  const dowOk = p.daysOfWeek!.includes(d.getDay())
+  if (!domAll && !dowAll) return domOk || dowOk
+  return domOk && dowOk
+}
+
 export function nextRuns(expr: string, count = 5, from: Date = new Date()): Date[] {
   const p = parseCron(expr)
   if (!p.valid) return []
   const out: Date[] = []
-  const stepMs = p.hasSeconds ? 1000 : 60000
-  // 从下一个最小粒度边界开始搜索(366 天为界)
   const unit = p.hasSeconds ? 1000 : 60000
-  let t = new Date(Math.floor(from.getTime() / unit) * unit + unit)
-  const limit = 366 * 24 * 60 * (p.hasSeconds ? 60 : 1)
-  for (let i = 0; i < limit && out.length < count; i++) {
-    if (matches(t, p)) out.push(new Date(t))
-    t = new Date(t.getTime() + stepMs)
+  const stepsPerDay = 86400000 / unit
+
+  // 从 from 之后的最小粒度边界开始,按天预扫避免稀疏表达式长循环卡顿
+  let dayStart = new Date(from.getFullYear(), from.getMonth(), from.getDate())
+  const fromMs = from.getTime()
+
+  for (let day = 0; day < 367 && out.length < count; day++) {
+    if (matchesDay(dayStart, p)) {
+      let t = dayStart.getTime()
+      if (t < fromMs) t = Math.floor(fromMs / unit) * unit + unit // 首日从 from 的下一个边界起
+      const dayEnd = dayStart.getTime() + 86400000
+      for (let s = 0; s < stepsPerDay && out.length < count; s++) {
+        if (t >= dayEnd) break
+        const d = new Date(t)
+        if (matches(d, p)) out.push(d)
+        t += unit
+      }
+    }
+    dayStart = new Date(dayStart.getFullYear(), dayStart.getMonth(), dayStart.getDate() + 1)
   }
   return out
 }

@@ -135,26 +135,27 @@
           <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: Cron 表达式 5 位和 7 位有什么区别?</h3>
-            <p style="font-size: 14px; color: #64748b;">A: Linux crontab 使用 5 位;Quartz 等 Java 调度框架常用 7 位(秒 分 时 日 月 周 年),并扩展了 L、W、# 修饰符。DevHub 支持标准 5 位与含秒 6 位语法,Quartz 特有修饰符会明确提示暂不支持。</p>
+            <p style="font-size: 14px; color: #64748b;">A: Linux crontab 使用 5 位(分 时 日 月 周);Quartz 等 Java 调度框架常用 7 位(秒 分 时 日 月 周 年),并在日/周字段扩展了 L(最后)、W(最近工作日)、#(第 n 个周 x)等修饰符。DevHub 支持标准 5 位与含秒 6 位语法,Quartz 特有修饰符会明确提示暂不支持,避免给出错误结果。</p>
           </div>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: Cron 里的 ? 和 * 有什么区别?</h3>
-            <p style="font-size: 14px; color: #64748b;">A: 两者都表示"任意",但 ? 只能用在日和周字段,用于在另一个字段已被指定时避免歧义。标准 Linux crontab 不支持 ?,那两个位置用 * 即可。</p>
+            <p style="font-size: 14px; color: #64748b;">A: 两者都表示"任意",但 ? 只能用在日和周字段,用于在另一个字段已被指定时避免歧义(如每月 1 号执行 0 0 1 * ?)。标准 Linux crontab 不支持 ?,那两个位置用 * 即可。</p>
           </div>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: Cron 任务用的是服务器时区还是 UTC?</h3>
-            <p style="font-size: 14px; color: #64748b;">A: cron 守护进程按服务器本地时区匹配字段。容器化部署常默认 UTC,导致任务比预期早 8 小时(东八区视角)。本工具按浏览器本地时区计算下次执行时间。</p>
+            <p style="font-size: 14px; color: #64748b;">A: cron 守护进程按服务器本地时区匹配字段。容器化部署的服务器常默认 UTC,导致任务比预期早 8 小时(东八区视角)。排查时先 date 确认服务器时区,或在容器中设置 TZ=Asia/Shanghai。本工具按你的浏览器本地时区计算下次执行时间。</p>
           </div>
-        </section>
-
+        
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">
             <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
-            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
-            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 解码器</a>
             <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
             <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/tools/uuid/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">UUID 生成器</a>
+            <a href="/tools/color/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">颜色转换器</a>
             <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
           </div>
         </section>

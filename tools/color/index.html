@@ -134,24 +134,25 @@
           <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: HSL 的 H、S、L 分别控制什么?</h3>
-            <p style="font-size: 14px; color: #64748b;">A: H 是色环角度(0 红、120 绿、240 蓝),S 是饱和度,L 是亮度。想要同一颜色的浅色版只需调 L,比 RGB 直观得多。</p>
+            <p style="font-size: 14px; color: #64748b;">A: H(Hue 色相)是色环角度:0 红、120 绿、240 蓝;S(Saturation 饱和度)越高颜色越纯,0% 即灰色;L(Lightness 亮度)0% 是黑、100% 是白、50% 是纯色。想要"同一颜色的浅色版",只改 L 就行——这是它比 RGB 直观的原因。</p>
           </div>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 正文文字的对比度要达到多少才合格?</h3>
-            <p style="font-size: 14px; color: #64748b;">A: WCAG 2.1:正常正文至少 4.5:1(AA),大字号至少 3:1,增强级 AAA 为 7:1。</p>
+            <p style="font-size: 14px; color: #64748b;">A: WCAG 2.1 标准:正常字号正文至少 4.5:1(AA),大字号(≥18pt 或 14pt 粗体)至少 3:1,增强级 AAA 为 7:1。本工具自动计算你输入的颜色对白色与黑色文本的比值并标注达标状态。</p>
           </div>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么设计系统常用 HSL 派生色板?</h3>
-            <p style="font-size: 14px; color: #64748b;">A: 固定 H/S 递变 L 即可得到同族明暗有序的色阶(如 50-950),Tailwind 等设计系统的调色板正是这样生成的。</p>
+            <p style="font-size: 14px; color: #64748b;">A: 保持 H 与 S 不变、按档位递变 L,即可得到一组视觉上同族、明暗有序的色阶(如 50-950),这正是 Tailwind 等设计系统的调色板生成方式。用 RGB 手工派生很难保持这种规律感。</p>
           </div>
-        </section>
-
+        
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">
             <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
-            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 解码器</a>
             <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
             <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
             <a href="/tools/uuid/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">UUID 生成器</a>
             <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>

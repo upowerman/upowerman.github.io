@@ -45,6 +45,10 @@
         </li>
       </ol>
     </div>
+
+    <div v-else-if="result.valid" class="p-3 text-xs rounded-xl bg-slate-100 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400">
+      未来一年内没有匹配的执行时间(例如日期如 2 月 30 日不存在,或组合过于苛刻)。
+    </div>
   </div>
 </template>
 

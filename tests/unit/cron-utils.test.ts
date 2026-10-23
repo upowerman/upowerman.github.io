@@ -86,4 +86,14 @@ describe('nextRuns', () => {
   it('returns empty for invalid expr', () => {
     expect(nextRuns('bad', 3)).toEqual([])
   })
+  it('finds Feb 29 within the window (leap year)', () => {
+    // 2027-06-01 + 366 天覆盖 2028-02-29
+    const runs = nextRuns('0 0 0 29 2 *', 1, new Date(2027, 5, 1))
+    expect(runs).toHaveLength(1)
+    expect(runs[0].getMonth()).toBe(1)
+    expect(runs[0].getDate()).toBe(29)
+  })
+  it('returns empty fast when the date never exists (Feb 30)', () => {
+    expect(nextRuns('0 0 0 30 2 *', 1, new Date(2027, 5, 1))).toEqual([])
+  })
 })

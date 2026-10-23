@@ -195,16 +195,17 @@
         <section style="margin-bottom: 32px;">
           <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
           <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么在 DevHub 解码 JWT 是绝对安全的？</h3>
-            <p style="font-size: 14px; color: #64748b;">A: 纯前端解码仅调用浏览器内置的 Base64 算法与 JSON.parse，网络抓包不会产生任何发送 Token 的请求，无中间人监听风险。</p>
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 在线使用 JWT 解码器解析生产环境 Token 安全吗？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 使用常规服务端解析工具存在安全合规隐患。DevHub JWT 解码器基于纯前端浏览器本地算法，使用 UTF-8 安全 Base64URL 纯客户端解码，没有任何后台接口接收你的 Token，可放心解析含用户鉴权信息的测试与生产 Token。</p>
           </div>
           <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: JWT 的 Payload 可以加密敏感密码吗？</h3>
-            <p style="font-size: 14px; color: #64748b;">A: 切勿在 JWT Payload 存放明文密码！因为 Payload 仅做了 Base64URL 编码，任何人拿到均可直接解码读取内容，它仅保证防篡改而非内容保密。</p>
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: JWT 结构中的三部分分别代表什么？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: JWT 采用以句号 '.' 分隔的三段结构：第一段为 Header（头部，声明签名算法如 HS256/RS256 及令牌类型）；第二段为 Payload（有效载荷，存放身份 Claims 与自定义业务属性）；第三段为 Signature（数字签名，由前两段结合服务端私钥防篡改生成）。</p>
           </div>
-        </section>
-
-        
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 如何通过 exp 字段判断 JWT 是否过期？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: exp 是 JWT 标准声明中的 Expiration Time（过期时间戳，以秒为单位）。DevHub 会自动将 exp * 1000 转换为可读的北京时间，并与本地当前系统时间对比：当当前时间大于 exp 时自动预警已过期。</p>
+          </div>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: access token 和 refresh token 应该怎么设计有效期?</h3>
             <p style="font-size: 14px; color: #64748b;">A: 常见实践:access token 短有效期(15 分钟~2 小时)随请求携带;refresh token 长有效期(7~30 天)只在刷新端点使用且可服务端吊销。这样即使 access token 泄露,攻击窗口也很短,兼顾了 JWT 无状态与服务端可控性。</p>
@@ -213,13 +214,17 @@
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: JWT 为什么很难做到立即注销?</h3>
             <p style="font-size: 14px; color: #64748b;">A: JWT 的签名校验不依赖服务端状态,token 在 exp 前天然有效。要支持立即注销必须引入状态:例如在 Redis 维护 jti 黑名单直至过期,或回退为服务端会话——这实际放弃了无状态优势。务实折中是短有效期 + refresh token 轮换吊销。</p>
           </div>
+        
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">
             <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
-            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">时间戳转换器</a>
             <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
             <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
+            <a href="/tools/uuid/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">UUID 生成器</a>
+            <a href="/tools/color/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">颜色转换器</a>
             <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
           </div>
         </section>

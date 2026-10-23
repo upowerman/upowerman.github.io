@@ -134,26 +134,27 @@
           <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: UUID v1、v4、v7 应该怎么选?</h3>
-            <p style="font-size: 14px; color: #64748b;">A: v4 是通用默认;v7 时间戳有序、做数据库主键性能更好,是新版主流推荐;v1 含 MAC 地址有隐私问题,不应再使用。</p>
+            <p style="font-size: 14px; color: #64748b;">A: v4(122 位随机)是通用默认,无信息泄露;v7 前 48 位是毫秒时间戳,天然按时间排序,做数据库主键时 B+ 树插入局部性远好于随机的 v4,是新版主流推荐;v1 含 MAC 地址有隐私问题,新项目不应使用。</p>
           </div>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: UUID 真的会重复吗?</h3>
-            <p style="font-size: 14px; color: #64748b;">A: 随机 122 位的 v4,生成 103 万亿个后碰撞概率才约 10⁻¹²,日常业务可放心当作全局唯一标识。</p>
+            <p style="font-size: 14px; color: #64748b;">A: 理论上会,实际上概率可以忽略:随机 122 位的 v4,生成 103 万亿个后碰撞概率才约 10⁻¹²。日常业务量级下可以放心当作全局唯一标识使用,无需查重。</p>
           </div>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么不用 Math.random 生成 UUID?</h3>
-            <p style="font-size: 14px; color: #64748b;">A: Math.random 非加密安全、可被预测;UUID 用作令牌时必须使用 crypto.getRandomValues 这类加密安全随机源。</p>
+            <p style="font-size: 14px; color: #64748b;">A: Math.random 是非加密安全的伪随机数,可被预测与重现;UUID 用作令牌或 ID 时必须使用加密安全随机源。本工具使用浏览器原生 crypto.getRandomValues,与后端 crypto 库同等强度。</p>
           </div>
-        </section>
-
+        
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">
             <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
-            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
-            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 解码器</a>
             <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
+            <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
             <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
+            <a href="/tools/color/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">颜色转换器</a>
             <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
           </div>
         </section>

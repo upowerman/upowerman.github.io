@@ -166,15 +166,16 @@
           <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么推荐使用纯前端离线 JSON 格式化工具？</h3>
-            <p style="font-size: 14px; color: #64748b;">A: 避免将包含鉴权 Token、数据库明细或内部接口数据的 JSON 传输给不可信的第三方服务端，完全在本地完成排版转换。</p>
+            <p style="font-size: 14px; color: #64748b;">A: 传统在线工具通常将用户的 JSON 请求内容发送至服务端解析，存在接口密钥、Token 与业务私有数据泄露的严重风险。DevHub 采用纯前端 JavaScript 本地解析与格式化，数据全程仅在当前浏览器内存中流转，杜绝外泄可能。</p>
           </div>
           <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: JSON 解析报错最常见的原因有哪些？</h3>
-            <p style="font-size: 14px; color: #64748b;">A: 最多见的是数组或对象末尾存在多余逗号（Trailing Commas），或者使用了单引号取代双引号括起属性名。</p>
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: JSON 格式化与单行压缩有什么应用场景区别？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 格式化排版（2空格或4空格）能够让多层嵌套的复杂 JSON 结构层次分明，极大提升后端接口联调与日志排查效率；而单行压缩（Minify）去除冗余空白符与换行，可显著减少数据传输体积，适合生产环境 API 调用或配置文件储存。</p>
           </div>
-        </section>
-
-        
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: JSON 解析失败时如何准确定位语法错误？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 常见错误包括：尾部遗留多余逗号 (trailing comma)、使用了非标准的单引号包裹键值、未正确闭合花括号等。DevHub 内置错误捕获器，会在顶部红框精准提示解析失败原因，助你秒级排查修正。</p>
+          </div>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 超大 JSON 文件在这里会卡吗?</h3>
             <p style="font-size: 14px; color: #64748b;">A: DevHub 在浏览器主线程同步解析,常规接口报文与日志片段(几 MB 内)秒级完成。浏览器对单标签页有内存上限,超大的文件会得到明确报错而不是假死;若经常处理上百 MB 数据,建议改用本地命令行工具(如 jq)。</p>
@@ -183,13 +184,17 @@
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: JSON 和 JSONP 有什么区别?</h3>
             <p style="font-size: 14px; color: #64748b;">A: JSON 是纯数据格式;JSONP 是利用 &lt;script&gt; 标签可跨域加载的历史方案,把数据包在回调函数里返回以绕过同源策略。现代浏览器已有 CORS 标准方案,JSONP 已基本淘汰且存在 XSS 风险,新项目不应再使用。</p>
           </div>
+        
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
-            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 解码器</a>
             <a href="/tools/codec/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">全能编解码与哈希</a>
             <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
+            <a href="/tools/uuid/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">UUID 生成器</a>
+            <a href="/tools/color/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">颜色转换器</a>
             <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
           </div>
         </section>

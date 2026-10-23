@@ -195,16 +195,17 @@
         <section style="margin-bottom: 32px;">
           <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">常见问题解答 (FAQ)</h2>
           <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么 DevHub 能够支持包含中文与 Emoji 的 Base64 转换？</h3>
-            <p style="font-size: 14px; color: #64748b;">A: 我们采用标准的 Web API TextEncoder 将字符先转为 UTF-8 字节序列再执行 Base64，解决了原生 btoa 对 Unicode 字符报错的痛点。</p>
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么在部分网站进行 Base64 编解码时中文会出现乱码？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 浏览器原生的 btoa 和 atob 函数仅支持单字节 Latin1 字符（0-255）。遇到多字节的 UTF-8 中文字符或 Emoji 表情时会直接抛出字符越界异常或产生乱码。DevHub 底层统一采用 TextEncoder 与 TextDecoder 处理二进制字节流，实现 100% 汉字与特殊字符安全编解码。</p>
           </div>
           <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 哈希计算是把文本上传到云端服务器运行的吗？</h3>
-            <p style="font-size: 14px; color: #64748b;">A: 绝不上传。所有哈希摘要运算全部由浏览器本地 JavaScript 主线程实时运算得出，无网络延迟且确保隐私安全。</p>
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: MD5 和 SHA-256 可以被解密吗？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: MD5 与 SHA-256 是单向散列哈希函数（Hash Function），而非可逆的对称/非对称加密算法，数学上不可逆向解密。网上常见的所谓‘MD5解密’实际上是利用预先计算好的‘彩虹表（Rainbow Table）’进行碰撞反查。建议涉及密码存储时务必配合盐值（Salt）或使用专门的 bcrypt/argon2 算法。</p>
           </div>
-        </section>
-
-        
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: encodeURI 与 encodeURIComponent 有什么区别？</h3>
+            <p style="font-size: 14px; color: #64748b;">A: encodeURI 用于编码完整的统一资源标识符 (URI)，它不会对 URI 中的语义分隔符（如 http://, /, ?, &amp;, =）进行转义；而 encodeURIComponent 会对除了字母数字外的绝大部分标点符号都进行转义，通常用于给 URL 查询参数中的单个 key 或 value 进行安全转码。</p>
+          </div>
           <div style="margin-bottom: 16px;">
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么 URL 里空格有时是 %20 有时是 +?</h3>
             <p style="font-size: 14px; color: #64748b;">A: %20 是 RFC 3986 的标准百分号编码;+ 是 application/x-www-form-urlencoded 表单提交的历史约定,只在查询串中代表空格。encodeURIComponent 只产出 %20,若后端按表单语义解析就需要把空格换成 +,这是接口联调最常见的坑之一。</p>
@@ -213,13 +214,17 @@
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 哈希"加盐"是什么意思?还有必要吗?</h3>
             <p style="font-size: 14px; color: #64748b;">A: 加盐指哈希前拼接每用户唯一的随机串,使相同密码产出不同摘要,令预计算彩虹表失效。现代建议是直接用 bcrypt/scrypt/argon2 这类自带盐、计算速度可调慢的专用密码哈希算法,而不是裸算一次 MD5/SHA256。</p>
           </div>
+        
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">
             <a href="/tools/json/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JSON 实验室</a>
-            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Unix 时间戳转换器</a>
-            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 在线解码器</a>
+            <a href="/tools/timestamp/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">时间戳转换器</a>
+            <a href="/tools/jwt/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">JWT 解码器</a>
             <a href="/tools/regex/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">正则测试与速查</a>
+            <a href="/tools/cron/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">Cron 表达式工具</a>
+            <a href="/tools/uuid/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">UUID 生成器</a>
+            <a href="/tools/color/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #334155; text-decoration: none; font-size: 13px;">颜色转换器</a>
             <a href="/" style="padding: 8px 14px; background: #f1f5f9; border-radius: 8px; color: #16a34a; text-decoration: none; font-size: 13px; font-weight: 600;">返回 DevHub 首页</a>
           </div>
         </section>
