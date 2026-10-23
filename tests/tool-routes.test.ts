@@ -21,6 +21,10 @@ describe('toolIdFromPath', () => {
     expect(toolIdFromPath('/tools/json/')).toBe('tool-json')
     expect(toolIdFromPath('/tools/json')).toBe('tool-json')
   })
+  it('strips index.html suffix', () => {
+    expect(toolIdFromPath('/tools/json/index.html')).toBe('tool-json')
+    expect(toolIdFromPath('/tools/cron/index.html')).toBe('tool-cron')
+  })
   it('returns null for home, bare prefix and unknown tools', () => {
     expect(toolIdFromPath('/')).toBeNull()
     expect(toolIdFromPath('/tools/')).toBeNull()

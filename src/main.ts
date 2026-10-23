@@ -10,6 +10,11 @@ if (legacy) {
   // 兼容旧版 /?tool=json 参数直达
   window.location.replace(legacy)
 } else {
+  try {
+    localStorage.removeItem('devhub_active_tool_id')
+  } catch {
+    /* 隐私模式下忽略 */
+  }
   const toolId = toolIdFromPath(window.location.pathname)
   const app = toolId ? createApp(ToolPage, { toolId }) : createApp(App)
   app.use(createPinia())

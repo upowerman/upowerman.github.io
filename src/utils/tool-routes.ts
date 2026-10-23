@@ -19,7 +19,8 @@ export function toolPath(id: string): string | null {
 }
 
 export function toolIdFromPath(pathname: string): string | null {
-  const m = pathname.replace(/\/+$/, '').match(/^\/tools\/([a-z0-9-]+)$/)
+  const stripped = pathname.replace(/index\.html$/i, '').replace(/\/+$/, '')
+  const m = stripped.match(/^\/tools\/([a-z0-9-]+)$/)
   return m ? (idBySlug[m[1]] ?? null) : null
 }
 
