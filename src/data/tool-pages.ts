@@ -1,0 +1,164 @@
+export interface ToolFaq {
+  q: string
+  a: string
+}
+
+export interface ToolExtraSection {
+  title: string
+  head: string[]
+  /** 渲染为 font-mono 的列下标 */
+  monoCols?: number[]
+  rows: string[][]
+}
+
+export interface ToolPageContent {
+  h1: string
+  intro: string
+  extra?: ToolExtraSection
+  faqs: ToolFaq[]
+}
+
+export const toolPageContent: Record<string, ToolPageContent> = {
+  'tool-json': {
+    h1: 'JSON 格式化与在线校验工具',
+    intro:
+      '免费高效的纯前端离线 JSON 实验室:支持 2 空格/4 空格美化排版、单行去除空格压缩、语法错误精确定位与一键快速复制。数据 100% 在本地浏览器计算,绝不上报远程服务器。',
+    faqs: [
+      {
+        q: '为什么推荐使用纯前端离线 JSON 格式化工具?',
+        a: '传统在线工具通常将用户的 JSON 请求内容发送至服务端解析,存在接口密钥、Token 与业务私有数据泄露的严重风险。DevHub 采用纯前端 JavaScript 本地解析与格式化,数据全程仅在当前浏览器内存中流转,杜绝外泄可能。'
+      },
+      {
+        q: 'JSON 格式化与单行压缩有什么应用场景区别?',
+        a: '格式化排版(2空格或4空格)能够让多层嵌套的复杂 JSON 结构层次分明,极大提升后端接口联调与日志排查效率;而单行压缩(Minify)去除冗余空白符与换行,可显著减少数据传输体积,适合生产环境 API 调用或配置文件储存。'
+      },
+      {
+        q: 'JSON 解析失败时如何准确定位语法错误?',
+        a: '常见错误包括:尾部遗留多余逗号 (trailing comma)、使用了非标准的单引号包裹键值、未正确闭合花括号等。DevHub 内置错误捕获器,会在顶部红框精准提示解析失败原因,助你秒级排查修正。'
+      }
+    ]
+  },
+  'tool-timestamp': {
+    h1: 'Unix 时间戳在线转换工具',
+    intro:
+      '专为后端工程师、数据库管理员及分布式系统排障打造的高效转换工具。支持 10 位秒级 / 13 位毫秒级时间戳与北京时间、UTC、ISO 8601 标准日期双向互转,自带实时看板与相对时间换算。',
+    extra: {
+      title: '常用语言获取当前时间戳速查',
+      head: ['编程语言', '秒级时间戳 (10位)', '毫秒级时间戳 (13位)'],
+      monoCols: [1, 2],
+      rows: [
+        ['JavaScript', 'Math.floor(Date.now() / 1000)', 'Date.now()'],
+        ['Python', 'int(time.time())', 'int(time.time() * 1000)'],
+        ['Java', 'Instant.now().getEpochSecond()', 'System.currentTimeMillis()'],
+        ['Go', 'time.Now().Unix()', 'time.Now().UnixMilli()']
+      ]
+    },
+    faqs: [
+      {
+        q: 'Unix 秒级时间戳 (10位) 与毫秒级时间戳 (13位) 有什么区别?',
+        a: 'Unix 秒级时间戳是指从协调世界时 1970年1月1日 00:00:00 UTC 起至现在的总秒数(通常为 10 位整型,如 Python 的 time.time() 取整);毫秒级时间戳为总毫秒数(通常为 13 位整型,如 JavaScript 的 Date.now() 或 Java 的 System.currentTimeMillis())。'
+      },
+      {
+        q: '为什么转换出来的时间经常差了 8 个小时?',
+        a: '这是由于时区差引起的。Unix 时间戳本质上是无时区偏置的标准 UTC 绝对时间。中国标准时间(北京时间)为东八区(UTC+8),比标准 UTC 时间快 8 个小时。DevHub 同时展示 Local 北京时间与 UTC 标准时间,避免时区偏差导致的数据排查混乱。'
+      },
+      {
+        q: '什么是 2038 年问题(Y2038 Bug)?',
+        a: '在旧版 32 位有符号整数系统中,Unix 时间戳的最大表示上限为 2147483647(对应北京时间 2038年1月19日 11:14:07),溢出后会回卷为负数导致系统异常。现代 64 位操作系统已将时间上限扩展至近 2920 亿年之后。'
+      }
+    ]
+  },
+  'tool-jwt': {
+    h1: 'JWT 在线解码与 Token 过期校验工具',
+    intro:
+      '专为后端架构师、API 开发者及全栈工程师打造的 JWT 调试利器。本地结构化着色解析 Header 与 Payload、深度校验标准 Claims,智能判定 Token 过期状态,绝不上报服务器。',
+    extra: {
+      title: 'JWT 标准 Claims 字段速查',
+      head: ['字段', '英文全称', '含义与说明'],
+      monoCols: [0],
+      rows: [
+        ['sub', 'Subject', '该 JWT 所面向的主体(通常为用户唯一 User ID)'],
+        ['iss', 'Issuer', '签发机构标识或 OAuth 认证中心域名'],
+        ['exp', 'Expiration Time', '过期时间(秒级 Unix 时间戳),超时即拒绝服务'],
+        ['iat', 'Issued At', '签发时间(秒级 Unix 时间戳)'],
+        ['nbf', 'Not Before', '生效时间,在此时刻之前 Token 不可被接受']
+      ]
+    },
+    faqs: [
+      {
+        q: '在线使用 JWT 解码器解析生产环境 Token 安全吗?',
+        a: '使用常规服务端解析工具存在安全合规隐患。DevHub JWT 解码器基于纯前端浏览器本地算法,使用 UTF-8 安全 Base64URL 纯客户端解码,没有任何后台接口接收你的 Token,可放心解析含用户鉴权信息的测试与生产 Token。'
+      },
+      {
+        q: 'JWT 结构中的三部分分别代表什么?',
+        a: "JWT 采用以句号 '.' 分隔的三段结构:第一段为 Header(头部,声明签名算法如 HS256/RS256 及令牌类型);第二段为 Payload(有效载荷,存放身份 Claims 与自定义业务属性);第三段为 Signature(数字签名,由前两段结合服务端私钥防篡改生成)。"
+      },
+      {
+        q: '如何通过 exp 字段判断 JWT 是否过期?',
+        a: 'exp 是 JWT 标准声明中的 Expiration Time(过期时间戳,以秒为单位)。DevHub 会自动将 exp * 1000 转换为可读的北京时间,并与本地当前系统时间对比:当当前时间大于 exp 时自动预警已过期。'
+      }
+    ]
+  },
+  'tool-codec': {
+    h1: 'Base64 / URL 在线编解码与 MD5 / SHA256 哈希计算',
+    intro:
+      '纯前端离线一站式加密解密与哈希工具箱:支持中文字符与 Emoji 的 Base64 编码解码、URL 参数 Encode/Decode 转码,以及标准 MD5 与 SHA-256 摘要哈希极速计算。',
+    extra: {
+      title: '常见编解码与哈希算法对比指南',
+      head: ['算法/格式', '是否可逆', '输出长度', '核心应用场景'],
+      monoCols: [0],
+      rows: [
+        ['Base64', '可逆', '~ 原文本 133%', '文本协议传输图片、内联资源、邮件协议附件'],
+        ['URL Encode', '可逆', '视非ASCII字符而定', 'HTTP GET 请求 Query 参数中包含特殊标点与汉字转义'],
+        ['MD5', '不可逆', '32 位十六进制', '快速文件完整性校验 (Checksum)、数据指纹生成'],
+        ['SHA-256', '不可逆', '64 位十六进制', '数字证书验签、区块链加密哈希、安全密码存证']
+      ]
+    },
+    faqs: [
+      {
+        q: '为什么在部分网站进行 Base64 编解码时中文会出现乱码?',
+        a: '浏览器原生的 btoa 和 atob 函数仅支持单字节 Latin1 字符(0-255)。遇到多字节的 UTF-8 中文字符或 Emoji 表情时会直接抛出字符越界异常或产生乱码。DevHub 底层统一采用 TextEncoder 与 TextDecoder 处理二进制字节流,实现 100% 汉字与特殊字符安全编解码。'
+      },
+      {
+        q: 'MD5 和 SHA-256 可以被解密吗?',
+        a: "MD5 与 SHA-256 是单向散列哈希函数(Hash Function),而非可逆的对称/非对称加密算法,数学上不可逆向解密。网上常见的所谓'MD5解密'实际上是利用预先计算好的'彩虹表(Rainbow Table)'进行碰撞反查。建议涉及密码存储时务必配合盐值(Salt)或使用专门的 bcrypt/argon2 算法。"
+      },
+      {
+        q: 'encodeURI 与 encodeURIComponent 有什么区别?',
+        a: 'encodeURI 用于编码完整的统一资源标识符 (URI),它不会对 URI 中的语义分隔符(如 http://, /, ?, &, =)进行转义;而 encodeURIComponent 会对除了字母数字外的绝大部分标点符号都进行转义,通常用于给 URL 查询参数中的单个 key 或 value 进行安全转码。'
+      }
+    ]
+  },
+  'tool-regex': {
+    h1: '正则表达式在线测试与常用正则速查表',
+    intro:
+      '专为前端表单校验、爬虫提取与服务端日志分析打造的轻快正则调试器。支持实时多项匹配结果列表呈现,集成 200ms 防抖与 ReDoS 防假死保护,预置 6 款工业级常用模板。',
+    extra: {
+      title: '常用正则表达式速查模板清单',
+      head: ['业务场景', '正则表达式模式 Pattern'],
+      monoCols: [1],
+      rows: [
+        ['电子邮箱 (Email)', '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}'],
+        ['中国手机号码', '1[3-9]\\d{9}'],
+        ['IPv4 地址', '(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'],
+        ['HTTP/HTTPS 链接', 'https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)'],
+        ['中文字符匹配', '[\\u4e00-\\u9fa5]+'],
+        ['中国二代身份证号', '[1-9]\\d{5}(?:18|19|20)\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{3}[\\dXx]']
+      ]
+    },
+    faqs: [
+      {
+        q: '常用的正则表达式修饰符(Flags)代表什么?',
+        a: "g (Global) 代表全局匹配,找到目标字符串中所有符合条件的结果而非在命中首项后退出;i (Ignore Case) 代表忽略英文大小写;m (Multiline) 代表多行匹配,让 ^ 和 $ 可以分别定位每行的行首与行尾;s (Dot All) 允许点号 '.' 匹配换行符。"
+      },
+      {
+        q: '什么是正则表达式拒绝服务攻击 (ReDoS)?如何预防?',
+        a: '当正则表达式包含大量嵌套分组、重叠交替以及贪婪量词(例如 (a+)+$)时,面对精心构造的不匹配长输入,正则引擎会发生天文数字级别的灾难性回溯(Catastrophic Backtracking),导致 CPU 满载假死。DevHub 通过文本长度截断与最多循环限制进行安全防死锁。'
+      },
+      {
+        q: '如何用正则准确匹配包含汉字中文字符的内容?',
+        a: '基本中文字符的 Unicode 范围为 [\\u4e00-\\u9fa5]。若要匹配全汉字字符串,可使用 ^[\\u4e00-\\u9fa5]+$;在现代 ES2018+ 还可以使用 Unicode 属性转义 /\\p{Script=Han}+/u。'
+      }
+    ]
+  }
+}
