@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="group relative flex items-start space-x-3 p-3.5 bg-white dark:bg-slate-900/80 rounded-xl border border-slate-200/80 dark:border-slate-800 hover:border-primary-500/50 dark:hover:border-primary-500/50 hover:shadow-md transition-all duration-200 cursor-pointer"
-    @click="handleClick"
-  >
+  <div class="group relative flex items-start space-x-3 p-3.5 bg-white dark:bg-slate-900/80 rounded-xl border border-slate-200/80 dark:border-slate-800 hover:border-primary-500/50 dark:hover:border-primary-500/50 hover:shadow-md transition-all duration-200">
     <SiteIcon :name="item.name" :url="item.url" :icon="item.icon" />
     <div class="flex-1 min-w-0 pr-12">
       <div class="flex items-center space-x-1.5">
@@ -16,8 +13,17 @@
       </p>
     </div>
 
+    <!-- 拉伸链接:铺满整卡,键盘 Tab 可达,星标/删除按钮以 z-10 浮于其上 -->
+    <a
+      :href="item.url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="absolute inset-0 rounded-xl"
+      :aria-label="`在新标签页打开 ${item.name}`"
+    ></a>
+
     <!-- 操作按钮组 (删除自定义 / 收藏置顶) -->
-    <div class="absolute top-2.5 right-2.5 flex items-center space-x-1">
+    <div class="absolute top-2.5 right-2.5 z-10 flex items-center space-x-1">
       <button
         v-if="item.categoryId === 'custom'"
         type="button"
@@ -57,8 +63,4 @@ const props = defineProps<{
 const store = useAppStore()
 
 const isPinned = computed(() => store.isPinned(props.item.id))
-
-function handleClick() {
-  window.open(props.item.url, '_blank')
-}
 </script>

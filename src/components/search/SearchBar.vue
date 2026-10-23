@@ -6,6 +6,7 @@
         v-for="engine in engines"
         :key="engine.id"
         type="button"
+        :aria-pressed="store.searchEngine === engine.id"
         @click="store.setSearchEngine(engine.id)"
         :class="[
           'px-2.5 py-1 rounded-full transition-colors',
@@ -27,8 +28,13 @@
         v-model="query"
         type="text"
         :placeholder="currentPlaceholder"
+        role="combobox"
+        :aria-expanded="isFocused && suggestions.length > 0"
+        aria-controls="search-suggestions"
+        aria-autocomplete="list"
         class="w-full py-3.5 px-2 bg-transparent text-slate-800 dark:text-slate-100 text-sm md:text-base outline-none"
         @keydown.enter="handleEnter"
+        @keydown.down.prevent="focusFirstSuggestion"
         @focus="isFocused = true"
       />
       <button
@@ -51,15 +57,22 @@
     <!-- 站内快捷匹配建议下拉框 -->
     <div
       v-if="query && isFocused && suggestions.length > 0"
+      id="search-suggestions"
+      role="listbox"
+      ref="suggestionsRef"
       class="absolute left-0 right-0 mt-1.5 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 dark:border-slate-800 z-50 overflow-hidden divide-y divide-slate-100 dark:divide-slate-800"
     >
-      <div class="p-2 text-xs font-semibold text-slate-400 px-3">
+      <div class="p-2 text-xs font-semibold text-slate-400 px-3" aria-hidden="true">
         站内直达推荐
       </div>
-      <div
+      <a
         v-for="item in suggestions"
         :key="item.id"
-        @click="selectSuggestion(item)"
+        role="option"
+        aria-selected="false"
+        :href="suggestionHref(item)"
+        :target="'url' in item ? '_blank' : undefined"
+        :rel="'url' in item ? 'noopener noreferrer' : undefined"
         class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-800/60 cursor-pointer transition-colors"
       >
         <div class="flex items-center space-x-3">
@@ -68,7 +81,7 @@
             <div class="text-sm font-medium text-slate-800 dark:text-slate-200">
               {{ item.name }}
             </div>
-            <div class="text-xs text-slate-400 truncate max-w-xs md:max-w-md">
+            <div class="text-xs text-slate-500 dark:text-slate-400 truncate max-w-xs md:max-w-md">
               {{ item.desc }}
             </div>
           </div>
@@ -76,7 +89,7 @@
         <span class="text-xs px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">
           {{ 'keywords' in item ? '工具' : '网址' }}
         </span>
-      </div>
+      </a>
     </div>
   </div>
 </template>
@@ -87,12 +100,14 @@ import { Search, X } from 'lucide-vue-next'
 import { onClickOutside } from '@vueuse/core'
 import { useAppStore } from '../../stores/useAppStore'
 import SiteIcon from '../common/SiteIcon.vue'
+import { toolPath } from '../../utils/tool-routes'
 import type { SearchEngineType, NavItem, ToolItem } from '../../types'
 
 const store = useAppStore()
 const query = ref('')
 const isFocused = ref(false)
 const searchContainerRef = ref<HTMLElement | null>(null)
+const suggestionsRef = ref<HTMLElement | null>(null)
 
 onClickOutside(searchContainerRef, () => {
   isFocused.value = false
@@ -125,6 +140,14 @@ const suggestions = computed(() => {
 
   return [...matchedTools, ...matchedNav].slice(0, 6)
 })
+
+function suggestionHref(item: (ToolItem & { type: 'tool' }) | (NavItem & { type: 'nav' })): string {
+  return 'url' in item ? item.url : (toolPath(item.id) || '/')
+}
+
+function focusFirstSuggestion() {
+  suggestionsRef.value?.querySelector('a')?.focus()
+}
 
 function executeSearch() {
   const q = query.value.trim()
