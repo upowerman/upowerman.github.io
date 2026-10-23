@@ -4,7 +4,14 @@
     class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn"
     @click.self="$emit('close')"
   >
-    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden">
+    <div
+      ref="panelRef"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="community-title"
+      tabindex="-1"
+      class="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden"
+    >
       <!-- 装饰背景 -->
       <div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-primary-500/10 dark:bg-primary-500/5 blur-2xl"></div>
 
@@ -21,7 +28,7 @@
         <Users class="w-6 h-6" />
       </div>
 
-      <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+      <h3 id="community-title" class="text-lg font-bold text-slate-900 dark:text-white">
         加入开发者技术社群
       </h3>
       <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-xs mx-auto">
@@ -71,16 +78,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, toRef } from 'vue'
 import { X, Users, CheckCircle2 } from 'lucide-vue-next'
+import { useModal } from '../../composables/useModal'
 
-defineProps<{
+const props = defineProps<{
   isOpen: boolean
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'close'): void
 }>()
+
+const { panelRef } = useModal(toRef(props, 'isOpen'), () => emit('close'))
 
 const copied = ref(false)
 

@@ -4,9 +4,16 @@
     class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-fadeIn"
     @click.self="close"
   >
-    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800">
+    <div
+      ref="panelRef"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="add-link-title"
+      tabindex="-1"
+      class="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800"
+    >
       <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
-        <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100">添加自定义书签</h3>
+        <h3 id="add-link-title" class="text-lg font-bold text-slate-800 dark:text-slate-100">添加自定义书签</h3>
         <button
           type="button"
           @click="close"
@@ -23,6 +30,7 @@
             v-model="form.name"
             type="text"
             required
+            data-autofocus
             placeholder="例如: 我的博客"
             class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-primary-500 outline-none"
           />
@@ -70,17 +78,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, toRef } from 'vue'
 import { X } from 'lucide-vue-next'
 import { useAppStore } from '../../stores/useAppStore'
+import { useModal } from '../../composables/useModal'
 
-defineProps<{
+const props = defineProps<{
   isOpen: boolean
 }>()
 
 const emit = defineEmits<{
   (e: 'close'): void
 }>()
+
+const { panelRef } = useModal(toRef(props, 'isOpen'), () => emit('close'))
 
 const store = useAppStore()
 
