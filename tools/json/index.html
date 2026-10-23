@@ -16,6 +16,7 @@
     <link rel="alternate icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-9649405900209784" />
     <title>JSON 格式化与在线校验工具 - 纯前端离线美化/单行压缩 | DevHub</title>
     
     <!-- 搜索引擎站长认证 (Google & Bing) -->
@@ -116,7 +117,23 @@
                 "text": "常见错误包括：尾部遗留多余逗号 (trailing comma)、使用了非标准的单引号包裹键值、未正确闭合花括号等。DevHub 内置错误捕获器，会在顶部红框精准提示解析失败原因，助你秒级排查修正。"
               }
             }
-          ]
+          ,
+{
+                          "@type": "Question",
+                          "name": "超大 JSON 文件在这里会卡吗?",
+                          "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "DevHub 在浏览器主线程同步解析,常规接口报文与日志片段(几 MB 内)秒级完成。浏览器对单标签页有内存上限,超大的文件会得到明确报错而不是假死;若经常处理上百 MB 数据,建议改用本地命令行工具(如 jq)。"
+                          }
+            },
+{
+                          "@type": "Question",
+                          "name": "JSON 和 JSONP 有什么区别?",
+                          "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "JSON 是纯数据格式;JSONP 是利用 <script> 标签可跨域加载的历史方案,把数据包在回调函数里返回以绕过同源策略。现代浏览器已有 CORS 标准方案,JSONP 已基本淘汰且存在 XSS 风险,新项目不应再使用。"
+                          }
+            }]
         }
       ]
     }
@@ -157,6 +174,15 @@
           </div>
         </section>
 
+        
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 超大 JSON 文件在这里会卡吗?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: DevHub 在浏览器主线程同步解析,常规接口报文与日志片段(几 MB 内)秒级完成。浏览器对单标签页有内存上限,超大的文件会得到明确报错而不是假死;若经常处理上百 MB 数据,建议改用本地命令行工具(如 jq)。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: JSON 和 JSONP 有什么区别?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: JSON 是纯数据格式;JSONP 是利用 &lt;script&gt; 标签可跨域加载的历史方案,把数据包在回调函数里返回以绕过同源策略。现代浏览器已有 CORS 标准方案,JSONP 已基本淘汰且存在 XSS 风险,新项目不应再使用。</p>
+          </div>
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">

@@ -16,6 +16,7 @@
     <link rel="alternate icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-9649405900209784" />
     <title>正则表达式在线测试与常用正则速查表 - 纯前端防死锁 | DevHub</title>
     
     <!-- 搜索引擎站长认证 (Google & Bing) -->
@@ -116,7 +117,23 @@
                 "text": "基本中文字符的 Unicode 范围为 [\\u4e00-\\u9fa5]。若要匹配全汉字字符串，可使用 ^[\\u4e00-\\u9fa5]+$；在现代 ES2018+ 还可以使用 Unicode 属性转义 /\\p{Script=Han}+/u。"
               }
             }
-          ]
+          ,
+{
+                          "@type": "Question",
+                          "name": "贪婪匹配和非贪婪匹配有什么区别?",
+                          "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "量词(*、+、?、{n,m})默认贪婪,尽量多吃字符;后跟 ? 变为非贪婪,尽量少吃。例如对 \"a\"b\"c\",/\".*\"/ 一口吞到底,而 /\".*?\"/ 依次匹配出 \"a\" 与 \"c\"。提取成对符号之间的内容时几乎总应使用非贪婪。"
+                          }
+            },
+{
+                          "@type": "Question",
+                          "name": "正则的前瞻断言 (?=) 和 (?!) 是什么?",
+                          "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "(?=x) 表示\"此处后面必须是 x\"但不消耗字符;(?!x) 表示\"此处后面不能是 x\"。常用于\"后面跟着单位的数字\"\"不含某词的行\"等场景。ES2018 起还支持后行断言 (?<=) 与 (?<!)。"
+                          }
+            }]
         }
       ]
     }
@@ -185,6 +202,15 @@
           </div>
         </section>
 
+        
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 贪婪匹配和非贪婪匹配有什么区别?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 量词(*、+、?、{n,m})默认贪婪,尽量多吃字符;后跟 ? 变为非贪婪,尽量少吃。例如对 "a"b"c",/".*"/ 一口吞到底,而 /".*?"/ 依次匹配出 "a" 与 "c"。提取成对符号之间的内容时几乎总应使用非贪婪。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 正则的前瞻断言 (?=) 和 (?!) 是什么?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: (?=x) 表示"此处后面必须是 x"但不消耗字符;(?!x) 表示"此处后面不能是 x"。常用于"后面跟着单位的数字""不含某词的行"等场景。ES2018 起还支持后行断言 (?&lt;=) 与 (?&lt;!)。</p>
+          </div>
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">

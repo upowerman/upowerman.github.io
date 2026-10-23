@@ -16,6 +16,7 @@
     <link rel="alternate icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-9649405900209784" />
     <title>Unix 时间戳在线转换工具 (秒/毫秒/北京时间/UTC双向互转) | DevHub</title>
     
     <!-- 搜索引擎站长认证 (Google & Bing) -->
@@ -116,7 +117,23 @@
                 "text": "在旧版 32 位有符号整数系统中，Unix 时间戳的最大表示上限为 2147483647（对应北京时间 2038年1月19日 11:14:07），溢出后会回卷为负数导致系统异常。现代 64 位操作系统已将时间上限扩展至近 2920 亿年之后。"
               }
             }
-          ]
+          ,
+{
+                          "@type": "Question",
+                          "name": "为什么数据库推荐存时间戳而不是日期字符串?",
+                          "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "时间戳是定长整数,占空间小、可索引、比较排序快,且天然无时区歧义;字符串在不同地区、不同格式下解析极易出错。工程最佳实践是存储层统一存 UTC 时间戳,展示层再按用户时区格式化。"
+                          }
+            },
+{
+                          "@type": "Question",
+                          "name": "前端 new Date() 有哪些时区陷阱?",
+                          "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "new Date('2026-10-23') 按 UTC 零点解析,而 new Date('2026-10-23 12:00') 按本地时区解析——同一个日期字符串带不带时间,在东八区会差 8 小时。Safari 还严格要求 ISO 格式。稳妥做法:传时间戳或带时区偏移的完整 ISO 8601 字符串。"
+                          }
+            }]
         }
       ]
     }
@@ -182,6 +199,15 @@
           </div>
         </section>
 
+        
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么数据库推荐存时间戳而不是日期字符串?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 时间戳是定长整数,占空间小、可索引、比较排序快,且天然无时区歧义;字符串在不同地区、不同格式下解析极易出错。工程最佳实践是存储层统一存 UTC 时间戳,展示层再按用户时区格式化。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 前端 new Date() 有哪些时区陷阱?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: new Date('2026-10-23') 按 UTC 零点解析,而 new Date('2026-10-23 12:00') 按本地时区解析——同一个日期字符串带不带时间,在东八区会差 8 小时。Safari 还严格要求 ISO 格式。稳妥做法:传时间戳或带时区偏移的完整 ISO 8601 字符串。</p>
+          </div>
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">

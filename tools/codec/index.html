@@ -16,6 +16,7 @@
     <link rel="alternate icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-9649405900209784" />
     <title>Base64 / URL 在线编解码与 MD5 / SHA256 哈希计算 - 纯前端安全工具 | DevHub</title>
     
     <!-- 搜索引擎站长认证 (Google & Bing) -->
@@ -116,7 +117,23 @@
                 "text": "encodeURI 用于编码完整的统一资源标识符 (URI)，它不会对 URI 中的语义分隔符（如 http://, /, ?, &, =）进行转义；而 encodeURIComponent 会对除了字母数字外的绝大部分标点符号都进行转义，通常用于给 URL 查询参数中的单个 key 或 value 进行安全转码。"
               }
             }
-          ]
+          ,
+{
+                          "@type": "Question",
+                          "name": "为什么 URL 里空格有时是 %20 有时是 +?",
+                          "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "%20 是 RFC 3986 的标准百分号编码;+ 是 application/x-www-form-urlencoded 表单提交的历史约定,只在查询串中代表空格。encodeURIComponent 只产出 %20,若后端按表单语义解析就需要把空格换成 +,这是接口联调最常见的坑之一。"
+                          }
+            },
+{
+                          "@type": "Question",
+                          "name": "哈希\"加盐\"是什么意思?还有必要吗?",
+                          "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "加盐指哈希前拼接每用户唯一的随机串,使相同密码产出不同摘要,令预计算彩虹表失效。现代建议是直接用 bcrypt/scrypt/argon2 这类自带盐、计算速度可调慢的专用密码哈希算法,而不是裸算一次 MD5/SHA256。"
+                          }
+            }]
         }
       ]
     }
@@ -187,6 +204,15 @@
           </div>
         </section>
 
+        
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 为什么 URL 里空格有时是 %20 有时是 +?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: %20 是 RFC 3986 的标准百分号编码;+ 是 application/x-www-form-urlencoded 表单提交的历史约定,只在查询串中代表空格。encodeURIComponent 只产出 %20,若后端按表单语义解析就需要把空格换成 +,这是接口联调最常见的坑之一。</p>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 哈希"加盐"是什么意思?还有必要吗?</h3>
+            <p style="font-size: 14px; color: #64748b;">A: 加盐指哈希前拼接每用户唯一的随机串,使相同密码产出不同摘要,令预计算彩虹表失效。现代建议是直接用 bcrypt/scrypt/argon2 这类自带盐、计算速度可调慢的专用密码哈希算法,而不是裸算一次 MD5/SHA256。</p>
+          </div>
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">
