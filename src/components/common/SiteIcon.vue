@@ -27,10 +27,17 @@ const props = defineProps<{
 }>()
 
 const hasError = ref(false)
+const providerIndex = ref(0)
+
+const providers = [
+  (domain: string) => `https://www.google.com/s2/favicons?domain=${domain}&sz=64`,
+  (domain: string) => `https://icons.duckduckgo.com/ip3/${domain}.ico`
+]
 
 // favicon 源变化时重置错误态,避免残留字母徽章
 watch(() => [props.url, props.icon], () => {
   hasError.value = false
+  providerIndex.value = 0
 })
 
 const faviconUrl = computed(() => {
@@ -38,7 +45,8 @@ const faviconUrl = computed(() => {
   if (!props.url) return ''
   try {
     const domain = new URL(props.url).hostname
-    return `https://favicon.splitbee.io/?url=${domain}`
+    const getUrl = providers[providerIndex.value] || providers[0]
+    return getUrl(domain)
   } catch {
     return ''
   }
@@ -61,6 +69,10 @@ const badgeColor = computed(() => {
 })
 
 function handleError() {
-  hasError.value = true
+  if (providerIndex.value < providers.length - 1) {
+    providerIndex.value++
+  } else {
+    hasError.value = true
+  }
 }
 </script>
