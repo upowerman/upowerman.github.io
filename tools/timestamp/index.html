@@ -25,8 +25,8 @@
     <meta name="msvalidate.01" content="C881F074467FD6757DFB5E6C8EE1B7DB" />
 
     <!-- SEO 核心元标签 -->
-    <meta name="description" content="精准好用的在线 Unix 时间戳转换器。支持秒(10位)与毫秒(13位)时间戳与北京时间(GMT+8)、UTC、ISO 8601 双向秒级互转，实时动态秒级刷新看板，支持人类友好的相对时间计算（如几分钟前）。" />
-    <meta name="keywords" content="时间戳转换,Unix时间戳,在线时间戳互转,北京时间转时间戳,毫秒时间戳,Unix timestamp converter,时间戳计算器,DevHub" />
+    <meta name="description" content="精准高效的在线时间戳转换工具 (Unix Timestamp Converter)。支持 10 位秒级与 13 位毫秒级时间戳与北京时间(GMT+8)、UTC、ISO 8601 双向互转；内置 Python/Java/JS/Go/PHP/MySQL/Shell 等 10 种语言获取时间戳代码速查及常用时间秒数换算对照。" />
+    <meta name="keywords" content="时间戳转换,时间戳,在线时间戳转换,北京时间转时间戳,毫秒时间戳转换,Unix时间戳,时间戳转日期,日期转时间戳,Unix Timestamp Converter,DevHub" />
     <meta name="author" content="upowerman" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://yunitytech.top/tools/timestamp/" />
@@ -34,7 +34,7 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="时间戳转换 - 在线Unix时间戳与北京时间双向转换 (秒/毫秒互转) | DevHub" />
-    <meta property="og:description" content="秒/毫秒时间戳与北京时间、UTC 双向秒级互转，实时动态刷新看板。" />
+    <meta property="og:description" content="精准高效的在线时间戳转换工具。秒/毫秒时间戳与北京时间、UTC 双向互转，内置 10 门语言时间戳速查与秒数换算。" />
     <meta property="og:url" content="https://yunitytech.top/tools/timestamp/" />
     <meta property="og:site_name" content="DevHub" />
     <meta property="og:image" content="https://yunitytech.top/og-cover.png" />
@@ -44,7 +44,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="时间戳转换 - 在线Unix时间戳与北京时间双向转换 (秒/毫秒互转) | DevHub" />
-    <meta name="twitter:description" content="秒/毫秒时间戳与北京时间、UTC 双向秒级互转，实时动态刷新看板。" />
+    <meta name="twitter:description" content="精准高效的在线时间戳转换工具。秒/毫秒时间戳与北京时间、UTC 双向互转，内置 10 门语言时间戳速查与秒数换算。" />
     <meta name="twitter:image" content="https://yunitytech.top/og-cover.png" />
 
     <!-- 结构化数据 (JSON-LD) 包含 WebApp、面包屑与 FAQ 问答 -->
@@ -55,9 +55,9 @@
         {
           "@type": "WebApplication",
           "@id": "https://yunitytech.top/tools/timestamp/#webapp",
-          "name": "DevHub 时间戳转换器",
+          "name": "DevHub 时间戳转换器 (Unix Timestamp Converter)",
           "url": "https://yunitytech.top/tools/timestamp/",
-          "description": "纯前端离线 Unix 秒/毫秒时间戳与北京时间、UTC 双向互转工具",
+          "description": "纯前端离线 Unix 秒/毫秒时间戳与北京时间、UTC 双向互转工具，内置多语言代码速查与常用秒数换算",
           "applicationCategory": "DeveloperApplication",
           "operatingSystem": "All",
           "offers": {
@@ -117,24 +117,24 @@
                 "@type": "Answer",
                 "text": "在旧版 32 位有符号整数系统中，Unix 时间戳的最大表示上限为 2147483647（对应北京时间 2038年1月19日 11:14:07），溢出后会回卷为负数导致系统异常。现代 64 位操作系统已将时间上限扩展至近 2920 亿年之后。"
               }
-            }
-          ,
-{
-                          "@type": "Question",
-                          "name": "为什么数据库推荐存时间戳而不是日期字符串?",
-                          "acceptedAnswer": {
-                                        "@type": "Answer",
-                                        "text": "时间戳是定长整数,占空间小、可索引、比较排序快,且天然无时区歧义;字符串在不同地区、不同格式下解析极易出错。工程最佳实践是存储层统一存 UTC 时间戳,展示层再按用户时区格式化。"
-                          }
             },
-{
-                          "@type": "Question",
-                          "name": "前端 new Date() 有哪些时区陷阱?",
-                          "acceptedAnswer": {
-                                        "@type": "Answer",
-                                        "text": "new Date('2026-10-23') 按 UTC 零点解析,而 new Date('2026-10-23 12:00') 按本地时区解析——同一个日期字符串带不带时间,在东八区会差 8 小时。Safari 还严格要求 ISO 格式。稳妥做法:传时间戳或带时区偏移的完整 ISO 8601 字符串。"
-                          }
-            }]
+            {
+              "@type": "Question",
+              "name": "为什么数据库推荐存时间戳而不是日期字符串?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "时间戳是定长整数,占空间小、可索引、比较排序快,且天然无时区歧义;字符串在不同地区、不同格式下解析极易出错。工程最佳实践是存储层统一存 UTC 时间戳,展示层再按用户时区格式化。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "前端 new Date() 有哪些时区陷阱?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "new Date('2026-10-23') 按 UTC 零点解析,而 new Date('2026-10-23 12:00') 按本地时区解析——同一个日期字符串带不带时间,在东八区会差 8 小时。Safari 还严格要求 ISO 格式。稳妥做法:传时间戳或带时区偏移的完整 ISO 8601 字符串。"
+              }
+            }
+          ]
         }
       ]
     }
@@ -148,17 +148,17 @@
           <a href="/" style="color: #16a34a; text-decoration: none;">DevHub 首页</a> &gt; <span>开发者工具箱</span> &gt; <span>时间戳转换器</span>
         </nav>
         
-        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Unix 时间戳在线转换工具 (Unix Timestamp Converter)</h1>
+        <h1 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">时间戳转换 - 在线Unix时间戳与北京时间双向转换工具 (Unix Timestamp Converter)</h1>
         <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
-          专为后端工程师、数据库管理员及分布式系统排障打造的高效转换工具。支持 10 位秒级 / 13 位毫秒级时间戳与北京时间、UTC、ISO 8601 标准日期双向互转，自带实时看板与相对时间换算。
+          专为后端工程师、数据库管理员及分布式系统排障打造的高效转换工具。支持 10 位秒级 / 13 位毫秒级时间戳与北京时间(GMT+8)、UTC、ISO 8601 标准日期双向互转，自带实时秒级看板、多语言获取时间戳速查及常用时间秒数换算对照。
         </p>
 
         <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
-          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">常用语言获取当前时间戳速查</h2>
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">主流语言获取当前时间戳代码速查</h2>
           <table style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
             <thead>
               <tr style="border-bottom: 2px solid #e2e8f0; color: #475569;">
-                <th style="padding: 8px 4px;">编程语言</th>
+                <th style="padding: 8px 4px;">编程语言 / 数据库</th>
                 <th style="padding: 8px 4px;">秒级时间戳 (10位)</th>
                 <th style="padding: 8px 4px;">毫秒级时间戳 (13位)</th>
               </tr>
@@ -179,10 +179,85 @@
                 <td style="padding: 8px 4px; font-family: monospace;">Instant.now().getEpochSecond()</td>
                 <td style="padding: 8px 4px; font-family: monospace;">System.currentTimeMillis()</td>
               </tr>
-              <tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
                 <td style="padding: 8px 4px; font-weight: 600;">Go</td>
                 <td style="padding: 8px 4px; font-family: monospace;">time.Now().Unix()</td>
                 <td style="padding: 8px 4px; font-family: monospace;">time.Now().UnixMilli()</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">PHP</td>
+                <td style="padding: 8px 4px; font-family: monospace;">time()</td>
+                <td style="padding: 8px 4px; font-family: monospace;">round(microtime(true) * 1000)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">MySQL</td>
+                <td style="padding: 8px 4px; font-family: monospace;">UNIX_TIMESTAMP()</td>
+                <td style="padding: 8px 4px; font-family: monospace;">ROUND(UNIX_TIMESTAMP(CURTIME(3)) * 1000)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">PostgreSQL</td>
+                <td style="padding: 8px 4px; font-family: monospace;">EXTRACT(epoch FROM NOW())::BIGINT</td>
+                <td style="padding: 8px 4px; font-family: monospace;">ROUND(EXTRACT(epoch FROM NOW()) * 1000)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">Shell / Bash</td>
+                <td style="padding: 8px 4px; font-family: monospace;">date +%s</td>
+                <td style="padding: 8px 4px; font-family: monospace;">date +%s%3N</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">C# / .NET</td>
+                <td style="padding: 8px 4px; font-family: monospace;">DateTimeOffset.UtcNow.ToUnixTimeSeconds()</td>
+                <td style="padding: 8px 4px; font-family: monospace;">DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 4px; font-weight: 600;">Redis</td>
+                <td style="padding: 8px 4px; font-family: monospace;">TIME (秒部分)</td>
+                <td style="padding: 8px 4px; font-family: monospace;">TIME (微秒部分换算)</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section style="margin-bottom: 32px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff;">
+          <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">常用时间秒数换算速查表 (TTL / 过期时间参考)</h2>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid #e2e8f0; color: #475569;">
+                <th style="padding: 8px 4px;">时间跨度</th>
+                <th style="padding: 8px 4px;">换算秒数 (秒级时间戳跨度)</th>
+                <th style="padding: 8px 4px;">常用业务场景</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">1 分钟</td>
+                <td style="padding: 8px 4px; font-family: monospace;">60 秒</td>
+                <td style="padding: 8px 4px; color: #64748b;">验证码有效期、短轮询间隔</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">1 小时</td>
+                <td style="padding: 8px 4px; font-family: monospace;">3,600 秒</td>
+                <td style="padding: 8px 4px; color: #64748b;">OAuth 访问令牌 (Access Token)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">1 天 (24小时)</td>
+                <td style="padding: 8px 4px; font-family: monospace;">86,400 秒</td>
+                <td style="padding: 8px 4px; color: #64748b;">Redis 日报缓存、每日限流窗口</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">1 周 (7天)</td>
+                <td style="padding: 8px 4px; font-family: monospace;">604,800 秒</td>
+                <td style="padding: 8px 4px; color: #64748b;">用户记住登录态、统计周报</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 4px; font-weight: 600;">30 天 (1个月)</td>
+                <td style="padding: 8px 4px; font-family: monospace;">2,592,000 秒</td>
+                <td style="padding: 8px 4px; color: #64748b;">刷新令牌 (Refresh Token)、月度账单</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 4px; font-weight: 600;">365 天 (平年)</td>
+                <td style="padding: 8px 4px; font-family: monospace;">31,536,000 秒</td>
+                <td style="padding: 8px 4px; color: #64748b;">长效数据归档、SSL 证书有效期</td>
               </tr>
             </tbody>
           </table>
@@ -210,7 +285,8 @@
             <h3 style="font-size: 15px; font-weight: 600; color: #1e293b;">Q: 前端 new Date() 有哪些时区陷阱?</h3>
             <p style="font-size: 14px; color: #64748b;">A: new Date('2026-10-23') 按 UTC 零点解析,而 new Date('2026-10-23 12:00') 按本地时区解析——同一个日期字符串带不带时间,在东八区会差 8 小时。Safari 还严格要求 ISO 格式。稳妥做法:传时间戳或带时区偏移的完整 ISO 8601 字符串。</p>
           </div>
-        
+        </section>
+
         <section style="border-top: 1px solid #e2e8f0; padding-top: 24px;">
           <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">浏览更多 DevHub 生产力工具</h2>
           <div style="display: flex; flex-wrap: wrap; gap: 12px;">
@@ -234,8 +310,8 @@
     </div>
     <noscript>
       <div style="padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6;">
-        <h1>Unix 时间戳在线转换工具</h1>
-        <p>支持秒/毫秒时间戳与北京时间、UTC 双向互转，实时动态刷新，支持相对时间换算。</p>
+        <h1>时间戳转换 - 在线Unix时间戳与北京时间双向转换工具</h1>
+        <p>支持秒/毫秒时间戳与北京时间、UTC 双向互转，实时动态刷新，支持 10 门语言时间戳速查与常用时间换算。</p>
         <p><a href="/">返回 DevHub 首页</a></p>
       </div>
     </noscript>
