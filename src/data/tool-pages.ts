@@ -15,6 +15,7 @@ export interface ToolPageContent {
   h1: string
   intro: string
   extra?: ToolExtraSection
+  extraSections?: ToolExtraSection[]
   faqs: ToolFaq[]
 }
 
@@ -47,20 +48,41 @@ export const toolPageContent: Record<string, ToolPageContent> = {
     ]
   },
   'tool-timestamp': {
-    h1: 'Unix 时间戳在线转换工具',
+    h1: '时间戳转换 - 在线Unix时间戳与北京时间双向转换工具',
     intro:
-      '专为后端工程师、数据库管理员及分布式系统排障打造的高效转换工具。支持 10 位秒级 / 13 位毫秒级时间戳与北京时间、UTC、ISO 8601 标准日期双向互转,自带实时看板与相对时间换算。',
+      '专为后端工程师、数据库管理员及分布式系统排障打造的高效转换工具。支持 10 位秒级 / 13 位毫秒级时间戳与北京时间(GMT+8)、UTC、ISO 8601 标准日期双向互转，自带实时秒级看板、多语言获取时间戳速查及常用时间秒数换算对照。',
     extra: {
-      title: '常用语言获取当前时间戳速查',
-      head: ['编程语言', '秒级时间戳 (10位)', '毫秒级时间戳 (13位)'],
+      title: '主流语言获取当前时间戳代码速查',
+      head: ['编程语言 / 数据库', '秒级时间戳 (10位)', '毫秒级时间戳 (13位)'],
       monoCols: [1, 2],
       rows: [
         ['JavaScript', 'Math.floor(Date.now() / 1000)', 'Date.now()'],
         ['Python', 'int(time.time())', 'int(time.time() * 1000)'],
         ['Java', 'Instant.now().getEpochSecond()', 'System.currentTimeMillis()'],
-        ['Go', 'time.Now().Unix()', 'time.Now().UnixMilli()']
+        ['Go', 'time.Now().Unix()', 'time.Now().UnixMilli()'],
+        ['PHP', 'time()', 'round(microtime(true) * 1000)'],
+        ['MySQL', 'UNIX_TIMESTAMP()', 'ROUND(UNIX_TIMESTAMP(CURTIME(3)) * 1000)'],
+        ['PostgreSQL', 'EXTRACT(epoch FROM NOW())::BIGINT', 'ROUND(EXTRACT(epoch FROM NOW()) * 1000)'],
+        ['Shell / Bash', 'date +%s', 'date +%s%3N'],
+        ['C# / .NET', 'DateTimeOffset.UtcNow.ToUnixTimeSeconds()', 'DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()'],
+        ['Redis', 'TIME (秒部分)', 'TIME (微秒部分换算)']
       ]
     },
+    extraSections: [
+      {
+        title: '常用时间秒数换算速查表 (TTL / 过期时间参考)',
+        head: ['时间跨度', '换算秒数 (秒级时间戳跨度)', '常用业务场景'],
+        monoCols: [1],
+        rows: [
+          ['1 分钟', '60 秒', '验证码有效期、短轮询间隔'],
+          ['1 小时', '3,600 秒', 'OAuth 访问令牌 (Access Token)'],
+          ['1 天 (24小时)', '86,400 秒', 'Redis 日报缓存、每日限流窗口'],
+          ['1 周 (7天)', '604,800 秒', '用户记住登录态、统计周报'],
+          ['30 天 (1个月)', '2,592,000 秒', '刷新令牌 (Refresh Token)、月度账单'],
+          ['365 天 (平年)', '31,536,000 秒', '长效数据归档、SSL 证书有效期']
+        ]
+      }
+    ],
     faqs: [
       {
         q: 'Unix 秒级时间戳 (10位) 与毫秒级时间戳 (13位) 有什么区别?',

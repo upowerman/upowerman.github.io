@@ -21,6 +21,25 @@ describe('toolPageContent integrity', () => {
           expect(row).toHaveLength(c.extra.head.length)
         }
       }
+      if (c.extraSections) {
+        for (const s of c.extraSections) {
+          expect(s.head.length).toBeGreaterThan(1)
+          expect(s.rows.length).toBeGreaterThan(2)
+          for (const row of s.rows) {
+            expect(row).toHaveLength(s.head.length)
+          }
+        }
+      }
     }
+  })
+
+  it('tool-timestamp has 10+ languages in extra and extraSections for seconds conversion', () => {
+    const ts = toolPageContent['tool-timestamp']
+    expect(ts.extra?.rows.length).toBeGreaterThanOrEqual(10)
+    expect(ts.extraSections).toBeDefined()
+    expect(ts.extraSections!.length).toBeGreaterThanOrEqual(1)
+    const secTable = ts.extraSections![0]
+    expect(secTable.title).toContain('秒数')
+    expect(secTable.rows.length).toBeGreaterThanOrEqual(6)
   })
 })

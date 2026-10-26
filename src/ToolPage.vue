@@ -75,6 +75,29 @@
         </div>
       </section>
 
+      <!-- 扩展速查表组 (如秒数换算等) -->
+      <template v-if="content.extraSections">
+        <section v-for="(sec, si) in content.extraSections" :key="si" class="mt-6 p-4 md:p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800">
+          <h2 class="text-lg font-bold text-slate-900 dark:text-white mb-4">{{ sec.title }}</h2>
+          <div class="overflow-x-auto -mx-1 px-1">
+            <table class="w-full text-left text-xs md:text-sm border-collapse">
+              <thead>
+                <tr class="border-b-2 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                  <th v-for="h in sec.head" :key="h" class="py-2 pr-4 font-semibold whitespace-nowrap">{{ h }}</th>
+                </tr>
+              </thead>
+              <tbody class="text-slate-600 dark:text-slate-300">
+                <tr v-for="(row, ri) in sec.rows" :key="ri" class="border-b border-slate-100 dark:border-slate-800 last:border-0">
+                  <td v-for="(cell, ci) in row" :key="ci" class="py-2.5 pr-4 align-top" :class="sec.monoCols?.includes(ci) ? 'font-mono text-primary-700 dark:text-primary-300 break-all' : ''">
+                    {{ cell }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </template>
+
       <!-- FAQ(原生 details/summary,零 JS 可折叠) -->
       <section class="mt-10">
         <h2 class="text-lg font-bold text-slate-900 dark:text-white mb-3">常见问题</h2>
