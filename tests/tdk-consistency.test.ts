@@ -30,6 +30,14 @@ describe('TDK title standard prefix check', () => {
       expect(title).toContain(EXPECTED_TITLE_PREFIXES[toolId])
       expect(title).toContain('| DevHub')
       expect(title.length).toBeLessThanOrEqual(65)
+
+      const ogMatch = html.match(/<meta property="og:title" content="(.*?)" \/>/)
+      expect(ogMatch, `og:title found in ${slug}`).toBeTruthy()
+      expect(ogMatch![1], `og:title matches title in ${slug}`).toBe(title)
+
+      const twitterMatch = html.match(/<meta name="twitter:title" content="(.*?)" \/>/)
+      expect(twitterMatch, `twitter:title found in ${slug}`).toBeTruthy()
+      expect(twitterMatch![1], `twitter:title matches title in ${slug}`).toBe(title)
     })
   }
 })
