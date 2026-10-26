@@ -71,6 +71,15 @@ jobs:
                 "https://yunitytech.top/tools/timestamp/",
                 "https://yunitytech.top/tools/jwt/",
                 "https://yunitytech.top/tools/codec/",
-                "https://yunitytech.top/tools/regex/"
+                "https://yunitytech.top/tools/regex/",
+                "https://yunitytech.top/tools/cron/",
+                "https://yunitytech.top/tools/uuid/",
+                "https://yunitytech.top/tools/color/",
+                "https://yunitytech.top/tools/aes/",
+                "https://yunitytech.top/tools/case/",
+                "https://yunitytech.top/tools/sql/",
+                "https://yunitytech.top/tools/curl/",
+                "https://yunitytech.top/tools/diff/",
+                "https://yunitytech.top/tools/json-to-type/"
               ]
             }'
